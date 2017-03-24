@@ -11,19 +11,21 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class CompanyServiceIpml implements CompanyService{
-	
+public class CompanyServiceIpml implements CompanyService {
+
 	@Autowired
 	private CompanyRepository companyRepository;
 
 	@Transactional
-	public String newCompany(Company company, MultipartFile fileUpload) {
+	public String newCompany(Company company, MultipartFile fileUpload, String location) {
 		try {
-			if(!fileUpload.isEmpty())
-			company.setLogo(fileUpload.getBytes());
+			if (!fileUpload.isEmpty())
+				company.setLogo(fileUpload.getBytes());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		if(!location.isEmpty())
+			company.setAddress(company.getAddress()+" - "+location);
 		companyRepository.save(company);
 		return "Create Success !";
 	}
@@ -37,8 +39,12 @@ public class CompanyServiceIpml implements CompanyService{
 	}
 
 	public String delete(long id) {
-		companyRepository.delete(id);
-		return "Delete success";
+		Company company = companyRepository.findOne(id);
+		if (company != null) {
+			companyRepository.delete(id);
+			return "Delete success !";
+		}
+		return "Delete fail !";
 	}
 
 }
