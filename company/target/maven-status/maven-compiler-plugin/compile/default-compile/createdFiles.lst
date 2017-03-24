@@ -1,0 +1,3 @@
+org\partnership\company\repository\CompanyRepository.class
+org\partnership\company\service\CompanyService.class
+org\partnership\company\service\CompanyServiceIpml.class
