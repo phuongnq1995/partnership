@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html" pageEncoding="UTF-8" %>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -13,7 +12,6 @@
 			</div>
 		</c:if>
 		<div class="sixteen columns">
-
 			<h2>
 				<i class="fa fa-plus-circle"></i> Company Details
 			</h2>
@@ -48,6 +46,15 @@
 						<form:input type="text" class="input-text" path="address"
 							id="address" placeholder="Street, state, city..." />
 					</div>
+
+				</fieldset>
+				<fieldset class="form fieldset-company_website">
+					<label for="city">City <small>(optional)</small></label> <select
+						class="form-control" id="sel1" name="location">
+						<c:forEach items="${listLocation}" var="location">
+							<option value="${location.getName()}">${location.getName()}</option>
+						</c:forEach>
+					</select>
 				</fieldset>
 
 				<fieldset class="form fieldset-company_website">

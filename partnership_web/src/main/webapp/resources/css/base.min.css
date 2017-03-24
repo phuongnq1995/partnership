@@ -153,3 +153,35 @@ textarea{-webkit-transition:0;-moz-transition:0;-o-transition:0;-ms-transition:0
 input[type="checkbox"]{display:inline;}
 label span,
 legend span{font-weight:normal;font-size:14px;color:#444;}
+.flash {
+    text-align: center;
+    padding:    .3em .4em;
+    margin:     0 auto .5em;
+    clear:      both;
+    max-width:  25.923em; /* 610/13 */  
+    *max-width: 25.923em; /* 610/13.3333 - for IE */
+}
+
+.flash.error {
+    border: thin solid #8b0000;
+    background: #ffc0cb;
+}
+
+.flash.notice, .flash.info {
+    border: thin solid #ffffff;
+    background: #00ff00;
+}
+
+.flash.warning {
+    border: thin solid #ffffff;
+    background: #ff0;
+}
+
+.flash .close {
+    float:  right;
+}
+
+.flash .close a {
+    color:              #f00;
+    text-decoration:    none;
+}

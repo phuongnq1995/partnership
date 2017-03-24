@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html" pageEncoding="UTF-8" %>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="s"%>
@@ -26,8 +25,21 @@
 		</div>
 	</div>
 </div>
-
+	<div class="row-fluid">
+		<br />
+		<c:if test="${SUCCESS_MESSAGE != null}">
+			<div class="flash info">
+				<strong>${SUCCESS_MESSAGE}</strong>
+			</div>
+		</c:if>
+		<c:if test="${ERROR_MESSAGE != null}">
+			<div class="flash error">
+				<strong>${ERROR_MESSAGE}</strong>
+			</div>
+		</c:if>
+	</div>
 <div class="container full-width">
+
 	<article id="post-14"
 		class="sixteen columns woocommerce-account post-14 page type-page status-publish hentry">
 

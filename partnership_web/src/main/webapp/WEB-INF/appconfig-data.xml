@@ -41,6 +41,8 @@
 		<property name="packagesToScan">
 			<list>
 				<value>org.partnership.company.model</value>
+				<value>org.partnership.location.model</value>
+				<value>org.partnership.employee.model</value>
 			</list>
 		</property>
 	</bean>

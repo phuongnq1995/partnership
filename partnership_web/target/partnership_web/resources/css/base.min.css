@@ -83,8 +83,8 @@ button,
 .margin-bottom-60{margin-bottom:60px !important;}
 .margin-bottom-65{margin-bottom:65px !important;}
 .margin-bottom-70{margin-bottom:70px !important;}
-img, object, video{height:auto;display:block;}
-img{width:auto;border:0;-ms-interpolation-mode:bicubic;max-width:100%;}
+img, object, video{display:block;}
+img{border:0;-ms-interpolation-mode:bicubic;max-width:100%;}
 .embed{position:relative;padding:0px;padding-bottom:56.25%;height:0;overflow:hidden;}
 .embed iframe,
 .embed object,

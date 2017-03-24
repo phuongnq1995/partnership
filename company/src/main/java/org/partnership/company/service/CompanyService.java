@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface CompanyService {
 
-	String newCompany(Company company, MultipartFile fileUpload);
+	String newCompany(Company company, MultipartFile fileUpload, String location);
 
 	List<Company> findAll();
 

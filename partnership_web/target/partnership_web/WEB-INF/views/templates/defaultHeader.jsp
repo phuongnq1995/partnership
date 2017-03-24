@@ -1,112 +1,49 @@
-<header class="default sticky-header transparent" id="main-header">
+<header class="default sticky-header" id="main-header">
 	<div class="container">
 		<div class="sixteen columns">
-
+			<!-- Logo -->
 			<div id="logo">
-				<a href="workscout.html" title="WorkScout" rel="home"><img
-					src="https://39sf152pf74z2negmt1gi8ik-wpengine.netdna-ssl.com/wp-content/uploads/2016/10/logo2.svg"
-					data-rjs="https://workscout.in/wp-content/uploads/2016/10/logo.svg"
+				<a href="index.html" title="WorkScout" rel="home"><img
+					src="https://raw.githubusercontent.com/levunguyen/java-spring-internal-partnership/master/partnership-web/src/main/webapp/resource/images/logo/logo_homepage.png"
+					data-rjs="https://raw.githubusercontent.com/levunguyen/java-spring-internal-partnership/master/partnership-web/src/main/webapp/resource/images/logo/logo_homepage.png"
 					alt="WorkScout" /></a>
 			</div>
 
 			<!-- Menu -->
-
 			<nav id="navigation" class="menu">
 
 				<ul id="responsive" class="menu">
-					<li id="menu-item-2876"
-						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-9 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-2876"><a
-						href="workscout.html">Home</a>
+					<li><a href="index.html">Home</a>
+						</li>
+					<li><a href="#">Pages</a>
 						<ul class="sub-menu">
-							<li id="menu-item-2875"
-								class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-9 current_page_item menu-item-2875"><a
-								href="workscout.html">Home #1</a></li>
-							<li id="menu-item-5659"
-								class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5659"><a
-								href="home-2/home-2.html">Home #2</a></li>
-							<li id="menu-item-2878"
-								class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2878"><a
-								href="home-3/home-3.html">Home #3</a></li>
-							<li id="menu-item-2879"
-								class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2879"><a
-								href="home-4/home-4.html">Home #4</a></li>
-							<li id="menu-item-2880"
-								class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2880"><a
-								href="home-5/home-5.html">Home #5</a></li>
-							<li id="menu-item-5371"
-								class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5371"><a
-								href="home-resumes/home-resumes.html">Home #6 &#8211;
-									Resumes</a></li>
+							<li><a>Job Page</a></li>
+							<li><a>Job Page Alternative</a></li>
+							<li><a>Resume Page</a></li>
+							<li><a>Shortcodes</a></li>
+							<li><a>Pricing Tables</a></li>
+							<li><a>Contact</a></li>
 						</ul></li>
-					<li id="menu-item-2855"
-						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2855"><a
-						href="#">Pages</a>
+					<li><a href="#">For Candidates</a>
 						<ul class="sub-menu">
-							<li id="menu-item-2856"
-								class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2856"><a
-								href="job/grader-operator/grader-operator.html">Job Page</a></li>
-							<li id="menu-item-2857"
-								class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2857"><a
-								href="job/restaurant-team-member-crew/restaurant-team-member-crew.html">Job
-									Page Alternative</a></li>
-							<li id="menu-item-2858"
-								class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2858"><a
-								href="resume/john-smith/john-smith.html">Resume Page</a></li>
-							<li id="menu-item-2881"
-								class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2881"><a
-								href="shortcodes/shortcodes.html">Shortcodes</a></li>
-							<li id="menu-item-2893"
-								class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2893"><a
-								href="woo-job-packages/woo-job-packages.html">Pricing Tables</a></li>
-							<li id="menu-item-2892"
-								class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2892"><a
-								href="contact/contact.html">Contact</a></li>
-						</ul></li>
-					<li id="menu-item-2859"
-						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2859"><a
-						href="#">For Candidates</a>
-						<ul class="sub-menu">
-							<li id="menu-item-2882"
-								class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2882"><a
-								href="browse-jobs/browse-jobs.html">Browse Jobs</a></li>
-							<li id="menu-item-2883"
-								class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2883"><a
-								href="browse-categories/browse-categories.html">Browse
+							<li><a href="browse-jobs/index.html">Browse Jobs</a></li>
+							<li><a href="browse-categories/index.html">Browse
 									Categories</a></li>
-							<li id="menu-item-2955"
-								class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2955"><a
-								href="companies/companies.html">Browse Companies</a></li>
-							<li id="menu-item-2884"
-								class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2884"><a
-								href="submit-resume/submit-resume.html">Submit Resume</a></li>
-							<li id="menu-item-2885"
-								class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2885"><a
-								href="candidate-dashboard/candidate-dashboard.html">Candidate
+							<li><a href="companies/index.html">Browse Companies</a></li>
+							<li><a href="submit-resume/index.html">Submit Resume</a></li>
+							<li><a href="candidate-dashboard/index.html">Candidate
 									Dashboard</a></li>
-							<li id="menu-item-2886"
-								class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2886"><a
-								href="job-alerts/job-alerts.html">Job Alerts</a></li>
-							<li id="menu-item-2891"
-								class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2891"><a
-								href="my-bookmarks/my-bookmarks.html">My Bookmarks</a></li>
+							<li><a href="job-alerts/index.html">Job Alerts</a></li>
+							<li><a href="my-bookmarks/index.html">My Bookmarks</a></li>
 						</ul></li>
-					<li id="menu-item-2860"
-						class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-2860"><a
-						href="#">For Employers</a>
+					<li><a href="#">For Employers</a>
 						<ul class="sub-menu">
-							<li id="menu-item-2889"
-								class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2889"><a
-								href="resumes/resumes.html">Browse Candidates</a></li>
-							<li id="menu-item-2888"
-								class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2888"><a
-								href="post-a-job/post-a-job.html">Post a Job</a></li>
-							<li id="menu-item-2887"
-								class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2887"><a
-								href="job-dashboard/job-dashboard.html">Employer Dashboard</a></li>
+							<li><a href="resumes/index.html">Browse Candidates</a></li>
+							<li><a href="post-a-job/index.html">Post a Job</a></li>
+							<li><a href="job-dashboard/index.html">Employer
+									Dashboard</a></li>
 						</ul></li>
-					<li id="menu-item-2890"
-						class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2890"><a
-						href="blog/blog.html">Blog</a></li>
+					<li><a href="blog/index.html">Blog</a></li>
 				</ul>
 				<ul class="float-right">
 					<li><a href="#signup-dialog"
@@ -148,7 +85,7 @@
 								<option value="candidate">.. for a job</option></select>
 							<p class="form-row">
 								<input type="hidden" id="_wpnonce" name="_wpnonce"
-									value="135f2a59d4" /><input type="hidden"
+									value="a0344a07f2" /><input type="hidden"
 									name="_wp_http_referer" value="/" /> <input type="submit"
 									class="button" name="register" value="Register" />
 							</p>
@@ -184,7 +121,7 @@
 
 							<p class="form-row">
 								<input type="hidden" id="_wpnonce" name="_wpnonce"
-									value="35cc921709" /><input type="hidden"
+									value="b8a9ad2054" /><input type="hidden"
 									name="_wp_http_referer" value="/" /> <input type="submit"
 									class="button" name="login" value="Login" /> <label
 									for="rememberme" class="inline"> <input
@@ -193,8 +130,8 @@
 								</label>
 							</p>
 							<p class="lost_password">
-								<a href="my-account/lost-password/lost-password.html">Lost
-									your password?</a>
+								<a href="my-account/lost-password/index.html">Lost your
+									password?</a>
 							</p>
 
 

@@ -10,6 +10,12 @@
         <dependent-module archiveName="model-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/model/model">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="employee-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/employee/employee">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="location-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/location/location">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="partnership_web"/>
         <property name="java-output-path" value="/partnership_web/target/classes"/>
     </wb-module>

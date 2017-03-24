@@ -23,7 +23,7 @@ public class AdminController {
 	
 	@RequestMapping(value="/companies/delete/{id}")
 	private String deleteCompany(@PathVariable long id, RedirectAttributes redirectAttributes){
-		redirectAttributes.addFlashAttribute("message", companyService.delete(id));
+		redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", companyService.delete(id));
 		return "redirect:/admin/companies";
 	}
 }

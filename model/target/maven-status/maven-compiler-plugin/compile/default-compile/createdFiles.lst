@@ -1,1 +1,3 @@
 org\partnership\company\model\Company.class
+org\partnership\employee\model\Employee.class
+org\partnership\location\model\Location.class
