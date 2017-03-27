@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="s"%>
@@ -10,34 +10,29 @@
 			<h1>Company Dashboard</h1>
 			<nav id="breadcrumbs" xmlns:v="http://rdf.data-vocabulary.org/#">
 				<ul>
-					<!-- Breadcrumb NavXT 5.6.0 -->
-					<li class="home"><span property="itemListElement"
-						typeof="ListItem"><a property="item" typeof="WebPage"
-							title="Go to WorkScout." href="../workscout.html" class="home"><span
-								property="name">Admin</span></a>
-							<meta property="position" content="1"></span></li>
-					<li class="current_item"><span property="itemListElement"
-						typeof="ListItem"><span property="name">Company
-								Dashboard</span>
-							<meta property="position" content="2"></span></li>
+					<li class="home"><span><a title="Go to WorkScout."
+							href="../workscout.html" class="home"><span>Admin</span></a>
+					</span></li>
+					<li class="current_item"><span><span>Company
+								Dashboard</span> </span></li>
 				</ul>
 			</nav>
 		</div>
 	</div>
 </div>
-	<div class="row-fluid">
-		<br />
-		<c:if test="${SUCCESS_MESSAGE != null}">
-			<div class="flash info">
-				<strong>${SUCCESS_MESSAGE}</strong>
-			</div>
-		</c:if>
-		<c:if test="${ERROR_MESSAGE != null}">
-			<div class="flash error">
-				<strong>${ERROR_MESSAGE}</strong>
-			</div>
-		</c:if>
-	</div>
+<div class="row-fluid">
+	<br />
+	<c:if test="${SUCCESS_MESSAGE != null}">
+		<div class="flash info">
+			<strong>${SUCCESS_MESSAGE}</strong>
+		</div>
+	</c:if>
+	<c:if test="${ERROR_MESSAGE != null}">
+		<div class="flash error">
+			<strong>${ERROR_MESSAGE}</strong>
+		</div>
+	</c:if>
+</div>
 <div class="container full-width">
 
 	<article id="post-14"
@@ -66,7 +61,8 @@
 		</nav>
 
 		<div class="woocommerce-MyAccount-content">
-			<table class="resume-manager-resumes manage-table resumes responsive-table stacktable large-only">
+			<table
+				class="resume-manager-resumes manage-table resumes responsive-table stacktable large-only">
 				<thead>
 					<tr>
 						<th>Id</th>
