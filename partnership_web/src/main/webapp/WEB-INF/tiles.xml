@@ -32,4 +32,11 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/company/newcompany.jsp" />
 	</definition>
+
+	<!-- Employee Page  -->
+	<definition name="newemployee" extends="base-definition">
+		<put-attribute name="title" value="Register Employee" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/employee/register.jsp" />
+	</definition>
 </tiles-definitions>

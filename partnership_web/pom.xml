@@ -12,6 +12,10 @@
 	<packaging>war</packaging>
 	<name>partnership_web Maven Webapp</name>
 	<url>http://maven.apache.org</url>
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org</groupId>
@@ -31,6 +35,11 @@
 		<dependency>
 			<groupId>org</groupId>
 			<artifactId>location</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org</groupId>
+			<artifactId>category</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
@@ -83,5 +92,16 @@
 	</dependencies>
 	<build>
 		<finalName>partnership_web</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 </project>

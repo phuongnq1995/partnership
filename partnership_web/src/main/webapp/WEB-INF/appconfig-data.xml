@@ -43,6 +43,7 @@
 				<value>org.partnership.company.model</value>
 				<value>org.partnership.location.model</value>
 				<value>org.partnership.employee.model</value>
+				<value>org.partnership.category.model</value>
 			</list>
 		</property>
 	</bean>
@@ -51,5 +52,5 @@
 		<property name="entityManagerFactory" ref="entityManagerFactoryBean" />
 	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager" />
-	
+
 </beans>

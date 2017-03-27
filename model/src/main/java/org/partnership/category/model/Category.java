@@ -1,31 +1,32 @@
-package org.partnership.location.model;
+package org.partnership.category.model;
 
 import java.io.Serializable;
 import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import org.partnership.employee.model.Employee;
 
 @Entity
-@Table(name="location")
-public class Location implements Serializable{
+@Table(name="category")
+public class Category implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	
 	@Size(min=3, max=255, message="Name have to size from 3 to 255 character.")
 	private String name;
 	
-	@OneToMany(mappedBy="location")
-	private List<Employee> employees;
+	@ManyToMany(mappedBy="categories")
+	private List<Employee> listEmployee;
 
 	public int getId() {
 		return id;
@@ -43,20 +44,19 @@ public class Location implements Serializable{
 		this.name = name;
 	}
 
-	public List<Employee> getEmployees() {
-		return employees;
+	public List<Employee> getListEmployee() {
+		return listEmployee;
 	}
 
-	public void setEmployees(List<Employee> employees) {
-		this.employees = employees;
+	public void setListEmployee(List<Employee> listEmployee) {
+		this.listEmployee = listEmployee;
 	}
 
-	public Location(int id, String name) {
+	public Category(int id, String name) {
 		this.id = id;
 		this.name = name;
 	}
-
-	public Location() {
-	}
+	
+	public Category(){}
 	
 }

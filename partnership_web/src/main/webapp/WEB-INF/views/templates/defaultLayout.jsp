@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><tiles:getAsString name="title" /></title>
 <link href="<c:url value="/resources/css/font-awesome.css" />"
 	rel="stylesheet" media="all" type="text/css">
@@ -31,7 +31,6 @@
 
 		<tiles:insertAttribute name="footer" />
 	</div>
-
 	<script src="<c:url value="/resources/js/jquery.js"/>"></script>
 	<script src="<c:url value="/resources/js/chosen.jquery.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/jquery.jpanelmenu.min.js"/>"></script>
@@ -42,5 +41,10 @@
 		src="<c:url value="/resources/js/jquery.magnific-popup.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/stacktable.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/custom.min.js"/>"></script>
+
+	<script src="<c:url value="/resources/chosen/chosen.jquery.js"/>"
+		type="text/javascript"></script>
+	<script src="<c:url value="/resources/chosen/docsupport/prism.js"/>"
+		type="text/javascript" charset="utf-8"></script>
 </body>
 </html>

@@ -122,6 +122,12 @@ ol ol li, ol ul li{}
 li{line-height:18px;}
 ul.large li{line-height:21px;}
 li p{line-height:21px;}
+.chosen-results{
+	padding-bottom: 30px;
+}
+#candidate_title{
+	padding: 14px 18px;
+}
 .fake-input,
 input[type="text"],
 input[type="password"],
@@ -130,6 +136,7 @@ input[type="number"],
 input[type="tel"],
 input[type="phone"],
 input[type="url"],
+input[type="date"],
 textarea,
 select{padding:14px 18px;outline:none;font-size:15px;color:#909090;margin:0;max-width:100%;width:100%;box-sizing:border-box;display:block;background-color:#fcfcfc;font-weight:500;border:1px solid #e0e0e0;opacity:1;}
 #respond input{width:40%}
@@ -169,7 +176,7 @@ legend span{font-weight:normal;font-size:14px;color:#444;}
 
 .flash.notice, .flash.info {
     border: thin solid #ffffff;
-    background: #00ff00;
+    background: #11b759;
 }
 
 .flash.warning {

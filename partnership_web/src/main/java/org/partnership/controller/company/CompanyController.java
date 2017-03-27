@@ -28,14 +28,14 @@ public class CompanyController {
 	private LocationService locationService;
 
 	@RequestMapping(value = "/register/new")
-	private String registerCompany(Model model) {
+	private String register(Model model) {
 		model.addAttribute("company", new Company());
 		model.addAttribute("listLocation", locationService.findAll());
 		return "newcompany";
 	}
 
 	@RequestMapping(value = "/register/new", method = RequestMethod.POST)
-	private String createCompany(RedirectAttributes redirectAttributes, @Valid Company company,
+	private String create(RedirectAttributes redirectAttributes, @Valid Company company,
 			@RequestParam("location") String location, BindingResult bindingResult,
 			@RequestParam("fileUpload") MultipartFile fileUpload) throws IOException {
 		if (bindingResult.hasErrors())
