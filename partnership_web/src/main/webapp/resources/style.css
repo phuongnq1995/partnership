@@ -328,7 +328,7 @@ header.full-width .container .sixteen.columns {
 
 header.full-width #navigation ul.float-right { right: 35px; }
 
-.cloned  #logo { margin-top: 0px; }
+
 /* Alternative Header & Menu style*/
 .alternative #navigation {
 	width: 100%;
@@ -345,55 +345,6 @@ header.full-width #navigation ul.float-right { right: 35px; }
 
 .alternative #navigation ul.float-right { top: 27px; }
 
-
-
-
-
-
-/* ---------------------------------- */
-/* Sticky Header
-------------------------------------- */
-.sticky-header.headroom--pinned.cloned,
-.sticky-header.headroom--unpinned.cloned,
-.sticky-header.headroom--top.cloned {
-    transform: translateY(-100%);
-    transition: all 0.25s ease-in-out;
-}
-
-
-.sticky-header.cloned {
-	background-color: transparent;
-	position: fixed !important;
-	top: 0;
-	left: 0;
-	opacity: 0;
-	visibility: hidden;
-	background-color: #fff;
-	border-bottom: none;
-	box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.22);
-	width: 100%;
-	z-index: 999;
-	max-height: 80px;
-}
-
-.sticky-header.cloned.headroom--not-top.headroom--unpinned,
-.sticky-header.cloned.headroom--not-top.headroom--pinned {
-	opacity: 1;
-	visibility: visible;
-	transition-delay: 0s;
-    transform: translateY(0%);
-}
-
-.sticky-header.cloned .menu ul.float-right,
-.sticky-header.cloned .menu ul#responsive {
-	margin: 21px 0;
-}
-
-.sticky-header.cloned #logo img {
-	max-height: 42px;
-	width: auto;
-	margin: 20px 30px 20px 0;
-}
 
 /* ---------------------------------- */
 /* Navigation

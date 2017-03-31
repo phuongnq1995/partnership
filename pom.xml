@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org</groupId>
 	<artifactId>partnership</artifactId>
@@ -9,11 +10,12 @@
 		<module>partnership_web</module>
 		<module>model</module>
 		<module>company</module>
-    <module>location</module>
-    <module>employee</module>
-    <module>category</module>
-  </modules>
-	
+		<module>location</module>
+		<module>employee</module>
+		<module>category</module>
+		<module>user</module>
+	</modules>
+
 	<properties>
 		<springframework.version>4.1.4.RELEASE</springframework.version>
 		<jstl.version>1.2</jstl.version>
@@ -30,7 +32,7 @@
 		<hibernate.jpa.version>1.0.1.Final</hibernate.jpa.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -52,7 +54,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>

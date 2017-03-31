@@ -11,8 +11,7 @@
 			<nav id="breadcrumbs" xmlns:v="http://rdf.data-vocabulary.org/#">
 				<ul>
 					<li class="home"><span><a title="Go to WorkScout."
-							href="../workscout.html" class="home"><span>Admin</span></a>
-					</span></li>
+							href="../workscout.html" class="home"><span>Admin</span></a> </span></li>
 					<li class="current_item"><span><span>Company
 								Dashboard</span> </span></li>
 				</ul>
@@ -21,14 +20,15 @@
 	</div>
 </div>
 <div class="row-fluid">
-	<br />
 	<c:if test="${SUCCESS_MESSAGE != null}">
-		<div class="flash info">
+		<br>
+		<div class="flash info pull-right" id="flash">
 			<strong>${SUCCESS_MESSAGE}</strong>
 		</div>
 	</c:if>
 	<c:if test="${ERROR_MESSAGE != null}">
-		<div class="flash error">
+		<br>
+		<div class="flash error pull-right" id="flash">
 			<strong>${ERROR_MESSAGE}</strong>
 		</div>
 	</c:if>
@@ -79,11 +79,21 @@
 							<td>${company.getName()}</td>
 							<td>${s:substring(company.getTagline(),0,10)}..</td>
 							<td>${company.getAddress()}</td>
-							<td><img
-								src="${pageContext.request.contextPath}/imageCompany/${company.getId()}"
-								width="100px" height="100px" /></td>
+							<c:choose>
+								<c:when test="${empty company.getLogo()}">
+									<td><img
+										src="<c:url value="/resources/images/company.png"/>"
+										width="100px" height="100px" /></td>
+								</c:when>
+								<c:otherwise>
+									<td><img
+										src="${pageContext.request.contextPath}/imageCompany/${company.getId()}"
+										width="100px" height="100px" /></td>
+								</c:otherwise>
+							</c:choose>
 							<td><a href="companies/delete/${company.getId()}"
 								class="button">Delete </a></td>
+
 						</tr>
 					</c:forEach>
 				<tbody>
@@ -96,3 +106,10 @@
 
 	</article>
 </div>
+<script>
+	$(document).ready(function() {
+		$('#flash').delay(10000).fadeOut('slow');
+	});
+
+	
+</script>

@@ -7,8 +7,8 @@
 	<article id="post-13"
 		class="sixteen columns post-13 page type-page status-publish hentry">
 		<div class="submit-page">
-			<form:form action="new" method="post" id="submit-resume-form"
-				modelAttribute="employee" class="job-manager-form"
+			<form:form modelAttribute="employee"  method="POST"
+				action="new?${_csrf.parameterName}=${_csrf.token}" class="job-manager-form"
 				enctype="multipart/form-data">
 				<fieldset class="form fieldset-candidate_name">
 					<label for="candidate_name">Your name<small>*</small></label><span
@@ -20,12 +20,12 @@
 					</div>
 				</fieldset>
 
-				<fieldset class="form  fieldset-candidate_title">
+				<fieldset class="form fieldset-candidate_title">
 					<label for="candidate_name">Your email<small>*</small></label><span
 						class="error text-danger" style="color: red;"><form:errors
 							path="email" /></span>
 					<div class="field">
-						<form:input type="email" class="input-text" path="email" />
+						<form:input type="email" class="input-text" path="email" value="${pageContext.request.userPrincipal.name}" />
 					</div>
 				</fieldset>
 
@@ -115,9 +115,9 @@
 					<div class="field">
 
 						<label class="fake-upload-btn">
-							<div class="job-manager-uploaded-files"></div> <input type="file"
+							<div class="job-manager-uploaded-files"></div> <input type='file'	
 							name="fileUpload" class="input-text wp-job-manager-file-upload"
-							accept="jpg|jpeg|jpe|gif|png|bmp|tiff|tif|ico|asf|asx|wmv|wmx|wm|avi|divx|flv|mov|qt|mpeg|mpg|mpe|mp4|m4v|ogv|webm|mkv|3gp|3gpp|3g2|3gp2|txt|asc|c|cc|h|srt|csv|tsv|ics|rtx|css|vtt|dfxp|mp3|m4a|m4b|ra|ram|wav|ogg|oga|mid|midi|wma|wax|mka|rtf|js|pdf|class|tar|zip|gz|gzip|rar|7z|psd|xcf|doc|pot|pps|ppt|wri|xla|xls|xlt|xlw|mdb|mpp|docx|docm|dotx|dotm|xlsx|xlsm|xlsb|xltx|xltm|xlam|pptx|pptm|ppsx|ppsm|potx|potm|ppam|sldx|sldm|onetoc|onetoc2|onetmp|onepkg|oxps|xps|odt|odp|ods|odg|odc|odb|odf|wp|wpd|key|numbers|pages"
+							accept="jpg|jpeg|jpe|gif|png|bmp|pdf|"
 							id="resume_file" />
 							<div class="upload-btn">
 								<i class="fa fa-upload"></i>Browse

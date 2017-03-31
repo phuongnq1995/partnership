@@ -47,7 +47,7 @@ public class EmployeeController {
 		binder.registerCustomEditor(Location.class, new LocationConverter());
 	}
 
-	@RequestMapping(value = "/register/new")
+	@RequestMapping(value = "/register/new", method = RequestMethod.GET)
 	private String register(Model model) {
 		model.addAttribute("employee", new Employee());
 		model.addAttribute("categories", categoryService.findAll());
@@ -64,7 +64,15 @@ public class EmployeeController {
 			model.addAttribute("listLocation", locationService.findAll());
 			return "newemployee";
 		} else {
-			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", employeeService.newEmployee(employee, fileUpload));
+			try {
+				if (!fileUpload[0].isEmpty())
+					employee.setAvatar(fileUpload[0].getBytes());
+				if (!fileUpload[1].isEmpty())
+					employee.setCv(fileUpload[1].getBytes());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", employeeService.newEmployee(employee));
 		}
 		return "redirect:/";
 	}

@@ -1,7 +1,5 @@
 <!-- Footer
 ================================================== -->
-<div class="margin-top-45"></div>
-
 <div id="footer">
 <!-- Main -->
 	<div class="container">
