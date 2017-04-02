@@ -151,13 +151,12 @@
 						</c:when>
 						<c:otherwise>
 							<li><security:authorize access="hasRole('ROLE_EMPLOYEE')">
-									<a href="#signup-dialog"
-										class="small-dialog popup-with-zoom-anim"><i
-										class="fa fa-user"></i> Employee page</a>
+									<a href="${pageContext.request.contextPath}/employeeprofile"><i
+										class="fa fa-user"></i> User page</a>
 								</security:authorize> <security:authorize access="hasRole('ROLE_COMPANY')">
 									<a href="#signup-dialog"
 										class="small-dialog popup-with-zoom-anim"><i
-										class="fa fa-user"></i> Company page</a>
+										class="fa fa-user"></i> User page</a>
 								</security:authorize></li>
 							<li><a onclick="document.forms['logoutForm'].submit()"
 								role="button" class="small-dialog popup-with-zoom-anim"><i

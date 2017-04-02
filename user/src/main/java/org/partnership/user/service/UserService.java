@@ -13,4 +13,6 @@ public interface UserService {
 
 	boolean findUserPresent(String email);
 
+	User findUserByEmail(String email);
+
 }

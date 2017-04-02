@@ -1,8 +1,9 @@
 package org.partnership.controller.home;
 
+import java.security.Principal;
+
 import javax.validation.Valid;
 
-import org.partnership.employee.model.Employee;
 import org.partnership.employee.service.EmployeeService;
 import org.partnership.user.model.User;
 import org.partnership.user.service.UserService;
@@ -45,15 +46,14 @@ public class HomeController {
 		return "home";
 	}
 
+	@RequestMapping(value = "/employeeprofile")
+	public String profileEmployee(Principal principal, Model model) {
+		User user = userService.findUserByEmail(principal.getName());
+		return employeeService.findProfile(user, model);
+	}
+
 	@RequestMapping(value = "/employeeprofile/{id}")
 	public String profileEmployee(@PathVariable("id") long id, Model model, RedirectAttributes redirectAttributes) {
-		Employee employee = employeeService.findOne(id);
-		if (employee == null) {
-			redirectAttributes.addFlashAttribute("ERROR_MESSAGE", "Not found.");
-			return "redirect:/";
-		} else {
-			model.addAttribute("employee", employee);
-			return "employeeprofile";
-		}
+		return employeeService.showProfile(id, model, redirectAttributes);
 	}
 }

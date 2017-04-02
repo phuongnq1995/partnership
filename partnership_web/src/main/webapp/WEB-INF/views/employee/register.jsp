@@ -7,9 +7,12 @@
 	<article id="post-13"
 		class="sixteen columns post-13 page type-page status-publish hentry">
 		<div class="submit-page">
-			<form:form modelAttribute="employee"  method="POST"
-				action="new?${_csrf.parameterName}=${_csrf.token}" class="job-manager-form"
-				enctype="multipart/form-data">
+			<form:form modelAttribute="employee" method="POST"
+				action="new?${_csrf.parameterName}=${_csrf.token}"
+				class="job-manager-form" enctype="multipart/form-data">
+				<form:hidden path="userId"/>
+				<span class="error text-danger" style="color: red;"><form:errors
+						path="userId" /></span>
 				<fieldset class="form fieldset-candidate_name">
 					<label for="candidate_name">Your name<small>*</small></label><span
 						class="error text-danger" style="color: red;"><form:errors
@@ -21,11 +24,11 @@
 				</fieldset>
 
 				<fieldset class="form fieldset-candidate_title">
-					<label for="candidate_name">Your email<small>*</small></label><span
-						class="error text-danger" style="color: red;"><form:errors
-							path="email" /></span>
+					<label for="candidate_name">Your email<small>*</small></label>
 					<div class="field">
-						<form:input type="email" class="input-text" path="email" value="${pageContext.request.userPrincipal.name}" />
+						<input type="email" class="input-text" name="email"
+							value="${pageContext.request.userPrincipal.name}"
+							disabled="disabled" />
 					</div>
 				</fieldset>
 
@@ -109,16 +112,15 @@
 				</fieldset>
 
 				<fieldset class="form  fieldset-resume_file">
-					<label for="resume_file">Curriculum Vitae(CV) <small>(optional)</small>
+					<label for="resume_file">Curriculum Vitae(CV) <small>(PDF otional)</small>
 					</label> <span class="error text-danger" style="color: red;"><form:errors
 							path="cv" /></span>
 					<div class="field">
 
 						<label class="fake-upload-btn">
-							<div class="job-manager-uploaded-files"></div> <input type='file'	
+							<div class="job-manager-uploaded-files"></div> <input type='file'
 							name="fileUpload" class="input-text wp-job-manager-file-upload"
-							accept="jpg|jpeg|jpe|gif|png|bmp|pdf|"
-							id="resume_file" />
+							accept="|pdf|" id="resume_file" />
 							<div class="upload-btn">
 								<i class="fa fa-upload"></i>Browse
 							</div>

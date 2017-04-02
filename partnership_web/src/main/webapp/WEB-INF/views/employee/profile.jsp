@@ -27,12 +27,16 @@
 						href="http://maps.google.com/maps?q=${employee.getLocation().getName()}&zoom=14&size=512x512&maptype=roadmap&sensor=false">
 							${employee.getLocation().getName()}</a></span> <span class="icons"><i
 						class="fa fa-birthday-cake"></i> &#36;${employee.getBirthday()}</span> <span
-						class="icons"> <a rel="nofollow" href="${pageContext.request.contextPath}/cvEmployee/${employee.getId()}"><i
-							class="fa fa-link"></i>Curriculum Vitae(CV)</a>
-							
+						class="icons"> <c:if test="${not empty employee.getCv()}">
+							<a rel="nofollow"
+								href="${pageContext.request.contextPath}/cvEmployee/${employee.getId()}"><i
+								class="fa fa-link"></i>Curriculum Vitae(CV)</a>
+						</c:if>
 					</span>
 					<div class="skills">
-						<span>javascript</span><span>wordpress</span>
+						<c:forEach items="${employee.getCategories()}" var="category">
+							<span>${category.getName()}</span>
+						</c:forEach>
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -102,95 +106,13 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="job-manager-form wp-job-manager-bookmarks-form">
-					<div>
-						<a class="bookmark-notice button dark bookmark-notice"
-							href="https://workscout.in/my-account/">Login to bookmark
-							this Resume</a>
-					</div>
-				</div>
 			</div>
 		</div>
 
 	</div>
 </div>
 <div class="container ">
-
-	<!-- Recent Jobs -->
-	<div class="eight columns">
-		<div class="padding-right resume_description">
-			<h3>About Me</h3>
-			<p>&nbsp;</p>
-			<p>Ut sodales arcu sagittis metus molestie molestie. Nulla
-				maximus volutpat dui. Etiam luctus lobortis massa in pulvinar.
-				Maecenas nunc odio, faucibus in malesuada a, dignissim at odio.
-				Aenean eleifend urna.</p>
-			<p>Duis ac augue sit amet ex blandit facilisis sit amet ut dui.
-				Nulla pharetra fermentum mollis. Duis in tempor tortor. Suspendisse
-				vitae nisl diam. Proin eu erat vestibulum, suscipit quam et, cursus
-				ante.</p>
-			<div class="margin-top-30"></div>
-			<p>&nbsp;</p>
-			<p>
-				<strong>Personal Characteristics:</strong>
-			</p>
-			<ul class="list-1">
-				<li>Excellent customer service skills, communication skills,
-					and a happy, smiling attitude are essential.</li>
-				<li>Available to work required shifts including weekends,
-					evenings and holidays.</li>
-				<li>I have great time management skills.</li>
-				<li>I take constructive criticism well and I am comfortable
-					voicing opinions.</li>
-			</ul>
-		</div>
-	</div>
-
-	<!-- Widgets -->
-	<div class="eight columns">
-		<h3 class="margin-bottom-20">Education</h3>
-		<dl class="resume-table resume-manager-education">
-
-			<dt>
-				<small class="date">2012-2015</small> <strong><span
-					class="qualification">School of Arts &amp; Sciences</span> at <span
-					class="location">Stanford University</span></strong>
-			</dt>
-			<dd>
-				<p>Maximus faucibus non non nibh. Cras luctus velit et ante
-					vehicula, sit amet commodo magna eleifend. Fusce congue ante id
-					urna porttitor luctus.</p>
-			</dd>
-
-
-			<dt>
-				<small class="date">2010-2012</small> <strong><span
-					class="qualification">School of Design</span> at <span
-					class="location">University of Pennsylvania</span></strong>
-			</dt>
-			<dd>
-				<p>Phasellus vestibulum metus orci, ut facilisis dolor interdum
-					eget. Pellentesque magna sem, hendrerit nec elit sit amet, ornare
-					efficitur est.</p>
-			</dd>
-
-
-			<dt>
-				<small class="date">2006-2010</small> <strong><span
-					class="qualification"></span> at <span class="location">Massachusetts
-						Institute of Technology</span></strong>
-			</dt>
-			<dd>
-				<p>Suspendisse lorem lorem, aliquet at lectus quis, porttitor
-					porta sapien. Etiam ut turpis tempor, vulputate risus at, elementum
-					dui. Etiam faucibus.</p>
-			</dd>
-
-		</dl>
-
-
-	</div>
-
-
+	<h3>About Me</h3>
+	<p>&nbsp;</p>
+	<p>${employee.getDescription()}.</p>
 </div>

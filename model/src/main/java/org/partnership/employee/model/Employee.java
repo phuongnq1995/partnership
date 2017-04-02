@@ -3,7 +3,7 @@ package org.partnership.employee.model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,8 +20,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.partnership.category.model.Category;
 import org.partnership.location.model.Location;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -38,10 +39,6 @@ public class Employee implements Serializable {
 
 	@Size(min = 3, max = 255, message = "Name have to size from 3 to 255 character.")
 	private String fullname;
-
-	@NotEmpty(message = "Email can not be empty.")
-	@Email(message = "Email not valid.")
-	private String email;
 
 	@NotNull(message = "Birthday can not be empty.")
 	@Past(message = "Birthday not valid.")
@@ -70,7 +67,12 @@ public class Employee implements Serializable {
 	@ManyToMany()
 	@JoinTable(name = "business", joinColumns = @JoinColumn(name = "employee_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	@NotNull(message = "Category can not be empty.")
+	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Category> categories;
+	
+	@NotNull
+	@Column(name = "user_id")
+	private long userId;
 
 	public long getId() {
 		return id;
@@ -144,12 +146,15 @@ public class Employee implements Serializable {
 		this.categories = categories;
 	}
 
-	public String getEmail() {
-		return email;
+	public long getUserId() {
+		return userId;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 
+	public Employee(){
+		
+	}
 }
