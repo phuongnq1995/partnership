@@ -5,10 +5,13 @@ import java.util.List;
 
 import org.partnership.company.model.Company;
 import org.partnership.company.repository.CompanyRepository;
+import org.partnership.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Service
 public class CompanyServiceIpml implements CompanyService {
@@ -25,7 +28,10 @@ public class CompanyServiceIpml implements CompanyService {
 			e.printStackTrace();
 		}
 		if(!location.isEmpty())
-			company.setAddress(company.getAddress()+" - "+location);
+			company.setAddress(company.getAddress()+", "+location);
+		if(!company.getVideo().isEmpty()){
+			company.setVideo(company.getVideo().replace("watch?v=", "embed/"));
+		}
 		companyRepository.save(company);
 		return "Create Success !";
 	}
@@ -45,6 +51,22 @@ public class CompanyServiceIpml implements CompanyService {
 			return "Delete success !";
 		}
 		return "Delete fail !";
+	}
+
+	public String findProfile(User user, Model model) {
+		if (!companyRepository.checkCompanyPresent(user.getId()))
+			return "redirect:/company/new";
+		return "redirect:/companyprofile/" + (companyRepository.findByUserId(user.getId()).getId());
+	}
+
+	public String showProfile(long id, Model model, RedirectAttributes redirectAttributes) {
+		Company company = companyRepository.findOne(id);
+		if(company == null){
+			redirectAttributes.addFlashAttribute("ERROR_MESSAGE", "Not found !");
+			return "redirect:/";
+		}
+		model.addAttribute("company", company);	
+		return "companyprofile";
 	}
 
 }

@@ -24,9 +24,10 @@
 		<div class="submit-page">
 			<form:form method="POST" modelAttribute="company" action="new"
 				enctype="multipart/form-data">
-				<form:hidden path="id" />
+				
+				<form:hidden path="userId"/>
 				<span class="error text-danger" style="color: red;"><form:errors
-						path="id" /></span>
+						path="userId" /></span>
 				<fieldset class="form fieldset-company_name">
 					<label for="name">Company name*</label>
 
@@ -93,7 +94,7 @@
 							onchange="PreviewImage();"
 							class="input-text wp-job-manager-file-upload" accept="image/*"
 							name="fileUpload" id="uploadImage" />
-							<div class="upload-btn">
+							<div class="upload-btn" >
 								<i class="fa fa-upload"></i> Browse
 							</div>
 						</label><img id="uploadPreview"

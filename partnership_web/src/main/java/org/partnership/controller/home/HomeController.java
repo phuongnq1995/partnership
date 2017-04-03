@@ -4,6 +4,7 @@ import java.security.Principal;
 
 import javax.validation.Valid;
 
+import org.partnership.company.service.CompanyService;
 import org.partnership.employee.service.EmployeeService;
 import org.partnership.user.model.User;
 import org.partnership.user.service.UserService;
@@ -25,6 +26,9 @@ public class HomeController {
 
 	@Autowired
 	private EmployeeService employeeService;
+	
+	@Autowired
+	private CompanyService companyService;
 
 	@RequestMapping(value = "/")
 	private String home() {
@@ -55,5 +59,16 @@ public class HomeController {
 	@RequestMapping(value = "/employeeprofile/{id}")
 	public String profileEmployee(@PathVariable("id") long id, Model model, RedirectAttributes redirectAttributes) {
 		return employeeService.showProfile(id, model, redirectAttributes);
+	}
+	
+	@RequestMapping(value = "/companyprofile")
+	public String profileCompany(Principal principal, Model model) {
+		User user = userService.findUserByEmail(principal.getName());
+		return companyService.findProfile(user, model);
+	}
+
+	@RequestMapping(value = "/companyprofile/{id}")
+	public String profileCompany(@PathVariable("id") long id, Model model, RedirectAttributes redirectAttributes) {
+		return companyService.showProfile(id, model, redirectAttributes);
 	}
 }

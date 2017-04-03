@@ -32,6 +32,11 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/company/newcompany.jsp" />
 	</definition>
+	<definition name="companyprofile" extends="base-definition">
+		<put-attribute name="title" value="Company" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/company/comdetails.jsp" />
+	</definition>
 
 	<!-- Employee Page -->
 	<definition name="newemployee" extends="base-definition">

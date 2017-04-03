@@ -59,7 +59,7 @@ public class EmployeeController {
 		return employee;
 	}
 	
-	@RequestMapping(value = "/register/new", method = RequestMethod.GET)
+	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	private String register(Model model, Principal principal) {
 		model.addAttribute("employee", newEmployee(principal));
 		model.addAttribute("categories", categoryService.findAll());
@@ -67,7 +67,7 @@ public class EmployeeController {
 		return "newemployee";
 	}
 
-	@RequestMapping(value = "/register/new", method = RequestMethod.POST)
+	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	private String createEmployee(RedirectAttributes redirectAttributes, @ModelAttribute("employee")@Valid Employee employee,
 			BindingResult bindingResult, @RequestParam("fileUpload") MultipartFile[] fileUpload, Model model) throws IOException {
 		if (bindingResult.hasErrors()) {

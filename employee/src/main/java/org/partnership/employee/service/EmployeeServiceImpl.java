@@ -27,7 +27,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	public String findProfile(User user, Model model) {
 		if (!employeeRepository.checkEmployeePresent(user.getId()))
-			return "redirect:/employee/register/new";
+			return "redirect:/employee/new";
 		return "redirect:/employeeprofile/" + (employeeRepository.findByUserId(user.getId()).getId());
 	}
 

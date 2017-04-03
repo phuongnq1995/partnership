@@ -2,42 +2,38 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <div id="titlebar" class="resume">
 	<div class="container">
 		<div class="ten columns">
 			<div class="resume-titlebar photo-rounded">
 				<c:choose>
-					<c:when test="${empty employee.getAvatar()}">
-						<td><img src="<c:url value="/resources/images/user.png"/>"
-							width="100px" height="100px" /></td>
+					<c:when test="${empty company.getLogo()}">
+						<td><img alt="Photo" width="100px" height="100px"
+							src="<c:url value="/resources/images/company.png"/>" /></td>
 					</c:when>
 					<c:otherwise>
 						<img width="100px" height="100px"
-							src="${pageContext.request.contextPath}/imageEmployee/${employee.getId()}"
+							src="${pageContext.request.contextPath}/imageCompany/${company.getId()}"
 							alt="Photo" />
 					</c:otherwise>
 				</c:choose>
 
 				<div class="resumes-content">
-					<h4>
-						${employee.getFullname()} <span>UX/UI Graphic Designer</span>
-					</h4>
-					<span class="icons"><i class="fa fa-map-marker"></i><a
-						class="google_map_link candidate-location"
-						href="http://maps.google.com/maps?q=${employee.getLocation().getName()}&zoom=14&size=512x512&maptype=roadmap&sensor=false">
-							${employee.getLocation().getName()}</a></span> <span class="icons"><i
-						class="fa fa-birthday-cake"></i> &#36;${employee.getBirthday()}</span> <span
-						class="icons"> <c:if test="${not empty employee.getCv()}">
-							<a rel="nofollow"
-								href="${pageContext.request.contextPath}/cvEmployee/${employee.getId()}"><i
-								class="fa fa-link"></i>Curriculum Vitae(CV)</a>
+					<h4>${company.getName()}</h4>
+					<c:if test="${not empty company.getAddress()}">
+						<span class="icons"><i class="fa fa-map-marker"></i><a
+							class="google_map_link candidate-location"
+							href="http://maps.google.com/maps?q=${company.getAddress()}&zoom=14&size=512x512&maptype=roadmap&sensor=false">
+								${company.getAddress()}</a></span>
+					</c:if>
+					<span class="icons"> <c:if
+							test="${not empty company.getWebsite()}">
+							<a rel="nofollow" onclick="Redirect();"
+								href="${company.getWebsite()}"><i class="fa fa-link"></i>Website</a>
 						</c:if>
 					</span>
-					<div class="skills">
-						<c:forEach items="${employee.getCategories()}" var="category">
-							<span>${category.getName()}</span>
-						</c:forEach>
-					</div>
+
 					<div class="clearfix"></div>
 				</div>
 			</div>
@@ -112,7 +108,18 @@
 	</div>
 </div>
 <div class="container ">
-	<h3>About Me</h3>
-	<p>&nbsp;</p>
-	<p>${employee.getDescription()}.</p>
+	<div class="eight columns">
+		<div class="padding-right resume_description">
+			<h3>About Me</h3>
+			<p>&nbsp;</p>
+			<p>${company.getTagline()}.</p>
+		</div>
+	</div>
+	<c:if test="${not empty company.getVideo()}">
+		<div class="eight columns">
+			<h3 class="margin-bottom-20">Video</h3>
+			<iframe width="420" height="345" src="${company.getVideo()}">
+			</iframe>
+		</div>
+	</c:if>
 </div>

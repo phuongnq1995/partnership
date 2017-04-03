@@ -54,7 +54,7 @@
 				</ul>
 				<ul class="float-right">
 					<c:choose>
-						<c:when test="${pageContext.request.userPrincipal.name == null}">
+						<c:when test="${pageContext.request.userPrincipal == null}">
 							<li><a href="#signup-dialog"
 								class="small-dialog popup-with-zoom-anim"><i
 									class="fa fa-user"></i> Sign Up</a></li>
@@ -154,8 +154,7 @@
 									<a href="${pageContext.request.contextPath}/employeeprofile"><i
 										class="fa fa-user"></i> User page</a>
 								</security:authorize> <security:authorize access="hasRole('ROLE_COMPANY')">
-									<a href="#signup-dialog"
-										class="small-dialog popup-with-zoom-anim"><i
+									<a href="${pageContext.request.contextPath}/companyprofile"><i
 										class="fa fa-user"></i> User page</a>
 								</security:authorize></li>
 							<li><a onclick="document.forms['logoutForm'].submit()"
