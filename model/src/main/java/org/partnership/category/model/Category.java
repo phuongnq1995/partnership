@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import org.partnership.employee.model.Employee;
+import org.partnership.post.model.Post;
 
 @Entity
 @Table(name="category")
@@ -28,6 +29,9 @@ public class Category implements Serializable{
 	@ManyToMany(mappedBy="categories")
 	private List<Employee> listEmployee;
 
+	@ManyToMany(mappedBy="categories")
+	private List<Post> listPost;
+	
 	public int getId() {
 		return id;
 	}
@@ -50,6 +54,14 @@ public class Category implements Serializable{
 
 	public void setListEmployee(List<Employee> listEmployee) {
 		this.listEmployee = listEmployee;
+	}
+
+	public List<Post> getListPost() {
+		return listPost;
+	}
+
+	public void setListPost(List<Post> listPost) {
+		this.listPost = listPost;
 	}
 
 	public Category(int id, String name) {

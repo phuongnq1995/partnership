@@ -64,7 +64,7 @@ public class Employee implements Serializable {
 	@NotNull(message = "Location can not be empty.")
 	private Location location;
 
-	@ManyToMany()
+	@ManyToMany
 	@JoinTable(name = "business", joinColumns = @JoinColumn(name = "employee_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	@NotNull(message = "Category can not be empty.")
 	@LazyCollection(LazyCollectionOption.FALSE)

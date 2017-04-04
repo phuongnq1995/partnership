@@ -52,38 +52,40 @@ public class EmployeeController {
 		binder.registerCustomEditor(Category.class, new CategoryConverter());
 		binder.registerCustomEditor(Location.class, new LocationConverter());
 	}
-	
-	Employee newEmployee(Principal principal){
+
+	Employee newEmployee(Principal principal) {
 		Employee employee = new Employee();
 		employee.setUserId(userService.findUserByEmail(principal.getName()).getId());
 		return employee;
 	}
-	
+
+	boolean checkEmployeePresent(Principal principal) {
+		if (employeeService.findByUserId(userService.findUserByEmail(principal.getName()).getId()) == null)
+			return false;
+		return true;
+	}
+
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	private String register(Model model, Principal principal) {
-		model.addAttribute("employee", newEmployee(principal));
-		model.addAttribute("categories", categoryService.findAll());
-		model.addAttribute("listLocation", locationService.findAll());
-		return "newemployee";
+		if (!checkEmployeePresent(principal)) {
+			model.addAttribute("employee", newEmployee(principal));
+			model.addAttribute("categories", categoryService.findAll());
+			model.addAttribute("listLocation", locationService.findAll());
+			return "newemployee";
+		}
+		return "redirect:/";
 	}
 
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
-	private String createEmployee(RedirectAttributes redirectAttributes, @ModelAttribute("employee")@Valid Employee employee,
-			BindingResult bindingResult, @RequestParam("fileUpload") MultipartFile[] fileUpload, Model model) throws IOException {
+	private String createEmployee(RedirectAttributes redirectAttributes,
+			@ModelAttribute("employee") @Valid Employee employee, BindingResult bindingResult,
+			@RequestParam("fileUpload") MultipartFile[] fileUpload, Model model) throws IOException {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("categories", categoryService.findAll());
 			model.addAttribute("listLocation", locationService.findAll());
 			return "newemployee";
 		} else {
-			try {
-				if (!fileUpload[0].isEmpty())
-					employee.setAvatar(fileUpload[0].getBytes());
-				if (!fileUpload[1].isEmpty())
-					employee.setCv(fileUpload[1].getBytes());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", employeeService.newEmployee(employee));
+			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", employeeService.newEmployee(employee, fileUpload));
 		}
 		return "redirect:/";
 	}

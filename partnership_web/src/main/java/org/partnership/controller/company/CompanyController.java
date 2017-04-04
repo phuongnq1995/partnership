@@ -5,9 +5,12 @@ import java.security.Principal;
 
 import javax.validation.Valid;
 
+import org.partnership.category.service.CategoryService;
 import org.partnership.company.model.Company;
 import org.partnership.company.service.CompanyService;
 import org.partnership.location.service.LocationService;
+import org.partnership.post.model.Post;
+import org.partnership.post.service.PostService;
 import org.partnership.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,21 +31,42 @@ public class CompanyController {
 
 	@Autowired
 	private LocationService locationService;
-	
+
 	@Autowired
 	private UserService userService;
 	
-	Company newCompany(Principal principal){
+	@Autowired
+	private CategoryService categoryService;
+	
+	@Autowired
+	private PostService postService;
+
+	Company newCompany(Principal principal) {
 		Company company = new Company();
 		company.setUserId(userService.findUserByEmail(principal.getName()).getId());
 		return company;
 	}
+
+	boolean checkCompanyPresent(Principal principal) {
+		if (companyService.findByUserId(userService.findUserByEmail(principal.getName()).getId()) == null)
+			return false;
+		return true;
+	}
 	
+	Post newPost(Principal principal){
+		Post post = new Post();
+		post.setCompany(companyService.findByUserId(userService.findUserByEmail(principal.getName()).getId()));
+		return post;
+	}
+
 	@RequestMapping(value = "/new")
 	private String register(Model model, Principal principal) {
-		model.addAttribute("company", newCompany(principal));
-		model.addAttribute("listLocation", locationService.findAll());
-		return "newcompany";
+		if (!checkCompanyPresent(principal)) {
+			model.addAttribute("company", newCompany(principal));
+			model.addAttribute("listLocation", locationService.findAll());
+			return "newcompany";
+		}
+		return "redirect:/";
 	}
 
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
@@ -52,8 +76,22 @@ public class CompanyController {
 		if (bindingResult.hasErrors())
 			return "newcompany";
 		else {
-			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", companyService.newCompany(company, fileUpload, location));
+			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE",
+					companyService.newCompany(company, fileUpload, location));
 		}
 		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/post")
+	private String newPost(Model model, Principal principal) {
+		if (!checkCompanyPresent(principal)) {
+			return "redirect:/company/new";
+		}
+		model.addAttribute("post", newPost(principal));
+		model.addAttribute("types", postService.findListType());
+		model.addAttribute("levels", postService.findListLevel());
+		model.addAttribute("categories", categoryService.findAll());
+		model.addAttribute("locations", locationService.findAll());
+		return "newpost";
 	}
 }

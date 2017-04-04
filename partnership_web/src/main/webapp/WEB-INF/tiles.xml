@@ -50,4 +50,12 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/employee/profile.jsp" />
 	</definition>
+
+	<!-- Post Page -->
+	<definition name="newpost" extends="base-definition">
+		<put-attribute name="title" value="New Post" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/post/newpost.jsp" />
+	</definition>
+
 </tiles-definitions>

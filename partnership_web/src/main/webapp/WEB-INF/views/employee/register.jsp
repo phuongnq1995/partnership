@@ -10,7 +10,7 @@
 			<form:form modelAttribute="employee" method="POST"
 				action="new?${_csrf.parameterName}=${_csrf.token}"
 				class="job-manager-form" enctype="multipart/form-data">
-				<form:hidden path="userId"/>
+				<form:hidden path="userId" />
 				<span class="error text-danger" style="color: red;"><form:errors
 						path="userId" /></span>
 				<fieldset class="form fieldset-candidate_name">
@@ -112,7 +112,8 @@
 				</fieldset>
 
 				<fieldset class="form  fieldset-resume_file">
-					<label for="resume_file">Curriculum Vitae(CV) <small>(PDF otional)</small>
+					<label for="resume_file">Curriculum Vitae(CV) <small>(PDF
+							otional)</small>
 					</label> <span class="error text-danger" style="color: red;"><form:errors
 							path="cv" /></span>
 					<div class="field">
@@ -131,7 +132,7 @@
 
 				<p class="send-btn-border">
 					<input type="submit" name="submit_resume" class="button big"
-						value="Preview &rarr;" />
+						value="Register &rarr;" />
 				</p>
 			</form:form>
 		</div>

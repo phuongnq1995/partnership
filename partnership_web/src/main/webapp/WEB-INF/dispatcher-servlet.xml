@@ -21,4 +21,5 @@
 	<import resource="classpath:employeeApplicationContext.xml" />
 	<import resource="classpath:locationApplicationContext.xml" />
 	<import resource="classpath:categoryApplicationContext.xml" />
+	<import resource="classpath:postApplicationContext.xml" />
 </beans>

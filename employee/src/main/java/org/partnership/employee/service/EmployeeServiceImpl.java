@@ -1,5 +1,7 @@
 package org.partnership.employee.service;
 
+import java.io.IOException;
+
 import org.partnership.employee.model.Employee;
 import org.partnership.employee.repository.EmployeeRepository;
 import org.partnership.user.model.User;
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Service
@@ -16,7 +19,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private EmployeeRepository employeeRepository;
 
 	@Transactional
-	public String newEmployee(Employee employee) {
+	public String newEmployee(Employee employee, MultipartFile[] fileUpload) {
+		try {
+			if (!fileUpload[0].isEmpty())
+				employee.setAvatar(fileUpload[0].getBytes());
+			if (!fileUpload[1].isEmpty())
+				employee.setCv(fileUpload[1].getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		employeeRepository.save(employee);
 		return "Create Success !";
 	}
@@ -39,6 +50,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}
 		model.addAttribute("employee", employee);	
 		return "employeeprofile";
+	}
+
+	public Employee findByUserId(long userId) {
+		return employeeRepository.findByUserId(userId);
 	}
 
 }

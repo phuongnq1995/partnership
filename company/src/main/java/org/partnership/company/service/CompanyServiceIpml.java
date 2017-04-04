@@ -69,4 +69,8 @@ public class CompanyServiceIpml implements CompanyService {
 		return "companyprofile";
 	}
 
+	public Company findByUserId(long userId) {
+		return companyRepository.findByUserId(userId);
+	}
+	
 }

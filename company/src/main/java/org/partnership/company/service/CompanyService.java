@@ -21,5 +21,6 @@ public interface CompanyService {
 	String findProfile(User user, Model model);
 
 	String showProfile(long id, Model model, RedirectAttributes redirectAttributes);
-
+	
+	Company findByUserId(long id);
 }

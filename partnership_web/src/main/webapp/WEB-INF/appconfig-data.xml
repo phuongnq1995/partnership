@@ -45,6 +45,7 @@
 				<value>org.partnership.employee.model</value>
 				<value>org.partnership.category.model</value>
 				<value>org.partnership.user.model</value>
+				<value>org.partnership.post.model</value>
 			</list>
 		</property>
 	</bean>
