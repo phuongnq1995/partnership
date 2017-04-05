@@ -19,17 +19,17 @@
 	<article id="post-2869"
 		class="sixteen columns post-2869 page type-page status-publish hentry">
 		<div class="submit-page">
-			<form:form modelAttribute="post" method="POST"
-				action="post?${_csrf.parameterName}=${_csrf.token}"
-				class="job-manager-form" enctype="multipart/form-data">
+			<form:form modelAttribute="post" method="POST" action="post"
+				class="job-manager-form">
 
-				<form:hidden path="company" />
+				<form:hidden path="company.id" />
 				<span class="error text-danger" style="color: red;"><form:errors
-						path="company" /></span>
+						path="company.id" /></span>
 				<!-- Job Information Fields -->
 
 				<fieldset class="form fieldset-job_title">
-					<label for="job_title">Job Title</label>
+					<span class="error text-danger" style="color: red;"><form:errors
+							path="title" /></span> <label for="job_title">Job Title</label>
 					<div class="field required-field">
 						<form:input type="text" class="input-text" path="title"
 							id="job_title" placeholder="Title..." />
@@ -37,17 +37,19 @@
 				</fieldset>
 
 				<fieldset class="form">
-					<label>Position </label>
+					<span class="error text-danger" style="color: red;"><form:errors
+							path="position" /></span> <label>Position </label>
 					<div class="field">
-						<form:input type="email" class="input-text" path="position"
+						<form:input type="text" class="input-text" path="position"
 							id="account_email" />
 					</div>
 				</fieldset>
 
 				<fieldset class="form  fieldset-resume_category">
-					<label for="resume_category">Job location<small>*</small></label> <span
-						class="error text-danger" style="color: red;"><form:errors
-							path="level" /></span>
+					<span class="error text-danger" style="color: red;"><form:errors
+							path="level" /></span> <label for="resume_category">Job
+						level<small>*</small>
+					</label>
 					<div class="field">
 						<form:select path="level" id="resume_category"
 							class="chosen-select">
@@ -57,9 +59,10 @@
 				</fieldset>
 
 				<fieldset class="form  fieldset-resume_category">
-					<label for="resume_category">Job location<small>*</small></label> <span
-						class="error text-danger" style="color: red;"><form:errors
-							path="locations" /></span>
+					<span class="error text-danger" style="color: red;"><form:errors
+							path="locations" /></span> <label for="resume_category">Job
+						location<small>*</small>
+					</label>
 					<div class="field">
 						<form:select path="locations" multiple="true" id="resume_category"
 							class="chosen-select">
@@ -70,9 +73,8 @@
 				</fieldset>
 
 				<fieldset class="form  fieldset-resume_category">
-					<label for="resume_category">Job type<small>*</small></label> <span
-						class="error text-danger" style="color: red;"><form:errors
-							path="types" /></span>
+					<span class="error text-danger" style="color: red;"><form:errors
+							path="types" /></span> <label for="resume_category">Job type<small>*</small></label>
 					<div class="field">
 						<form:select path="types" multiple="true" id="resume_category"
 							class="chosen-select">
@@ -82,9 +84,10 @@
 				</fieldset>
 
 				<fieldset class="form  fieldset-resume_category">
-					<label for="resume_category">Job category<small>*</small></label> <span
-						class="error text-danger" style="color: red;"><form:errors
-							path="categories" /></span>
+					<span class="error text-danger" style="color: red;"><form:errors
+							path="categories" /></span> <label for="resume_category">Job
+						category<small>*</small>
+					</label>
 					<div class="field">
 						<form:select path="categories" multiple="true"
 							id="resume_category" class="chosen-select">
@@ -95,9 +98,9 @@
 				</fieldset>
 
 				<fieldset class="form  fieldset-resume_content">
-					<label for="resume_content">Descriptions yourself<small>*</small>
-					</label><span class="error text-danger" style="color: red;"><form:errors
-							path="description" /></span>
+					<span class="error text-danger" style="color: red;"><form:errors
+							path="description" /></span> <label for="resume_content">Descriptions<small>*</small>
+					</label>
 					<div class="field">
 						<div id="wp-resume_content-wrap"
 							class="wp-core-ui wp-editor-wrap html-active">
@@ -111,9 +114,9 @@
 				</fieldset>
 
 				<fieldset class="form  fieldset-resume_content">
-					<label for="resume_content">Requirement<small>*</small>
-					</label><span class="error text-danger" style="color: red;"><form:errors
-							path="requirement" /></span>
+					<span class="error text-danger" style="color: red;"><form:errors
+							path="requirement" /></span> <label for="resume_content">Requirement<small>(optional)</small>
+					</label>
 					<div class="field">
 						<div id="wp-resume_content-wrap"
 							class="wp-core-ui wp-editor-wrap html-active">
@@ -127,45 +130,79 @@
 				</fieldset>
 
 				<fieldset class="form fieldset-application">
-					<label for="application">Application email/URL</label>
+					<span class="error text-danger" style="color: red;"><form:errors
+							path="emailApply" /></span> <label for="application">Application
+						email/URL<small>*</small>
+					</label>
 					<div class="field required-field">
-						<input type="text" class="input-text" name="application"
-							id="application"
+						<form:input type="text" class="input-text" path="emailApply"
 							value="${pageContext.request.userPrincipal.name}"
 							placeholder="Enter an email address or website URL" />
 					</div>
 				</fieldset>
 
 				<fieldset class="form fieldset-salary_min">
-					<label for="salary_min">Minimum Salary (&#36;) <small>(optional)</small></label>
+					<span class="error text-danger" style="color: red;"><form:errors
+							path="minsalary" /></span> <label for="salary_min">Minimum
+						Salary (&#36;) <small>(optional)</small>
+					</label>
 					<div class="field ">
 						<form:input type="number" class="input-text" path="minsalary"
 							placeholder="e.g. 20000" />
 					</div>
 				</fieldset>
 				<fieldset class="form fieldset-salary_max">
-					<label for="salary_max">Maximum Salary (&#36;) <small>(optional)</small></label>
+					<span class="error text-danger" style="color: red;"><form:errors
+							path="maxsalary" /></span> <label for="salary_max">Maximum
+						Salary (&#36;) <small>(optional)</small>
+					</label>
 					<div class="field ">
 						<form:input type="number" class="input-text" path="maxsalary"
 							placeholder="e.g. 50000" />
 					</div>
 				</fieldset>
 
-				<fieldset class="form fieldset-apply_link">
-					<label for="apply_link">External &quot;Apply for Job&quot;
-						link <small>(optional)</small>
+				<fieldset class="form fieldset-application">
+					<span class="error text-danger" style="color: red;"><form:errors
+							path="dayend" /></span> <label for="application">Dead Line<small>(Max
+							1 month)</small>
 					</label>
-					<div class="field ">
-						<input type="text" class="input-text" name="apply_link"
-							id="apply_link" placeholder="http://" value="" maxlength="" />
+					<div class="field required-field">
+						<form:input type="date" class="input-text" path="dayend"
+							id="dayend" />
 					</div>
 				</fieldset>
+
 				<p class="send-btn-border">
 					<input type="submit" name="submit_resume" class="button big"
 						value="Post a job &rarr;" />
 				</p>
 			</form:form>
 		</div>
-
 	</article>
 </div>
+<script>
+	var today = new Date();
+	var endday = new Date();
+	var dd = today.getDate()+ 1;
+	var ddend = today.getDate();
+	var mm = today.getMonth() + 1; //January is 0!
+	var mmend = today.getMonth() + 2; //January is 0!
+	var yyyy = today.getFullYear();
+	if (dd < 10) {
+		dd = '0' + dd
+	}
+	if (ddend < 10) {
+		ddend = '0' + ddend
+	}
+	if (mm < 10) {
+		mm = '0' + mm
+	}
+	if (mmend < 10) {
+		mmend = '0' + mmend
+	}
+	today = yyyy + '-' + mm + '-' + dd;
+	endday = yyyy + '-' + mmend + '-' + ddend;
+	document.getElementById("dayend").setAttribute("min", today);
+	document.getElementById("dayend").setAttribute("max", endday);
+</script>

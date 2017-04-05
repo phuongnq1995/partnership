@@ -43,7 +43,7 @@ public class Post implements Serializable{
 	@Size(min=3, max=100, message="Title have to size from 3 to 100 character.")
 	private String title;
 	
-	@NotEmpty
+	@Size(min=3, max=100, message="Position have to size from 3 to 100 character.")
 	private String position;
 	
 	@Email
@@ -131,6 +131,14 @@ public class Post implements Serializable{
 
 	public void setCompany(Company company) {
 		this.company = company;
+	}
+
+	public String getEmailApply() {
+		return emailApply;
+	}
+
+	public void setEmailApply(String emailApply) {
+		this.emailApply = emailApply;
 	}
 
 	public Level getLevel() {

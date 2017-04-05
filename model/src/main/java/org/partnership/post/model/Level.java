@@ -12,17 +12,18 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "level")
-public class Level implements Serializable{
+public class Level implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id@GeneratedValue(strategy=GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
-	@Size(min=3, max=100, message="Name have to size from 3 to 100 character.")
+	@Size(min = 3, max = 100, message = "Name have to size from 3 to 100 character.")
 	private String name;
 
-	@OneToMany(mappedBy="level")
+	@OneToMany(mappedBy = "level")
 	private List<Post> listPost;
 
 	public int getId() {
@@ -32,7 +33,7 @@ public class Level implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -48,6 +49,15 @@ public class Level implements Serializable{
 	public void setListPost(List<Post> listPost) {
 		this.listPost = listPost;
 	}
-	
-	
+
+	public Level(int id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+
+	public Level() {
+
+	}
+
 }
