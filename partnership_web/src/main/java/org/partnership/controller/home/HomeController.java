@@ -1,18 +1,14 @@
 package org.partnership.controller.home;
 
-import java.security.Principal;
 
 import javax.validation.Valid;
 
-import org.partnership.company.service.CompanyService;
-import org.partnership.employee.service.EmployeeService;
 import org.partnership.user.model.User;
 import org.partnership.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,12 +19,6 @@ public class HomeController {
 
 	@Autowired
 	private UserService userService;
-
-	@Autowired
-	private EmployeeService employeeService;
-	
-	@Autowired
-	private CompanyService companyService;
 
 	@RequestMapping(value = "/")
 	private String home() {
@@ -50,25 +40,4 @@ public class HomeController {
 		return "home";
 	}
 
-	@RequestMapping(value = "/employeeprofile")
-	public String profileEmployee(Principal principal, Model model) {
-		User user = userService.findUserByEmail(principal.getName());
-		return employeeService.findProfile(user, model);
-	}
-
-	@RequestMapping(value = "/employeeprofile/{id}")
-	public String profileEmployee(@PathVariable("id") long id, Model model, RedirectAttributes redirectAttributes) {
-		return employeeService.showProfile(id, model, redirectAttributes);
-	}
-	
-	@RequestMapping(value = "/companyprofile")
-	public String profileCompany(Principal principal, Model model) {
-		User user = userService.findUserByEmail(principal.getName());
-		return companyService.findProfile(user, model);
-	}
-
-	@RequestMapping(value = "/companyprofile/{id}")
-	public String profileCompany(@PathVariable("id") long id, Model model, RedirectAttributes redirectAttributes) {
-		return companyService.showProfile(id, model, redirectAttributes);
-	}
 }

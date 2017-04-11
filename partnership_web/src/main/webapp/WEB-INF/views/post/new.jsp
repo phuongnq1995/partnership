@@ -5,13 +5,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div id="titlebar" class="single submit-page">
 	<div class="container">
-
 		<div class="sixteen columns">
 			<h2>
 				<i class="fa fa-plus-circle"></i> Post a Job
 			</h2>
 		</div>
-
 	</div>
 </div>
 
@@ -19,7 +17,7 @@
 	<article id="post-2869"
 		class="sixteen columns post-2869 page type-page status-publish hentry">
 		<div class="submit-page">
-			<form:form modelAttribute="post" method="POST" action="post"
+			<form:form modelAttribute="post" method="POST" action="new"
 				class="job-manager-form">
 
 				<form:hidden path="company.id" />

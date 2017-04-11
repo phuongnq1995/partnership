@@ -56,7 +56,7 @@ public class CompanyServiceIpml implements CompanyService {
 	public String findProfile(User user, Model model) {
 		if (!companyRepository.checkCompanyPresent(user.getId()))
 			return "redirect:/company/new";
-		return "redirect:/companyprofile/" + (companyRepository.findByUserId(user.getId()).getId());
+		return "redirect:/company/" + (companyRepository.findByUserId(user.getId()).getId());
 	}
 
 	public String showProfile(long id, Model model, RedirectAttributes redirectAttributes) {
@@ -66,7 +66,7 @@ public class CompanyServiceIpml implements CompanyService {
 			return "redirect:/";
 		}
 		model.addAttribute("company", company);	
-		return "companyprofile";
+		return "showcompany";
 	}
 
 	public Company findByUserId(long userId) {

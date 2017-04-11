@@ -8,14 +8,18 @@
 
 	<http auto-config="true">
 		<intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')" />
-		<intercept-url pattern="/company/*" access="hasRole('ROLE_COMPANY')" />
-		<intercept-url pattern="/companyprofile" access="hasRole('ROLE_COMPANY')" />
-		<intercept-url pattern="/employee/*" access="hasRole('ROLE_EMPLOYEE')" />
-		<intercept-url pattern="/employeeprofile" access="hasRole('ROLE_EMPLOYEE')" />
+
+		<intercept-url pattern="/company/new" access="hasRole('ROLE_COMPANY')" />
+		<intercept-url pattern="/company" access="hasRole('ROLE_COMPANY')" />
+
+		<intercept-url pattern="/employee/new" access="hasRole('ROLE_EMPLOYEE')" />
+		<intercept-url pattern="/employee" access="hasRole('ROLE_EMPLOYEE')" />
+
 		<form-login login-page="/" default-target-url="/"
 			authentication-failure-url="/login?error" username-parameter="email"
 			password-parameter="password" />
 		<logout logout-success-url="/" />
+
 	</http>
 
 	<authentication-manager alias="authenticationManager">

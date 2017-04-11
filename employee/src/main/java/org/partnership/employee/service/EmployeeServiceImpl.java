@@ -39,7 +39,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public String findProfile(User user, Model model) {
 		if (!employeeRepository.checkEmployeePresent(user.getId()))
 			return "redirect:/employee/new";
-		return "redirect:/employeeprofile/" + (employeeRepository.findByUserId(user.getId()).getId());
+		return "redirect:/showemployee/" + (employeeRepository.findByUserId(user.getId()).getId());
 	}
 
 	public String showProfile(long id, Model model, RedirectAttributes redirectAttributes) {
@@ -49,7 +49,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			return "redirect:/";
 		}
 		model.addAttribute("employee", employee);	
-		return "employeeprofile";
+		return "showemployee";
 	}
 
 	public Employee findByUserId(long userId) {

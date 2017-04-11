@@ -151,10 +151,10 @@
 						</c:when>
 						<c:otherwise>
 							<li><security:authorize access="hasRole('ROLE_EMPLOYEE')">
-									<a href="${pageContext.request.contextPath}/employeeprofile"><i
+									<a href="${pageContext.request.contextPath}/employee"><i
 										class="fa fa-user"></i> User page</a>
 								</security:authorize> <security:authorize access="hasRole('ROLE_COMPANY')">
-									<a href="${pageContext.request.contextPath}/companyprofile"><i
+									<a href="${pageContext.request.contextPath}/company"><i
 										class="fa fa-user"></i> User page</a>
 								</security:authorize></li>
 							<li><a onclick="document.forms['logoutForm'].submit()"

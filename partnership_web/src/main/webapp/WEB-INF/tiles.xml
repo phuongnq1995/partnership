@@ -27,35 +27,40 @@
 		<put-attribute name="body"
 			value="/WEB-INF/views/company/companies.jsp" />
 	</definition>
+	
 	<definition name="newcompany" extends="base-definition">
 		<put-attribute name="title" value="Register Company" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/company/newcompany.jsp" />
+			value="/WEB-INF/views/company/new.jsp" />
 	</definition>
-	<definition name="companyprofile" extends="base-definition">
+	
+	<definition name="showcompany" extends="base-definition">
 		<put-attribute name="title" value="Company" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/company/comdetails.jsp" />
+			value="/WEB-INF/views/company/show.jsp" />
 	</definition>
 
 	<!-- Employee Page -->
 	<definition name="newemployee" extends="base-definition">
 		<put-attribute name="title" value="Register Employee" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/employee/register.jsp" />
+			value="/WEB-INF/views/employee/new.jsp" />
 	</definition>
 
-	<definition name="employeeprofile" extends="base-definition">
+	<definition name="showemployee" extends="base-definition">
 		<put-attribute name="title" value="Employee" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/employee/profile.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/employee/show.jsp" />
 	</definition>
 
 	<!-- Post Page -->
 	<definition name="newpost" extends="base-definition">
 		<put-attribute name="title" value="New Post" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/post/newpost.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/post/new.jsp" />
+	</definition>
+
+	<definition name="showpost" extends="base-definition">
+		<put-attribute name="title" value="Post" />
+		<put-attribute name="body" value="/WEB-INF/views/post/show.jsp" />
 	</definition>
 
 </tiles-definitions>

@@ -228,6 +228,11 @@ public class Post implements Serializable{
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	
+	public String timePost() {
+	    long days = (new Date().getTime() - this.daypost.getTime()) / 86400000;
+	    if(days == 0) return "Today";
+	    else if(days == 1) return "Yesterday";
+	    else return days + " days ago";
+	}
 	
 }
