@@ -55,6 +55,12 @@ public class PostServiceImpl implements PostService {
 		}
 		model.addAttribute("post", post);
 		model.addAttribute("company", post.getCompany());
+		model.addAttribute("posts", postRepository.findAll());
 		return "showpost";
+	}
+
+	public String getIndex(Model model) {
+		model.addAttribute("posts", postRepository.findAll());
+		return "indexpost";
 	}
 }

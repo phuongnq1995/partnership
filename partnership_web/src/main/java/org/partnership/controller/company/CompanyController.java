@@ -71,9 +71,8 @@ public class CompanyController {
 	}
 
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
-	private String create(RedirectAttributes redirectAttributes, @Valid Company company,
-			@RequestParam("location") String location, BindingResult bindingResult,
-			@RequestParam("fileUpload") MultipartFile fileUpload) throws IOException {
+	private String create(RedirectAttributes redirectAttributes, @Valid Company company, @RequestParam("location") String location, 
+			BindingResult bindingResult, @RequestParam("fileUpload") MultipartFile fileUpload) throws IOException {
 		if (bindingResult.hasErrors())
 			return "newcompany";
 		else {
@@ -82,11 +81,17 @@ public class CompanyController {
 		}
 		return "redirect:/";
 	}
-	
+
 	@RequestMapping(value = "")
 	public String profileCompany(Principal principal, Model model) {
 		User user = userService.findUserByEmail(principal.getName());
 		return companyService.findProfile(user, model);
+	}
+	
+	@RequestMapping(value = "/index")
+	private String index(Model model){
+		model.addAttribute("companies", companyService.findAll());
+		return "indexcompany";
 	}
 
 	@RequestMapping(value = "/{id}")

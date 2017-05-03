@@ -17,4 +17,6 @@ public interface EmployeeService {
 	String showProfile(long id, Model model, RedirectAttributes redirectAttributes);
 	
 	Employee findByUserId(long id);
+
+	String getIndex(Model model);
 }

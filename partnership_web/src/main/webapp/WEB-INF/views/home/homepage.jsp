@@ -2,12 +2,11 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <div
 	style="background-image: url(https://39sf152pf74z2negmt1gi8ik-wpengine.netdna-ssl.com/wp-content/uploads/2016/10/banner-home-02.jpg);"
 	data-img-width="2000" data-img-height="1330" data-diff="300"
-	class="workscout-search-banner  with-transparent-header parallax background ">
+	class="workscout-search-banner parallax background ">
 	<div class="container">
 		<div class="sixteen columns">
 			<div class="message">
@@ -53,7 +52,7 @@
 	</div>
 </div>
 <script>
-$(document).ready(function(){
-	$('#flash').delay(10000).fadeOut('slow');
-});
+	$(document).ready(function() {
+		$('#flash').delay(10000).fadeOut('slow');
+	});
 </script>

@@ -51,7 +51,7 @@ public class PostController {
 	private PostService postService;
 
 	@InitBinder
-	public void initBinder(WebDataBinder binder) {
+	private void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));
 		binder.registerCustomEditor(Category.class, new CategoryConverter());
 		binder.registerCustomEditor(Location.class, new LocationConverter());
@@ -79,9 +79,15 @@ public class PostController {
 		return post;
 	}
 
+	@RequestMapping(value = "/index")
+	private String index(Model model) {
+		return postService.getIndex(model);
+	}
+
 	@RequestMapping(value = "/new")
-	private String newPost(Model model, Principal principal) {
+	private String newPost(Model model, Principal principal, RedirectAttributes redirectAttributes) {
 		if (!checkCompanyPresent(principal)) {
+			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGES", "Register your company !");
 			return "redirect:/company/new";
 		}
 		model.addAttribute("post", newPost(principal));
@@ -102,7 +108,7 @@ public class PostController {
 		}
 		return postService.createPost(post, redirectAttributes);
 	}
-	
+
 	@RequestMapping(value = "/{id}")
 	private String showPost(@PathVariable("id") long id, Model model, RedirectAttributes redirectAttributes) {
 		return postService.show(id, redirectAttributes, model);

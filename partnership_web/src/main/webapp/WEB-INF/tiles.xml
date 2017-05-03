@@ -22,29 +22,31 @@
 	</definition>
 
 	<!-- Company Page -->
-	<definition name="companies" extends="base-definition">
+	<definition name="indexcompany" extends="base-definition">
 		<put-attribute name="title" value="Company" />
 		<put-attribute name="body"
-			value="/WEB-INF/views/company/companies.jsp" />
+			value="/WEB-INF/views/company/index.jsp" />
 	</definition>
-	
+
 	<definition name="newcompany" extends="base-definition">
 		<put-attribute name="title" value="Register Company" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/company/new.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/company/new.jsp" />
 	</definition>
-	
+
 	<definition name="showcompany" extends="base-definition">
 		<put-attribute name="title" value="Company" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/company/show.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/company/show.jsp" />
 	</definition>
 
 	<!-- Employee Page -->
+	<definition name="indexemployee" extends="base-definition">
+		<put-attribute name="title" value="Browse Candidates" />
+		<put-attribute name="body" value="/WEB-INF/views/employee/index.jsp" />
+	</definition>
+
 	<definition name="newemployee" extends="base-definition">
 		<put-attribute name="title" value="Register Employee" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/employee/new.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/employee/new.jsp" />
 	</definition>
 
 	<definition name="showemployee" extends="base-definition">
@@ -53,6 +55,11 @@
 	</definition>
 
 	<!-- Post Page -->
+	<definition name="indexpost" extends="base-definition">
+		<put-attribute name="title" value="Browse Jobs" />
+		<put-attribute name="body" value="/WEB-INF/views/post/index.jsp" />
+	</definition>
+
 	<definition name="newpost" extends="base-definition">
 		<put-attribute name="title" value="New Post" />
 		<put-attribute name="body" value="/WEB-INF/views/post/new.jsp" />

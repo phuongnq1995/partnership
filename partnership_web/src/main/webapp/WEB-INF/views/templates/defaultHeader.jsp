@@ -33,22 +33,16 @@
 						</ul></li>
 					<li><a href="#">For Candidates</a>
 						<ul class="sub-menu">
-							<li><a href="browse-jobs/index.html">Browse Jobs</a></li>
+							<li><a href="${pageContext.request.contextPath}/post/index">Browse Jobs</a></li>
 							<li><a href="browse-categories/index.html">Browse
 									Categories</a></li>
-							<li><a href="companies/index.html">Browse Companies</a></li>
+							<li><a href="${pageContext.request.contextPath}/companies">Browse Companies</a></li>
 							<li><a href="submit-resume/index.html">Submit Resume</a></li>
-							<li><a href="candidate-dashboard/index.html">Candidate
-									Dashboard</a></li>
-							<li><a href="job-alerts/index.html">Job Alerts</a></li>
-							<li><a href="my-bookmarks/index.html">My Bookmarks</a></li>
 						</ul></li>
 					<li><a href="#">For Employers</a>
 						<ul class="sub-menu">
-							<li><a href="resumes/index.html">Browse Candidates</a></li>
-							<li><a href="post-a-job/index.html">Post a Job</a></li>
-							<li><a href="job-dashboard/index.html">Employer
-									Dashboard</a></li>
+							<li><a href="${pageContext.request.contextPath}/employee/index">Browse Candidates</a></li>
+							<li><a href="${pageContext.request.contextPath}/post/new">Post a Job</a></li>
 						</ul></li>
 					<li><a href="blog/index.html">Blog</a></li>
 				</ul>

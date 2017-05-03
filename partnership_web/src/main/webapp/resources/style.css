@@ -4718,11 +4718,11 @@ li.resume_featured,
 #titlebar.photo-bg h2 span { top: -7px; }
 
 span.job-type { background-color: #ddd }
-span.full-time { background-color: #186fc9; }
-span.part-time { background-color: #f1630d; }
-span.freelance { background-color: #53b427; }
-span.internship { background-color: #e1d123; }
-span.temporary { background-color: #e12335; }
+span.FULLTIME { background-color: #186fc9; }
+span.PARTTIME { background-color: #f1630d; }
+span.FREELANCE { background-color: #53b427; }
+span.INTERNSHIP { background-color: #e1d123; }
+span.TEMPORARY { background-color: #e12335; }
 span.new_job { background-color: #ff8000 }
 span.job-manager-applications-applied-notice { 
 	background-color: #58ba2b;     

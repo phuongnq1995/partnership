@@ -66,7 +66,12 @@ public class EmployeeController {
 			return false;
 		return true;
 	}
-
+	
+	@RequestMapping(value = "/index")
+	private String index(Model model){
+		return employeeService.getIndex(model);
+	}
+	
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	private String register(Model model, Principal principal) {
 		if (!checkEmployeePresent(principal)) {

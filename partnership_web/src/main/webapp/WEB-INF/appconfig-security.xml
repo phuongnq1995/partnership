@@ -11,7 +11,9 @@
 
 		<intercept-url pattern="/company/new" access="hasRole('ROLE_COMPANY')" />
 		<intercept-url pattern="/company" access="hasRole('ROLE_COMPANY')" />
-
+	
+		<intercept-url pattern="/post/new" access="hasRole('ROLE_COMPANY')" />
+		
 		<intercept-url pattern="/employee/new" access="hasRole('ROLE_EMPLOYEE')" />
 		<intercept-url pattern="/employee" access="hasRole('ROLE_EMPLOYEE')" />
 

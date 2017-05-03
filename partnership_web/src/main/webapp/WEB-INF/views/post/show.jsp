@@ -11,7 +11,7 @@
 			<h1>
 				${post.getTitle()}
 				<c:forEach items="${post.getTypes()}" var="type">
-					<span class="job-type full-time">${type.getName()}</span>
+					<span class="job-type ${type.getName()}">${type.getName()}</span>
 				</c:forEach>
 			</h1>
 
@@ -75,41 +75,61 @@
 				</div>
 
 				<div class="clearfix"></div>
-				<div id="related-job-container">
+				<div class="wpb_wrapper">
 					<h3 class="margin-bottom-5 margin-top-55">Related Jobs</h3>
-					<!-- Showbiz Container -->
-					<div id="related-job-spotlight"
-						class="related-job-spotlight-car showbiz-container"
-						data-visible="[2,2,1,1]">
-						<div class="showbiz" data-left="#showbiz_left_24"
-							data-right="#showbiz_right_24" data-play="#showbiz_play_24">
-							<div class="overflowholder">
-								<ul>
-									<li>
-										<div class="job-spotlight">
+					<div class="wpb_text_column wpb_content_element ">
+						<div class="wpb_wrapper">
+							<div class="job_listings">
+								<ul class="job_listings">
+									<c:forEach items="${posts}" var="perpost">
+										<li class="job_listing"><a
+											href="${pageContext.request.contextPath}/post/${perpost.getId()}">
+												<c:choose>
+													<c:when test="${empty post.getCompany().getLogo()}">
+														<td><img alt="Photo" width="70px" height="70px"
+															src="<c:url value="/resources/images/company.png"/>" /></td>
+													</c:when>
+													<c:otherwise>
+														<img width="70px" height="70px"
+															src="${pageContext.request.contextPath}/imageCompany/${company.getId()}"
+															alt="Photo" />
+													</c:otherwise>
+												</c:choose>
+												<div class="job-list-content">
+													<h4>
+														${perpost.getTitle()}
+														<c:forEach items="${perpost.getTypes()}" var="type">
+															<span class="job-type ${type.getName()}">${type.getName()}</span>
+														</c:forEach>
+													</h4>
 
-											<a
-												href="../restaurant-team-member-crew/restaurant-team-member-crew.html">
-												Restaurant Team Member &#8211; Crew <span
-												class="job-type full-time">Full Time</span>
-											</a> <span class="ws-meta-company-name"><i
-												class="fa fa-briefcase"></i> King LLC</span> <span
-												class="ws-meta-job-location"><i
-												class="fa fa-map-marker"></i> <a class="google_map_link"
-												href="http://maps.google.com/maps?q=London&#038;zoom=14&038;size=512x512&038;maptype=roadmap&038;sensor=false"
-												target="_blank">London</a></span> <span class="ws-meta-salary">
-												<i class="fa fa-money"></i> &#36;52000 - &#36;58000
-											</span>
-
-											<p>The Food Service Specialist ensures outstanding
-												customer service is provided to food customers and that all
-												food offerings meet the...</p>
-											<a
-												href="../restaurant-team-member-crew/restaurant-team-member-crew.html"
-												class="button">Apply For This Job</a>
-										</div>
-									</li>
-
+													<div class="job-icons">
+														<span class="ws-meta-company-name"><i
+															class="fa fa-briefcase"></i>
+															${perpost.getCompany().getName()}</span> <span
+															class="ws-meta-job-location"><i
+															class="fa fa-map-marker"></i> <c:forEach
+																items="${perpost.getLocations()}" var="location"
+																varStatus="loop">${location.getName()}<c:if
+																	test="${!loop.last}">,</c:if>
+															</c:forEach></span><span class="ws-meta-salary"> <i
+															class="fa fa-money"></i> <c:choose>
+																<c:when
+																	test="${empty post.getMinsalary() && empty post.getMaxsalary()}">negotiate
+									</c:when>
+																<c:otherwise>
+																	<c:if test="${not empty post.getMinsalary()}">
+							 from &#36;${post.getMinsalary()}</c:if> to <c:if
+																		test="${not empty post.getMaxsalary()}">
+							 &#36;${post.getMaxsalary()}</c:if>
+																</c:otherwise>
+															</c:choose>
+														</span>
+													</div>
+												</div>
+										</a>
+											<div class="clearfix"></div></li>
+									</c:forEach>
 								</ul>
 								<div class="clearfix"></div>
 
@@ -231,8 +251,7 @@
 
 								<p class="send-app-btn">
 									<input type="submit" name="wp_job_manager_send_application"
-										value="Send application" /> <input type="hidden"
-										name="job_id" value="2489" />
+										value="Send application" />
 								</p>
 							</form>
 							<hr />
@@ -245,8 +264,7 @@
 								<p>
 									<input type="submit"
 										name="wp_job_manager_resumes_apply_with_resume_create"
-										value="Submit resume and apply" /> <input type="hidden"
-										name="job_id" value="2489" />
+										value="Submit resume and apply" />
 								</p>
 							</form>
 						</div>

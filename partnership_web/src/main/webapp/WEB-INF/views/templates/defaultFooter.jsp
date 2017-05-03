@@ -4,7 +4,7 @@
 <!-- Main -->
 	<div class="container">
 		             <div class="seven columns">
-                <aside id="text-3" class="footer-widget widget_text"><h4>About</h4>			<div class="textwidget"><p>WorkScout is a fully functioning job board Theme for WordPress developed with the popular free WordPress Plugin WP Job Manager.</p>
+                <aside id="text-3" class="footer-widget widget_text"><h4>About</h4>			<div class="textwidget"><p>Partnership is a site connect people with many business.</p>
 <a href="https://themeforest.net/item/workscout-job-board-wordpress-theme/13591801?ref=purethemes" class="button">Learn More</a></div>
 		</aside>            </div>
                      <div class="three columns">

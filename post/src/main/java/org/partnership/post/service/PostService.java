@@ -17,5 +17,7 @@ public interface PostService {
 	String createPost(Post post, RedirectAttributes redirectAttributes);
 
 	String show(long id, RedirectAttributes redirectAttributes, Model model);
+
+	String getIndex(Model model);
 	
 }
