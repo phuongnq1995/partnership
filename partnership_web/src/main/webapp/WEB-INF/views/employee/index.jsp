@@ -22,20 +22,6 @@
 	<!-- Widgets -->
 	<div class="five columns sidebar " role="complementary">
 		<form class="resume_filters in_sidebar">
-			<div class="widget">
-				<h4>Location</h4>
-				<div class="search_location">
-					<input type="text" name="search_location" id="search_location"
-						placeholder="Location" value="" /> <input type="text"
-						name="search_radius" id="search_radius" value="50" /> <select
-						class="radius_type" name="radius_type">
-						<option value="miles">miles</option>
-						<option value="km">km</option>
-					</select>
-					<div class="clearfix"></div>
-
-				</div>
-			</div>
 			<!-- Skills -->
 			<div class="widget">
 				<h4>Filter by Skills</h4>
@@ -45,12 +31,9 @@
 						data-placeholder='Choose a skill'
 						data-no_results_text='No results match'
 						data-multiple_text='Select Some Options'>
-						<option class="level-0" value="1173">.net</option>
-						<option class="level-0" value="1291">2 sÃ³cios e uma
-						<option class="level-0" value="680">singing</option>
-						<option class="level-0" value="1231">Sistemas</option>
-						<option class="level-0" value="559">skill</option>
-						<option class="level-0" value="371">Skill 1</option>
+						<c:forEach items="${categories}" var="category">
+							<option class="level-0" value="${category.getId()}">${category.getName()}</option>
+						</c:forEach>
 					</select>
 
 				</div>

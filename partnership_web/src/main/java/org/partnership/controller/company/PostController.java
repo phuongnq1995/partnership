@@ -4,7 +4,10 @@ import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
 import javax.validation.Valid;
+
 import org.partnership.category.model.Category;
 import org.partnership.category.service.CategoryService;
 import org.partnership.company.service.CompanyService;
@@ -29,6 +32,8 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -112,5 +117,13 @@ public class PostController {
 	@RequestMapping(value = "/{id}")
 	private String showPost(@PathVariable("id") long id, Model model, RedirectAttributes redirectAttributes) {
 		return postService.show(id, redirectAttributes, model);
+	}
+	
+	
+	@RequestMapping(value="/searchForm", method = RequestMethod.GET)
+	public @ResponseBody List<Post> searchHome(@RequestParam(value= "keywords") String keywords,
+			@RequestParam(value= "location") String location){
+		List<Post> posts = postService.findByKeyWordAndLocation(keywords, location);
+		return posts;
 	}
 }

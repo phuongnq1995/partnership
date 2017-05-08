@@ -26,21 +26,23 @@
 			<div class="search-container sc-jobs">
 				<!-- Form -->
 				<h2>Find Job</h2>
-				<form method="GET" action="https://workscout.in/browse-jobs/">
-					<input type="text" id="search_keywords" name="search_keywords"
+				<form method="GET" action="/searchForm">
+					<input type="text" id="keywords" name="keywords"
 						class="ico-01" placeholder="job title, keywords or company name"
-						value="" /> <input type="text" id="search_location"
-						name="search_location" class="ico-02"
+						value="" /> 
+					<input type="text" id="location"
+						name="location" class="ico-02"
 						placeholder="city, province or region" value="" />
 					<button>
 						<i class="fa fa-search"></i>
 					</button>
-
 				</form>
 				<!-- Browse Jobs -->
+				
 				<div class="browse-jobs">
 					Or browse job offers by <a
 						href="browse-categories/browse-categories.html">category</a>
+					
 				</div>
 
 				<!-- Announce -->

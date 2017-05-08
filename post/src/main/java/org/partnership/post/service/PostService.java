@@ -19,5 +19,7 @@ public interface PostService {
 	String show(long id, RedirectAttributes redirectAttributes, Model model);
 
 	String getIndex(Model model);
+
+	List<Post> findByKeyWordAndLocation(String keywords, String location);
 	
 }
