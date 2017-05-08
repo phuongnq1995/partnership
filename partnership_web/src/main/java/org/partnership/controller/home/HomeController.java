@@ -1,8 +1,12 @@
 package org.partnership.controller.home;
 
 
+import java.util.List;
+
 import javax.validation.Valid;
 
+import org.hibernate.internal.util.Value;
+import org.partnership.post.model.Post;
 import org.partnership.user.model.User;
 import org.partnership.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -39,5 +44,6 @@ public class HomeController {
 			model.addAttribute("SUCCESS_MESSAGE", "You have been logged out successfully.");
 		return "home";
 	}
+	
 
 }

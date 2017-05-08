@@ -63,4 +63,11 @@ public class PostServiceImpl implements PostService {
 		model.addAttribute("posts", postRepository.findAll());
 		return "indexpost";
 	}
+
+	public List<Post> findByKeyWordAndLocation(String keywords, String location) {
+		if(keywords.equals("") && location.equals("")){
+			return postRepository.findAll();
+		}
+		return postRepository.findByKeyWordAndLocation(keywords, location);
+	}
 }

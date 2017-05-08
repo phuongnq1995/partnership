@@ -3,7 +3,7 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
-<div id="titlebar" class="single  with-map">
+<div id="titlebar" class="single with-map">
 	<div class="container">
 		<div class="sixteen columns">
 			<div class="ten columns">
@@ -21,7 +21,7 @@
 	<!-- Widgets -->
 	<div class="five columns sidebar" role="complementary">
 		<form class="job_filters in_sidebar">
-			<input type="hidden" name="search_keywords" id="search_keywords"
+			<input type="hidden" name="search_keywords" id="keywords"
 				placeholder="job title, keywords or company name" value="" />
 			<div class="job_filters_links"></div>
 			<div class="widget">
@@ -138,12 +138,12 @@
 		class="eleven columns post-2871 page type-page status-publish hentry">
 		<div class="padding-right">
 			<form class="list-search" method="GET"
-				action="https://workscout.in/browse-jobs/">
+				action="/searchForm">
 				<div class="search_keywords">
 					<button>
 						<i class="fa fa-search"></i>
 					</button>
-					<input type="text" name="search_keywords" id="search_keywords"
+					<input type="text" name="keywords" id="keywords"
 						placeholder="job title, keywords or company name" value="" />
 					<div class="clearfix"></div>
 				</div>
