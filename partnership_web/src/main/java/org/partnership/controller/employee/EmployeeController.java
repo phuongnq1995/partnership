@@ -5,6 +5,7 @@ import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.partnership.category.model.Category;
@@ -32,6 +33,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
 
 @Controller
 @RequestMapping("/employee")
@@ -110,12 +114,15 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(value="/applyPost", method = RequestMethod.GET)
-	public @ResponseBody Employee applyPost(Principal principal, Model model){
-		if (!checkEmployeePresent(principal)) {
-			Employee employee = employeeService.findByUserId(userService.findUserByEmail(principal.getName()).getId());
-			model.addAttribute("employee", employee);
-			return employee;
+	public @ResponseBody Employee applyPost(Principal principal) {
+		if (checkEmployeePresent(principal)) {
+			Employee employee1 = employeeService.findByUserId(userService.findUserByEmail(principal.getName()).getId());
+			Employee employee2 = new Employee();
+			employee2.setFullname(employee1.getFullname());
+			employee2.setId(employee1.getId());
+			return employee2;
 		}
+		System.out.println("Null");
 		return null;
 	}
 }

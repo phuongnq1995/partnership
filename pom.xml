@@ -13,7 +13,7 @@
 		<module>employee</module>
 		<module>category</module>
 		<module>user</module>
-    <module>post</module>
+    	<module>post</module>
   </modules>
 
 	<properties>
@@ -30,6 +30,7 @@
 		<spring-security.version>4.0.2.RELEASE</spring-security.version>
 		<slf4j.version>1.6.4</slf4j.version>
 		<hibernate.jpa.version>1.0.1.Final</hibernate.jpa.version>
+		<jackson.version>2.6.3</jackson.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 

@@ -195,7 +195,7 @@
 <%-- 				<c:choose>
 				<c:when test="${pageContext.request.userPrincipal.name != null}"> --%>
 				<div class="job_application application">
-					<a href="#apply-dialog" id="new-apply"
+					<a  id="new-apply" href="#apply-dialog"
 						class="small-dialog popup-with-zoom-anim button">Apply for job</a>
 
 					<div id="apply-dialog"
@@ -204,17 +204,17 @@
 							<h2>Apply For This Job</h2>
 						</div>
 						<div class="small-dialog-content">
-							<form:form class="job-manager-application-form job-manager-form"
+							<form class="job-manager-application-form job-manager-form"
 								method="post" enctype="multipart/form-data"
 								action="${pageContext.request.contextPath}/employee/applyPost" id="form-apply">
 
 								<fieldset class="fieldset-candidate_name">
 									<label for="candidate_name">Your name<small>*</small></label><span
 										class="error text-danger" style="color: red;"><form:errors
-											path="fullname" /></span>
+										/></span>
 									<div class="field">
-										<form:input type="text" class="input-text" path="fullname" 
-											id="candidate_name" placeholder="Your full name" />
+										<input type="text" class="input-text" path="fullname" 
+											id="candidate_name" placeholder="Your full name" value="${employee.getFullname()}"/>
 									</div>
 								</fieldset>
 								<fieldset class="fieldset-candidate_email">
@@ -249,18 +249,18 @@
 										</label>
 									</div>
 									<p id="log"></p>
-									<c:if test="${not empty employee.getCv()}">
-										<a rel="nofollow"
-											href="${pageContext.request.contextPath}/cvEmployee/${employee.getId()}"><i
-											class="fa fa-link"></i>Curriculum Vitae(CV)</a>
-									</c:if>
+									<div>
+											<a rel="nofollow" id="cv"
+												href=""><i
+												class="fa fa-link" ></i>Curriculum Vitae(CV)</a>
+									</div>
 								</fieldset>
 								
 								<p class="send-app-btn">
 									<input type="submit" name="wp_job_manager_send_application"
 										value="Send application" />
 								</p>
-							</form:form>
+							</form>
 							<hr />
 						</div>
 					</div>
@@ -283,13 +283,13 @@
 $(document).ready(function(){
     $("#new-apply").click(function(){
     	$.ajax({
-    	    url: '/applyPost',
-    	    success: function() {
-    	      $('#form-apply').val(data);
+    	    url:'${pageContext.request.contextPath}/employee/applyPost',
+    	    type: "GET",
+    	    success: function (data) {
+    	      $('#candidate_name').val(data.fullname);
+    	      $('#cv').attr("href","${pageContext.request.contextPath}/cvEmployee/"+data.id);
     	    }
     	  });
     });
 });
-
-	
 </script>
