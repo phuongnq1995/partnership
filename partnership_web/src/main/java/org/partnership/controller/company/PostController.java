@@ -15,6 +15,7 @@ import org.partnership.converter.CategoryConverter;
 import org.partnership.converter.LevelConverter;
 import org.partnership.converter.LocationConverter;
 import org.partnership.converter.WorkTypeConverter;
+import org.partnership.employee.model.Employee;
 import org.partnership.location.model.Location;
 import org.partnership.location.service.LocationService;
 import org.partnership.post.model.Level;
@@ -119,11 +120,11 @@ public class PostController {
 		return postService.show(id, redirectAttributes, model);
 	}
 	
-	
 	@RequestMapping(value="/searchForm", method = RequestMethod.GET)
 	public @ResponseBody List<Post> searchHome(@RequestParam(value= "keywords") String keywords,
 			@RequestParam(value= "location") String location){
 		List<Post> posts = postService.findByKeyWordAndLocation(keywords, location);
 		return posts;
 	}
+	
 }

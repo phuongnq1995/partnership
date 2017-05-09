@@ -2,6 +2,8 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 <div id="titlebar">
 	<div class="container">
 		<div class="ten columns">
@@ -138,9 +140,7 @@
 						</div>
 					</div>
 				</div>
-
 			</div>
-
 		</div>
 	</div>
 
@@ -191,8 +191,11 @@
 								${post.getDaypost().toString()}</span>
 						</div></li>
 				</ul>
+				
+<%-- 				<c:choose>
+				<c:when test="${pageContext.request.userPrincipal.name != null}"> --%>
 				<div class="job_application application">
-					<a href="#apply-dialog"
+					<a href="#apply-dialog" id="new-apply"
 						class="small-dialog popup-with-zoom-anim button">Apply for job</a>
 
 					<div id="apply-dialog"
@@ -201,24 +204,24 @@
 							<h2>Apply For This Job</h2>
 						</div>
 						<div class="small-dialog-content">
-							<form class="job-manager-application-form job-manager-form"
+							<form:form class="job-manager-application-form job-manager-form"
 								method="post" enctype="multipart/form-data"
-								action="https://workscout.in/job/restaurant-dishwasher/">
+								action="${pageContext.request.contextPath}/employee/applyPost" id="form-apply">
 
 								<fieldset class="fieldset-candidate_name">
-									<label for="candidate_name">Full name</label>
-									<div class="field required-field">
-										<input type="text" class="input-text" name="candidate_name"
-											id="candidate_name" placeholder="" value="" maxlength=""
-											required />
+									<label for="candidate_name">Your name<small>*</small></label><span
+										class="error text-danger" style="color: red;"><form:errors
+											path="fullname" /></span>
+									<div class="field">
+										<form:input type="text" class="input-text" path="fullname" 
+											id="candidate_name" placeholder="Your full name" />
 									</div>
 								</fieldset>
 								<fieldset class="fieldset-candidate_email">
-									<label for="candidate_email">Email address</label>
-									<div class="field required-field">
-										<input type="text" class="input-text" name="candidate_email"
-											id="candidate_email" placeholder="" value="" maxlength=""
-											required />
+									<label for="candidate_name">Your email<small>*</small></label>
+									<div class="field">
+										<input type="email" class="input-text" name="email"
+											value="${pageContext.request.userPrincipal.name}" placeholder="Your email"/>
 									</div>
 								</fieldset>
 								<fieldset class="fieldset-application_message">
@@ -226,51 +229,67 @@
 									<div class="field required-field">
 										<textarea cols="20" rows="3" class="input-text"
 											name="application_message" id="application_message"
-											placeholder="Your cover letter/message sent to the employer"
-											maxlength="" required></textarea>
+											placeholder="Your cover letter/message sent to the employer">
+										</textarea>
 									</div>
 								</fieldset>
 								<fieldset class="fieldset-application_attachment">
-									<label for="application_attachment">Upload CV <small>(optional)</small></label>
-									<div class="field ">
-
-										<label class="fake-upload-btn no_ajax">
-											<div class="job-manager-uploaded-files"></div> <input
-											type="file" class="ws-file-upload input-text"
-											data-file_types="jpg|jpeg|jpe|gif|png|bmp|tiff|tif|ico|asf|asx|wmv|wmx|wm|avi|divx|flv|mov|qt|mpeg|mpg|mpe|mp4|m4v|ogv|webm|mkv|3gp|3gpp|3g2|3gp2|txt|asc|c|cc|h|srt|csv|tsv|ics|rtx|css|vtt|dfxp|mp3|m4a|m4b|ra|ram|wav|ogg|oga|mid|midi|wma|wax|mka|rtf|js|pdf|class|tar|zip|gz|gzip|rar|7z|psd|xcf|doc|pot|pps|ppt|wri|xla|xls|xlt|xlw|mdb|mpp|docx|docm|dotx|dotm|xlsx|xlsm|xlsb|xltx|xltm|xlam|pptx|pptm|ppsx|ppsm|potx|potm|ppam|sldx|sldm|onetoc|onetoc2|onetmp|onepkg|oxps|xps|odt|odp|ods|odg|odc|odb|odf|wp|wpd|key|numbers|pages"
-											multiple name="application_attachment[]"
-											id="application_attachment" placeholder="" />
+										<label for="resume_file">Curriculum Vitae(CV) <small>(PDF optional)</small>
+									</label> <span class="error text-danger" style="color: red;"><form:errors
+											path="cv" /></span>
+									<div class="field">
+				
+										<label class="fake-upload-btn">
+											<div class="job-manager-uploaded-files"></div> <input type='file'
+											name="fileUpload" class="input-text wp-job-manager-file-upload"
+											accept="|pdf|" id="resume_file" />
 											<div class="upload-btn">
-												<i class="fa fa-upload"></i> Browse
+												<i class="fa fa-upload"></i>Browse
 											</div>
-										</label> <small class="description"> Upload your CV/resume or
-											any other relevant file. Max. file size: 50 MB. </small>
+										</label>
 									</div>
+									<p id="log"></p>
+									<c:if test="${not empty employee.getCv()}">
+										<a rel="nofollow"
+											href="${pageContext.request.contextPath}/cvEmployee/${employee.getId()}"><i
+											class="fa fa-link"></i>Curriculum Vitae(CV)</a>
+									</c:if>
 								</fieldset>
-
-
+								
 								<p class="send-app-btn">
 									<input type="submit" name="wp_job_manager_send_application"
 										value="Send application" />
 								</p>
-							</form>
+							</form:form>
 							<hr />
-							<form class="apply_with_resume" method="post"
-								action="https://workscout.in/submit-resume/">
-								<p>You can apply to this job and others using your online
-									resume. Click the link below to submit your online resume and
-									email your application to this employer.</p>
-
-								<p>
-									<input type="submit"
-										name="wp_job_manager_resumes_apply_with_resume_create"
-										value="Submit resume and apply" />
-								</p>
-							</form>
 						</div>
 					</div>
+					</div>
+			<%-- 		</c:when>
+					<c:otherwise>
+						<div class="job_application application">
+							<p class="small-dialog popup-with-zoom-anim button">Log in or sign up to apply</p>
+						</div>
+					</c:otherwise>
+					
+				</c:choose> --%>
+					
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#new-apply").click(function(){
+    	$.ajax({
+    	    url: '/applyPost',
+    	    success: function() {
+    	      $('#form-apply').val(data);
+    	    }
+    	  });
+    });
+});
+
+	
+</script>
