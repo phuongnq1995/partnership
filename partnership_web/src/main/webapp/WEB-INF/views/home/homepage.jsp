@@ -2,11 +2,12 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div
 	style="background-image: url(https://39sf152pf74z2negmt1gi8ik-wpengine.netdna-ssl.com/wp-content/uploads/2016/10/banner-home-02.jpg);"
 	data-img-width="2000" data-img-height="1330" data-diff="300"
 	class="workscout-search-banner parallax background ">
+
 	<div class="container">
 		<div class="sixteen columns">
 			<div class="message">
@@ -27,22 +28,20 @@
 				<!-- Form -->
 				<h2>Find Job</h2>
 				<form method="GET" action="/searchForm">
-					<input type="text" id="keywords" name="keywords"
-						class="ico-01" placeholder="job title, keywords or company name"
-						value="" /> 
-					<input type="text" id="location"
-						name="location" class="ico-02"
+					<input type="text" id="keywords" name="keywords" class="ico-01"
+						placeholder="job title, keywords or company name" value="" /> <input
+						type="text" id="location" name="location" class="ico-02"
 						placeholder="city, province or region" value="" />
 					<button>
 						<i class="fa fa-search"></i>
 					</button>
 				</form>
 				<!-- Browse Jobs -->
-				
+
 				<div class="browse-jobs">
 					Or browse job offers by <a
 						href="browse-categories/browse-categories.html">category</a>
-					
+
 				</div>
 
 				<!-- Announce -->

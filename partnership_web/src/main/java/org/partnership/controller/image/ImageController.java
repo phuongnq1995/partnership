@@ -2,6 +2,7 @@ package org.partnership.controller.image;
 
 import org.partnership.company.service.CompanyService;
 import org.partnership.employee.service.EmployeeService;
+import org.partnership.post.repository.PostApplyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,6 +22,9 @@ public class ImageController {
 	
 	@Autowired
 	private EmployeeService employeeService;
+	
+	@Autowired
+	private PostApplyRepository postApplyService;
 	
 	@RequestMapping(value = "/imageCompany/{id}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
 	@ResponseBody
@@ -49,7 +53,20 @@ public class ImageController {
 	      headers.setContentType(MediaType.parseMediaType("application/pdf"));
 	        headers.set("Content-Disposition", "inline; filename=test.pdf");
 	        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
-	        ResponseEntity<byte[]> responseE = new     ResponseEntity<byte[]>(cv, headers, HttpStatus.OK);
+	        ResponseEntity<byte[]> responseE = new ResponseEntity<byte[]>(cv, headers, HttpStatus.OK);
+	        return responseE;
+	}
+	
+	@RequestMapping(value = "/cvApply/{id}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
+	@ResponseBody
+	public ResponseEntity<byte[]> apply(@PathVariable long id) throws Exception{
+		byte[] cv = postApplyService.findOne(id).getCv();
+		HttpHeaders headers = new HttpHeaders();
+	      headers.setContentLength(cv.length);
+	      headers.setContentType(MediaType.parseMediaType("application/pdf"));
+	        headers.set("Content-Disposition", "inline; filename=test.pdf");
+	        headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+	        ResponseEntity<byte[]> responseE = new ResponseEntity<byte[]>(cv, headers, HttpStatus.OK);
 	        return responseE;
 	}
 }

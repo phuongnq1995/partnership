@@ -521,7 +521,7 @@ ul li ul a.sf-with-ul:after {
 	right: 9px;
 	top: 4px;
 	position: absolute;
-	content: "";
+	content: "ï„…";
 }
 .menu ul li.current-menu-parent a.sf-with-ul:after,
 .menu ul li.sfHover a.sf-with-ul:after { color: #fff; }
@@ -1301,7 +1301,7 @@ font-size: 13px;
 }
 
 .map-box-icon:before {
-	content: "";
+	content: "ï�¤";
 	font-family: "FontAwesome";
 	position: relative;
 	top: 6px;
@@ -1458,7 +1458,6 @@ a.button {
 	outline: none;
 	overflow: hidden;
 	line-height: 27px;
-	position: relative;
 	z-index: 10;
 	color: #fff;
 	background-color: #505050;
@@ -2262,7 +2261,7 @@ ul.meta li { display: inline-block; margin-right: 10px; }
 }
 
 #backtotop a:after {
-	content: "";
+	content: "ï�·";
 	font-family: "FontAwesome";
 	position: relative;
 	display: block;
@@ -2549,15 +2548,15 @@ button.mfp-arrow {
 
 .mfp-arrow.mfp-arrow-left,
 .mfp-arrow.mfp-arrow-right {
-	content: "ď";
+	content: "Ä�Â€Â�";
 	font-family: "FontAwesome";
 	font-size: 16px;
 }
 
 .mfp-arrow.mfp-arrow-right { right: 0; }
 
-.mfp-arrow.mfp-arrow-left:before { content: "ď"; top: 1px; left: -1px; position: relative; }
-.mfp-arrow.mfp-arrow-right:before { content: "ď"; top: 1px; left: 1px; position: relative; }
+.mfp-arrow.mfp-arrow-left:before { content: "Ä�Â�Â“"; top: 1px; left: -1px; position: relative; }
+.mfp-arrow.mfp-arrow-right:before { content: "Ä�Â�Â”"; top: 1px; left: 1px; position: relative; }
 
 .mfp-content:hover .mfp-arrow {
 	opacity: 1;
@@ -3322,7 +3321,7 @@ body ul.list-1 {
 	color: #777;
 }
 
-.list-1 li:before { content: ""; font-size: 8px; }
+.list-1 li:before { content: "ïƒˆ"; font-size: 8px; }
 
 
 .job-application-notes-list { margin-bottom: 20px; }
@@ -3491,7 +3490,7 @@ body ul.tabs-nav li a {
 .post-quote .icon:before {
 	font-family: "FontAwesome";
 	font-size: 28px;
-	content: "";
+	content: "ï„�";
 	color: #d0d0d0;
 	position: relative;
 	height: 15px;
@@ -4992,8 +4991,8 @@ li .job-spotlight p { line-height: 27px; }
 	transition: all 0.2s ease-in-out;
 }
 
-.tp-rightarrow.tparrows:before { content: ""; left: 19px; }
-.tp-leftarrow.tparrows:before { content: ""; left: 15px; }
+.tp-rightarrow.tparrows:before { content: "ï�”"; left: 19px; }
+.tp-leftarrow.tparrows:before { content: "ï�“"; left: 15px; }
 
 
 .tparrows {
@@ -5292,7 +5291,7 @@ html[xmlns] .flexslider .slides {
 	width: 19px;
 	top: 10px;
 	left: 17px;
-	content: "";
+	content: "ï�¤";
 	font-family: "FontAwesome";
 	position: relative;
 }
@@ -5948,7 +5947,7 @@ div.avatar img { max-width: 70px; }
 .input { position: relative; }
 
 .widget-box .input:before {
-	content:"";
+	content:"ï€‚";
 	font-size: 18px;
 	color: #a0a0a0;
 	position: absolute;
@@ -6123,7 +6122,7 @@ div.avatar img { max-width: 70px; }
 .widget_pages li:before {
 	font-family: "FontAwesome";
 	font-size: 16px;
-	content: "";
+	content: "ï„…";
 	position: absolute;
 	left: -14px;
 	top: 4px;
@@ -6429,7 +6428,7 @@ select#cat,
 }
 
 .widget_rss li:before{
-	content:"";
+	content:"ïƒˆ";
 	position: absolute;
 	font-family: "FontAwesome";
 	font-size: 8px;
@@ -6659,7 +6658,7 @@ select#cat,
 
 }
 .chosen-container-single .chosen-search:before {
-	content: "";
+	content: "ï€‚";
 	font-family: "FontAwesome";
 	font-size: 15px;
 	margin: 0 10px 0 0;
@@ -6812,7 +6811,7 @@ select#cat,
 }
 
 .chosen-container-multi .chosen-choices li.search-choice .search-choice-close:before {
-	content: "";
+	content: "ï€�";
 	font-family: "FontAwesome";
 	font-size: 13px;
 	top: 1px;
@@ -6856,7 +6855,7 @@ select#cat,
 	background: transparent;
 }
 
-.chosen-container-active.chosen-with-drop .chosen-single div b:after { content: "" }
+.chosen-container-active.chosen-with-drop .chosen-single div b:after { content: "ïƒ˜" }
 .chosen-container-active .chosen-choices li.search-field input[type="text"] { color: #808080 !important; }
 
 
@@ -7913,7 +7912,7 @@ a.close-form i { margin: 0; }
 }
 
 .checkboxes input[type=checkbox]:checked + label:before {
-	content: "";
+	content: "ï€Œ";
 	font-family: "FontAwesome";
 	font-size: 12px;
 	color: #fff;

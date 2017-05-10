@@ -577,3 +577,29 @@ color: #3c763d;
 	color: #f00;
 	text-decoration: none;
 }
+#table-ajax{
+	min-height: 300px;
+}
+.badge-notify {
+   background: red;
+   position: relative;
+   top: -49px;
+   left: 18px
+}
+.badge {
+	display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1;
+    vertical-align: baseline;
+    white-space: nowrap;
+    text-align: center;
+    background-color: #999;
+    border-radius: 10px;
+}
+#show-apply{
+	width: 100%;
+}

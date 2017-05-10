@@ -110,6 +110,4 @@
 	$(document).ready(function() {
 		$('#flash').delay(10000).fadeOut('slow');
 	});
-
-	
 </script>

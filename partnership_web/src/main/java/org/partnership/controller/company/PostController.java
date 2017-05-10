@@ -15,11 +15,11 @@ import org.partnership.converter.CategoryConverter;
 import org.partnership.converter.LevelConverter;
 import org.partnership.converter.LocationConverter;
 import org.partnership.converter.WorkTypeConverter;
-import org.partnership.employee.model.Employee;
 import org.partnership.location.model.Location;
 import org.partnership.location.service.LocationService;
 import org.partnership.post.model.Level;
 import org.partnership.post.model.Post;
+import org.partnership.post.model.PostApply;
 import org.partnership.post.model.WorkType;
 import org.partnership.post.service.PostService;
 import org.partnership.user.service.UserService;
@@ -30,11 +30,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -127,4 +129,20 @@ public class PostController {
 		return posts;
 	}
 	
+	@RequestMapping(value="/applyPost", method = RequestMethod.POST)
+	public String applyPost(@ModelAttribute PostApply postApply, @RequestParam("fileUpload") 
+		MultipartFile fileUpload, RedirectAttributes redirectAttributes){
+		return postService.newApplyPost(postApply, fileUpload, redirectAttributes);
+	}
+	
+	@RequestMapping(value="/applylists")
+	public String postList(Principal principal, Model model){
+		long companyId = (long)companyService.findByUserId(userService.findUserByEmail(principal.getName()).getId()).getId();
+		return postService.getPostsOfCompany(companyId, model);
+	}
+	
+	@RequestMapping(value="/showPostApply/{id}", method = RequestMethod.GET)
+	public @ResponseBody List<PostApply> postApplies(@PathVariable("id") long postId){
+		return postService.findPostsApply(postId);
+	}
 }

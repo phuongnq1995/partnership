@@ -5,13 +5,16 @@ import java.util.List;
 
 import org.partnership.post.model.Level;
 import org.partnership.post.model.Post;
+import org.partnership.post.model.PostApply;
 import org.partnership.post.model.WorkType;
 import org.partnership.post.repository.LevelRepository;
+import org.partnership.post.repository.PostApplyRepository;
 import org.partnership.post.repository.PostRepository;
 import org.partnership.post.repository.WorkTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Service
@@ -25,6 +28,9 @@ public class PostServiceImpl implements PostService {
 
 	@Autowired
 	private WorkTypeRepository workTypeRepository;
+	
+	@Autowired
+	private PostApplyRepository postApplyRepository;
 
 	public List<WorkType> findListType() {
 		return workTypeRepository.findAll();
@@ -56,6 +62,7 @@ public class PostServiceImpl implements PostService {
 		model.addAttribute("post", post);
 		model.addAttribute("company", post.getCompany());
 		model.addAttribute("posts", postRepository.findAll());
+		model.addAttribute("postApply", new PostApply());
 		return "showpost";
 	}
 
@@ -69,5 +76,26 @@ public class PostServiceImpl implements PostService {
 			return postRepository.findAll();
 		}
 		return postRepository.findByKeyWordAndLocation(keywords, location);
+	}
+
+	public String newApplyPost(PostApply postApply, MultipartFile fileUpload, RedirectAttributes redirectAttributes) {
+		try {
+			postApply.setCv(fileUpload.getBytes());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		postApplyRepository.save(postApply);
+		redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", "Apply success !");
+		return "redirect:/";
+	}
+
+	public String getPostsOfCompany(long companyId, Model model) {
+		List<Post> posts = postRepository.findByCompanyId(companyId);
+		model.addAttribute("posts", posts);
+		return "indexapply";
+	}
+
+	public List<PostApply> findPostsApply(long postId) {
+		return postApplyRepository.findByPostId(postId);
 	}
 }

@@ -13,4 +13,6 @@ public interface PostRepository extends JpaRepository<Post, Long>{
 		+ "and lowcase(p.title) like %:keywords% or lowcase(p.company.name) like %:keyword%" )
 	List<Post> findByKeyWordAndLocation(@Param("keywords") String keywords, @Param("location")String location);
 	//where lowcase(p.title) like %:keywords% or lowcase(p.company.name) like %:keyword%
+
+	List<Post> findByCompanyId(long companyId);
 }

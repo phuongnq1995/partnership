@@ -69,5 +69,12 @@
 		<put-attribute name="title" value="Post" />
 		<put-attribute name="body" value="/WEB-INF/views/post/show.jsp" />
 	</definition>
+	
+	<!-- Post apply -->
+	<definition name="indexapply" extends="base-definition">
+		<put-attribute name="title" value="Posts Of Company" />
+		<put-attribute name="body" value="/WEB-INF/views/postapply/index.jsp" />
+	</definition>
+	
 
 </tiles-definitions>

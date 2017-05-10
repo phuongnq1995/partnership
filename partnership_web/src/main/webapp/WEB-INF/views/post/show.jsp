@@ -16,7 +16,9 @@
 					<span class="job-type ${type.getName()}">${type.getName()}</span>
 				</c:forEach>
 			</h1>
-
+			
+				<strong style="color: green" id="flash"></strong>
+			
 		</div>
 		<div class="six columns">
 			<div class="job-manager-form wp-job-manager-bookmarks-form">
@@ -204,39 +206,37 @@
 							<h2>Apply For This Job</h2>
 						</div>
 						<div class="small-dialog-content">
-							<form class="job-manager-application-form job-manager-form"
-								method="post" enctype="multipart/form-data"
-								action="${pageContext.request.contextPath}/employee/applyPost" id="form-apply">
-
+							<form:form class="job-manager-application-form job-manager-form"
+								method="post" enctype="multipart/form-data" modelAttribute="postApply"
+								action="${pageContext.request.contextPath}/post/applyPost" id="form-apply">
+								
+								<form:hidden path="postId" value="${post.getId()}"/>
+								
 								<fieldset class="fieldset-candidate_name">
-									<label for="candidate_name">Your name<small>*</small></label><span
-										class="error text-danger" style="color: red;"><form:errors
-										/></span>
+									<label for="candidate_name">Your name<small>*</small></label>
 									<div class="field">
-										<input type="text" class="input-text" path="fullname" 
+										<form:input type="text" class="input-text" path="fullname" 
 											id="candidate_name" placeholder="Your full name" value="${employee.getFullname()}"/>
 									</div>
 								</fieldset>
 								<fieldset class="fieldset-candidate_email">
 									<label for="candidate_name">Your email<small>*</small></label>
 									<div class="field">
-										<input type="email" class="input-text" name="email"
+										<form:input type="email" class="input-text" path="email"
 											value="${pageContext.request.userPrincipal.name}" placeholder="Your email"/>
 									</div>
 								</fieldset>
 								<fieldset class="fieldset-application_message">
 									<label for="application_message">Message</label>
 									<div class="field required-field">
-										<textarea cols="20" rows="3" class="input-text"
-											name="application_message" id="application_message"
-											placeholder="Your cover letter/message sent to the employer">
-										</textarea>
+										<form:textarea cols="20" rows="3" class="input-text"
+											path="message" id="application_message"
+											placeholder="Your cover letter/message sent to the employer" />
 									</div>
 								</fieldset>
 								<fieldset class="fieldset-application_attachment">
-										<label for="resume_file">Curriculum Vitae(CV) <small>(PDF optional)</small>
-									</label> <span class="error text-danger" style="color: red;"><form:errors
-											path="cv" /></span>
+										<label for="resume_file">Curriculum Vitae(CV) <small>(PDF)</small>
+									</label> 
 									<div class="field">
 				
 										<label class="fake-upload-btn">
@@ -260,7 +260,7 @@
 									<input type="submit" name="wp_job_manager_send_application"
 										value="Send application" />
 								</p>
-							</form>
+							</form:form>
 							<hr />
 						</div>
 					</div>
@@ -287,9 +287,26 @@ $(document).ready(function(){
     	    type: "GET",
     	    success: function (data) {
     	      $('#candidate_name').val(data.fullname);
-    	      $('#cv').attr("href","${pageContext.request.contextPath}/cvEmployee/"+data.id);
+    	      if(data.cv != ""){
+	    	      $('#cv').attr("href","${pageContext.request.contextPath}/cvEmployee/"+data.id);
+    	      }
+    	      $("#form-apply").attr("modelAttribute", "postApply");
     	    }
     	  });
     });
+    
+    /* $("#form-apply").submit(function(){
+    	var postApply = $("#postApply").serialize();
+    	$.ajax({
+    	    type:"post",
+    	    data:postApply,
+    	    url:"${pageContext.request.contextPath}/post/applyPost",
+    	    async: false,
+    	    success: function(data){
+    	       $("#flash").text(data);
+    	       $("#new-apply").text("Wait for response")
+    	    }
+    	});
+    }) */
 });
 </script>

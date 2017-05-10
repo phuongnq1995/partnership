@@ -5,7 +5,6 @@ import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.partnership.category.model.Category;
@@ -34,8 +33,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonObjectFormatVisitor;
 
 @Controller
 @RequestMapping("/employee")
@@ -67,6 +64,9 @@ public class EmployeeController {
 	}
 
 	boolean checkEmployeePresent(Principal principal) {
+		if(principal == null){
+			return false;
+		}
 		if (employeeService.findByUserId(userService.findUserByEmail(principal.getName()).getId()) == null)
 			return false;
 		return true;
@@ -120,6 +120,7 @@ public class EmployeeController {
 			Employee employee2 = new Employee();
 			employee2.setFullname(employee1.getFullname());
 			employee2.setId(employee1.getId());
+			employee2.setCv(employee1.getCv());
 			return employee2;
 		}
 		System.out.println("Null");
