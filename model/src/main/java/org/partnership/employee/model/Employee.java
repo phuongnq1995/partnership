@@ -60,7 +60,7 @@ public class Employee implements Serializable {
 	@Lob
 	private byte[] cv;
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "location_id")
 	@NotNull(message = "Location can not be empty.")
 	private Location location;

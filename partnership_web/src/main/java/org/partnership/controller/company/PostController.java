@@ -89,6 +89,7 @@ public class PostController {
 
 	@RequestMapping(value = "/index")
 	private String index(Model model) {
+		model.addAttribute("categories", categoryService.findAll());
 		return postService.getIndex(model);
 	}
 

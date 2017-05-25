@@ -43,21 +43,12 @@
 			<div class="widget">
 				<h4>Filter by Categories</h4>
 				<div class="search_categories resume-filter">
-					<select name='search_categories[]' id='search_categories'
-						class='job-manager-category-dropdown ' multiple='multiple'
-						data-placeholder='Choose a category&hellip;'
-						data-no_results_text='No results match'
-						data-multiple_text='Select Some Options'>
-						<option class="level-0" value="125">Babysitter</option>
-						<option class="level-0" value="133">Construction
-							Facilities</option>
-						<option class="level-0" value="152">Management &amp;
-							Finance</option>
-						<option class="level-0" value="169">Web, Software &amp;
-							IT</option>
-						<option class="level-0" value="171">Writing</option>
-						<option class="level-1" value="181">&nbsp;&nbsp;&nbsp;Translations</option>
-					</select>
+					<select name="categories" multiple="multiple"
+							id="resume_category" class="chosen-select">
+							<c:forEach items="${categories}" var="category">
+								<option value="${category.getId()}">${category.getName()}</option>
+							</c:forEach>
+						</select>
 				</div>
 			</div>
 

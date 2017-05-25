@@ -40,23 +40,14 @@
 
 		<nav class="woocommerce-MyAccount-navigation">
 			<ul>
-				<li><a href="../my-bookmarks/my-bookmarks.html"> My
-						Bookmarks </a></li>
-				<li class=""><a href="https://workscout.in/my-account/">Dashboard</a>
+				<li><a href="../my-bookmarks/my-bookmarks.html"> Companies</a></li>
+				<li class=""><a href="https://workscout.in/my-account/">Candidates</a>
 				</li>
-				<li class=""><a href="https://workscout.in/my-account/orders/">Orders</a>
-				</li>
-				<li class=""><a
-					href="https://workscout.in/my-account/downloads/">Downloads</a></li>
-				<li class=""><a
-					href="https://workscout.in/my-account/edit-address/">Addresses</a>
+				<li class=""><a href="https://workscout.in/my-account/orders/">Post</a>
 				</li>
 				<li class=""><a
-					href="https://workscout.in/my-account/edit-account/">Account
-						Details</a></li>
-				<li class=""><a
-					href="https://workscout.in/my-account/customer-logout/">Logout</a>
-				</li>
+					href="https://workscout.in/my-account/downloads/">User</a></li>
+				<li class="">
 			</ul>
 		</nav>
 

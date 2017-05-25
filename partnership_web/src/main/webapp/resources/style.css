@@ -6811,7 +6811,7 @@ select#cat,
 }
 
 .chosen-container-multi .chosen-choices li.search-choice .search-choice-close:before {
-	content: "ï€�";
+	content: "\f00d";
 	font-family: "FontAwesome";
 	font-size: 13px;
 	top: 1px;
@@ -7912,7 +7912,7 @@ a.close-form i { margin: 0; }
 }
 
 .checkboxes input[type=checkbox]:checked + label:before {
-	content: "ï€Œ";
+	content: "\f00c";
 	font-family: "FontAwesome";
 	font-size: 12px;
 	color: #fff;

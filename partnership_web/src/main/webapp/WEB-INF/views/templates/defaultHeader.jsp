@@ -19,18 +19,9 @@
 
 			<!-- Menu -->
 			<nav id="navigation" class="menu">
-
+				
 				<ul id="responsive" class="menu">
-					<li><a href="index.html">Home</a></li>
-					<li><a href="#">Pages</a>
-						<ul class="sub-menu">
-							<li><a>Job Page</a></li>
-							<li><a>Job Page Alternative</a></li>
-							<li><a>Resume Page</a></li>
-							<li><a>Shortcodes</a></li>
-							<li><a>Pricing Tables</a></li>
-							<li><a>Contact</a></li>
-						</ul></li>
+					<li><a href="${pageContext.request.contextPath}/">Home</a></li>
 					<li><a href="#">For Candidates</a>
 						<ul class="sub-menu">
 							<li><a href="${pageContext.request.contextPath}/post/index">Browse Jobs</a></li>
@@ -44,6 +35,11 @@
 							<li><a href="${pageContext.request.contextPath}/employee/index">Browse Candidates</a></li>
 							<li><a href="${pageContext.request.contextPath}/post/new">Post a Job</a></li>
 						</ul></li>
+					<li>
+					<security:authorize access="hasRole('ROLE_ADMIN')">
+									<a href="${pageContext.request.contextPath}/admin/companies">Admin</a>
+					</security:authorize>
+					</li>
 					<li><a href="blog/index.html">Blog</a></li>
 				</ul>
 				<ul class="float-right">

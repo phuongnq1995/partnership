@@ -73,6 +73,7 @@
     	    url : link,
     	    type: "GET",
     	    success: function (data) {
+    	    	$('#response-data').empty();
     	    	var trHTML = '';
     	    	$.each(data, function (key,value) {
     	    		trHTML += 
