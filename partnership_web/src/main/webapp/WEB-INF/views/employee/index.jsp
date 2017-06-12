@@ -119,7 +119,7 @@
 						
 						<div class="resumes-content">
 							<h4>
-								${employee.getFullname()} <span>Copywriter</span>
+								${employee.getFullname()}
 							</h4>
 							<span class="icons"><i class="fa fa-map-marker">&nbsp;${employee.getLocation().getName()}</i></span>
 							<p>About Me&nbsp;${employee.getDescription()}&#8230;</p>

@@ -20,7 +20,7 @@
 
 				<div class="resumes-content">
 					<h4>
-						${employee.getFullname()} <span>UX/UI Graphic Designer</span>
+						${employee.getFullname()} 
 					</h4>
 					<span class="icons"><i class="fa fa-map-marker"></i><a
 						class="google_map_link candidate-location"
@@ -108,7 +108,6 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 </div>
 <div class="container ">

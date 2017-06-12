@@ -17,23 +17,25 @@
 		</div>
 	</div>
 </div>
+<form class="list-search" method="POST"
+				action="searchPost">
 <div class="container wpjm-container right-sidebar margin-top-55">
 	<!-- Widgets -->
 	<div class="five columns sidebar" role="complementary">
-		<form class="job_filters in_sidebar">
-			<input type="hidden" name="search_keywords" id="keywords"
+		
+<!-- 			<input type="hidden" name="search_keywords" id="keywords"
 				placeholder="job title, keywords or company name" value="" />
-			<div class="job_filters_links"></div>
+			<div class="job_filters_links"></div> -->
 			<div class="widget">
 				<h4>Location</h4>
 				<div class="search_location">
-					<input type="text" name="search_location" id="search_location"
-						placeholder="Location" value="" /> <input type="text"
-						name="search_radius" id="search_radius" value="50" /> <select
-						class="radius_type" name="radius_type">
-						<option value="miles">miles</option>
-						<option value="km">km</option>
+					<select name="search_location" id="search_location">
+						<option value="0">Select all</option>
+						<c:forEach items="${locations}" var="location">
+							<option value="${location.getId()}">${location.getName()}</option>
+						</c:forEach>
 					</select>
+
 					<div class="clearfix"></div>
 				</div>
 			</div>
@@ -41,21 +43,21 @@
 				<h4>Job type</h4>
 				<ul class="job_types checkboxes">
 					<li><input type="checkbox" name="filter_job_type[]"
-						value="freelance" checked='checked' id="job_type_freelance" /> <label
-						for="job_type_freelance" class="freelance"> Freelance</label></li>
-					<li><input type="checkbox" name="filter_job_type[]"
-						value="full-time" checked='checked' id="job_type_full-time" /> <label
+						value="1" checked='checked' id="job_type_full-time" /> <label
 						for="job_type_full-time" class="full-time"> Full Time</label></li>
 					<li><input type="checkbox" name="filter_job_type[]"
-						value="internship" checked='checked' id="job_type_internship" />
+						value="2" checked='checked' id="job_type_part-time" /> <label
+						for="job_type_part-time" class="part-time"> Part Time</label></li>	
+					<li><input type="checkbox" name="filter_job_type[]"
+						value="3" checked='checked' id="job_type_freelance" /> <label
+						for="job_type_freelance" class="freelance"> Freelance</label></li>
+					<li><input type="checkbox" name="filter_job_type[]"
+						value="4" checked='checked' id="job_type_temporary" /> <label
+						for="job_type_temporary" class="temporary"> Temporary</label></li>
+					<li><input type="checkbox" name="filter_job_type[]"
+						value="5" checked='checked' id="job_type_internship" />
 						<label for="job_type_internship" class="internship">
 							Internship</label></li>
-					<li><input type="checkbox" name="filter_job_type[]"
-						value="part-time" checked='checked' id="job_type_part-time" /> <label
-						for="job_type_part-time" class="part-time"> Part Time</label></li>
-					<li><input type="checkbox" name="filter_job_type[]"
-						value="temporary" checked='checked' id="job_type_temporary" /> <label
-						for="job_type_temporary" class="temporary"> Temporary</label></li>
 				</ul>
 				<input type="hidden" name="filter_job_type[]" value="" />
 			</div>
@@ -130,24 +132,24 @@
 				</div>
 			</div>
 
-		</form>
 	</div>
 	<!-- #secondary -->
 
 	<article id="post-2871"
 		class="eleven columns post-2871 page type-page status-publish hentry">
 		<div class="padding-right">
-			<form class="list-search" method="GET"
-				action="/searchForm">
+			
 				<div class="search_keywords">
-					<button>
+					<button type="submit">
 						<i class="fa fa-search"></i>
 					</button>
 					<input type="text" name="keywords" id="keywords"
-						placeholder="job title, keywords or company name" value="" />
+						placeholder="job title, keywords or company name" value="${keywords}" />
 					<div class="clearfix"></div>
 				</div>
-			</form>
+				<input type="hidden" name="${_csrf.parameterName}"
+					value="${_csrf.token}" />
+			
 			<div class="job_listings" data-location="" data-keywords=""
 				data-show_filters="false" data-show_pagination="true"
 				data-per_page="10" data-orderby="featured" data-order="DESC"
@@ -192,12 +194,12 @@
 											<c:choose>
 												<c:when
 													test="${perpost.getMinsalary() == 0 && perpost.getMaxsalary() == 0}">negotiate
-									</c:when>
+												</c:when>
 												<c:otherwise>
 													<c:if test="${perpost.getMinsalary() != 0}">
-							 from &#36;${perpost.getMinsalary()}</c:if> <c:if
-														test="${perpost.getMaxsalary() != 0}">
-							  to &#36;${perpost.getMaxsalary()}</c:if>
+							 							from &#36;${perpost.getMinsalary()}</c:if> 
+							 						<c:if test="${perpost.getMaxsalary() != 0}">
+							  							to &#36;${perpost.getMaxsalary()}  </c:if>
 												</c:otherwise>
 											</c:choose>
 										</span>
@@ -224,3 +226,4 @@
 		</div>
 	</article>
 </div>
+</form>

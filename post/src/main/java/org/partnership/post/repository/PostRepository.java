@@ -9,10 +9,17 @@ import org.springframework.data.repository.query.Param;
 
 public interface PostRepository extends JpaRepository<Post, Long>{
 
-	@Query("select p from Post p INNER JOIN p.locations l where l.name like %:location% "
-		+ "and lowcase(p.title) like %:keywords% or lowcase(p.company.name) like %:keyword%" )
-	List<Post> findByKeyWordAndLocation(@Param("keywords") String keywords, @Param("location")String location);
+	@Query("select p from Post p INNER JOIN p.locations l where l.id = :locationId "
+		+ "and lower(p.title) like %:keywords% or lower(p.company.name) like %:keywords%" )
+	List<Post> findByKeyWordsAndLocation(@Param("keywords") String keywords, @Param("locationId") int location_id);
 	//where lowcase(p.title) like %:keywords% or lowcase(p.company.name) like %:keyword%
-
+	
+	@Query("select p from Post p where lower(p.title) like %:keywords% or lower(p.company.name) like %:keywords%" )
+		List<Post> findByKeyWords(@Param("keywords") String keywords);
+		//where lowcase(p.title) like %:keywords% or lowcase(p.company.name) like %:keyword%
+	
+	@Query("select p from Post p INNER JOIN p.locations l where l.id = :locationId ")
+		List<Post> findByLocation(@Param("locationId") int location_id);
+	
 	List<Post> findByCompanyId(long companyId);
 }

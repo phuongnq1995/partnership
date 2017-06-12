@@ -89,6 +89,7 @@ public class PostController {
 
 	@RequestMapping(value = "/index")
 	private String index(Model model) {
+		model.addAttribute("locations", locationService.findAll());
 		return postService.getIndex(model);
 	}
 
@@ -122,11 +123,14 @@ public class PostController {
 		return postService.show(id, redirectAttributes, model);
 	}
 	
-	@RequestMapping(value="/searchForm", method = RequestMethod.GET)
-	public @ResponseBody List<Post> searchHome(@RequestParam(value= "keywords") String keywords,
-			@RequestParam(value= "location") String location){
-		List<Post> posts = postService.findByKeyWordAndLocation(keywords, location);
-		return posts;
+	@RequestMapping(value="/searchPost", method = RequestMethod.POST)
+	public String searchHome(@RequestParam(value= "keywords") String keywords, @RequestParam(value="search_location") int id, 
+			Model model){
+		List<Post> posts = postService.findByKeyWordsAndLocation(keywords.toLowerCase(), id);
+		model.addAttribute("locations", locationService.findAll());
+		model.addAttribute("posts", posts);
+		model.addAttribute("keywords", keywords);
+		return "indexpost";
 	}
 	
 	@RequestMapping(value="/applyPost", method = RequestMethod.POST)

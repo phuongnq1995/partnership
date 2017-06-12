@@ -22,7 +22,7 @@ public interface PostService {
 
 	String getIndex(Model model);
 
-	List<Post> findByKeyWordAndLocation(String keywords, String location);
+	List<Post> findByKeyWordsAndLocation(String keywords, int location_id);
 
 	String newApplyPost(PostApply postApply, MultipartFile fileUpload, RedirectAttributes redirectAttributesredirectAttributes);
 

@@ -37,9 +37,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 	
 	public String findProfile(User user, Model model) {
-		if (!employeeRepository.checkEmployeePresent(user.getId()))
+		if (!employeeRepository.checkEmployeePresent(user.getId())){
 			return "redirect:/employee/new";
-		return "redirect:/employee/" + (employeeRepository.findByUserId(user.getId()).getId());
+		}else{
+			long id = employeeRepository.findByUserId(user.getId()).getId();
+			model.addAttribute("employee", employeeRepository.findOne(id));
+			return "showemployee";
+		}
 	}
 
 	public String showProfile(long id, Model model, RedirectAttributes redirectAttributes) {

@@ -71,11 +71,15 @@ public class PostServiceImpl implements PostService {
 		return "indexpost";
 	}
 
-	public List<Post> findByKeyWordAndLocation(String keywords, String location) {
-		if(keywords.equals("") && location.equals("")){
+	public List<Post> findByKeyWordsAndLocation(String keywords, int location_id) {
+		if(keywords.equals("") && location_id == 0){
 			return postRepository.findAll();
+		}else if(location_id == 0){
+			return postRepository.findByKeyWords(keywords);
+		}else if(keywords.equals("")){
+			return postRepository.findByLocation(location_id);
 		}
-		return postRepository.findByKeyWordAndLocation(keywords, location);
+		return postRepository.findByKeyWordsAndLocation(keywords, location_id);
 	}
 
 	public String newApplyPost(PostApply postApply, MultipartFile fileUpload, RedirectAttributes redirectAttributes) {
