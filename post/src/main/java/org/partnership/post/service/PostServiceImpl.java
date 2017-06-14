@@ -3,6 +3,7 @@ package org.partnership.post.service;
 import java.util.Calendar;
 import java.util.List;
 
+import org.partnership.container.PartnershipFlash;
 import org.partnership.post.model.Level;
 import org.partnership.post.model.Post;
 import org.partnership.post.model.PostApply;
@@ -49,14 +50,14 @@ public class PostServiceImpl implements PostService {
 			post.setDayend(dayend.getTime());
 		}
 		postRepository.save(post);
-		redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", "Create Success !");
-		return "redirect:/";
+		redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashSuccess("Create Success !"));
+		return "redirect:/post/"+post.getId();
 	}
 
 	public String show(long id, RedirectAttributes redirectAttributes, Model model) {
 		Post post = postRepository.findOne(id);
 		if(post == null){
-			redirectAttributes.addFlashAttribute("ERROR_MESSAGE", "Not found !");
+			redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashError("Not found !"));
 			return "redirect:/";
 		}
 		model.addAttribute("post", post);
@@ -89,8 +90,8 @@ public class PostServiceImpl implements PostService {
 			e.printStackTrace();
 		}
 		postApplyRepository.save(postApply);
-		redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", "Apply success !");
-		return "redirect:/";
+		redirectAttributes.addFlashAttribute("SUCCESS", PartnershipFlash.getFlashSuccess("Apply success !"));
+		return "redirect:/post/"+postApply.getId();
 	}
 
 	public String getPostsOfCompany(long companyId, Model model) {

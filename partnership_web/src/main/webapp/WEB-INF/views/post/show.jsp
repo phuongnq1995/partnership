@@ -289,7 +289,7 @@ $(document).ready(function(){
     	      $('#candidate_name').val(data.fullname);
     	      if(data.cv != ""){
 	    	      $('#cv').attr("href","${pageContext.request.contextPath}/cvEmployee/"+data.id);
-	    	      $('#resume_file').attr("value", data.cv);
+	    	      $('#resume_file').val(data.cv);
     	      }
     	      $("#form-apply").attr("modelAttribute", "postApply");
     	    }
