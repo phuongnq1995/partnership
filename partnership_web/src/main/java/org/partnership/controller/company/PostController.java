@@ -1,6 +1,5 @@
 package org.partnership.controller.company;
 
-import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,9 +22,11 @@ import org.partnership.post.model.Post;
 import org.partnership.post.model.PostApply;
 import org.partnership.post.model.WorkType;
 import org.partnership.post.service.PostService;
+import org.partnership.user.service.UserCustom;
 import org.partnership.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -68,8 +69,9 @@ public class PostController {
 		binder.registerCustomEditor(Level.class, new LevelConverter());
 	}
 
-	boolean checkCompanyPresent(Principal principal) {
-		if (companyService.findByUserId(userService.findUserByEmail(principal.getName()).getId()) == null)
+	boolean checkCompanyPresent() {
+		UserCustom user = (UserCustom)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (companyService.findByUserId(user.getId()) == null)
 			return false;
 		return true;
 	}
@@ -82,9 +84,10 @@ public class PostController {
 		return "newpost";
 	}
 
-	Post newPost(Principal principal) {
+	Post newPost() {
+		UserCustom user = (UserCustom)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Post post = new Post();
-		post.setCompany(companyService.findByUserId(userService.findUserByEmail(principal.getName()).getId()));
+		post.setCompany(companyService.findByUserId(user.getId()));
 		return post;
 	}
 
@@ -96,12 +99,12 @@ public class PostController {
 	}
 
 	@RequestMapping(value = "/new")
-	private String newPost(Model model, Principal principal, RedirectAttributes redirectAttributes) {
-		if (!checkCompanyPresent(principal)) {
+	private String newPost(Model model, RedirectAttributes redirectAttributes) {
+		if (!checkCompanyPresent()) {
 			redirectAttributes.addFlashAttribute("MESSAGES", PartnershipFlash.getFlashSuccess("Register your company !"));
 			return "redirect:/company/new";
 		}
-		model.addAttribute("post", newPost(principal));
+		model.addAttribute("post", newPost());
 		return modelNewPost(model);
 	}
 
@@ -142,8 +145,9 @@ public class PostController {
 	}
 	
 	@RequestMapping(value="/applylists")
-	public String postList(Principal principal, Model model){
-		long companyId = (long)companyService.findByUserId(userService.findUserByEmail(principal.getName()).getId()).getId();
+	public String postList(Model model){
+		UserCustom user = (UserCustom)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		long companyId = (long)companyService.findByUserId(user.getId()).getId();
 		return postService.getPostsOfCompany(companyId, model);
 	}
 	

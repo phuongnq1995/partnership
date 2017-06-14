@@ -43,7 +43,7 @@ public class Employee implements Serializable {
 
 	@NotNull(message = "Birthday can not be empty.")
 	@Past(message = "Birthday not valid.")
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date birthday;
 
@@ -67,7 +67,6 @@ public class Employee implements Serializable {
 
 	@ManyToMany
 	@JoinTable(name = "business", joinColumns = @JoinColumn(name = "employee_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
-	@NotNull(message = "Category can not be empty.")
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Category> categories;
 	

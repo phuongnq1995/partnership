@@ -1,26 +1,21 @@
 package org.partnership.controller.employee;
 
 import java.io.IOException;
-import java.security.Principal;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import javax.validation.Valid;
-
 import org.partnership.category.model.Category;
 import org.partnership.category.service.CategoryService;
 import org.partnership.container.PartnershipFlash;
 import org.partnership.converter.CategoryConverter;
+import org.partnership.converter.CustomDateConverter;
 import org.partnership.converter.LocationConverter;
 import org.partnership.employee.model.Employee;
 import org.partnership.employee.service.EmployeeService;
 import org.partnership.location.model.Location;
 import org.partnership.location.service.LocationService;
-import org.partnership.user.model.User;
 import org.partnership.user.service.UserCustom;
 import org.partnership.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,7 +50,7 @@ public class EmployeeController {
 
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));
+		binder.registerCustomEditor(Date.class, new CustomDateConverter());
 		binder.registerCustomEditor(Category.class, new CategoryConverter());
 		binder.registerCustomEditor(Location.class, new LocationConverter());
 	}
@@ -110,9 +105,9 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(value = "")
-	public String profileEmployee(Principal principal, Model model) {
-		User user = userService.findUserByEmail(principal.getName());
-		return employeeService.findProfile(user, model);
+	public String profileEmployee(Model model) {
+		UserCustom user = (UserCustom)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		return employeeService.findProfile(user.getId(), model);
 	}
 
 	@RequestMapping(value = "/{id}")

@@ -10,9 +10,9 @@ public class CategoryConverter extends PropertyEditorSupport{
     public void setAsText(String id) 
     {
     	Category category = null;
-    	
-    	category = new Category(Integer.parseInt(id), "name");
-    	
+    	if(!id.isEmpty()){
+    		category = new Category(Integer.parseInt(id), "name");
+    	}
     	this.setValue(category);
     }
 }

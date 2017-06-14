@@ -1,10 +1,11 @@
 package org.partnership.controller.company;
 
 import java.io.IOException;
-import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import javax.validation.Valid;
+
 import org.partnership.category.model.Category;
 import org.partnership.company.model.Company;
 import org.partnership.company.service.CompanyService;
@@ -13,9 +14,11 @@ import org.partnership.converter.LocationConverter;
 import org.partnership.location.model.Location;
 import org.partnership.location.service.LocationService;
 import org.partnership.user.model.User;
+import org.partnership.user.service.UserCustom;
 import org.partnership.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -48,22 +51,24 @@ public class CompanyController {
 		binder.registerCustomEditor(Location.class, new LocationConverter());
 	}
 
-	Company newCompany(Principal principal) {
+	Company newCompany() {
 		Company company = new Company();
-		company.setUserId(userService.findUserByEmail(principal.getName()).getId());
+		UserCustom user = (UserCustom)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		company.setUserId(user.getId());
 		return company;
 	}
 
-	boolean checkCompanyPresent(Principal principal) {
-		if (companyService.findByUserId(userService.findUserByEmail(principal.getName()).getId()) == null)
+	boolean checkCompanyPresent() {
+		UserCustom user = (UserCustom)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (companyService.findByUserId(user.getId()) == null)
 			return false;
 		return true;
 	}
 
 	@RequestMapping(value = "/new")
-	private String register(Model model, Principal principal) {
-		if (!checkCompanyPresent(principal)) {
-			model.addAttribute("company", newCompany(principal));
+	private String register(Model model) {
+		if (!checkCompanyPresent()) {
+			model.addAttribute("company", newCompany());
 			model.addAttribute("listLocation", locationService.findAll());
 			return "newcompany";
 		}
@@ -83,8 +88,9 @@ public class CompanyController {
 	}
 
 	@RequestMapping(value = "")
-	public String profileCompany(Principal principal, Model model) {
-		User user = userService.findUserByEmail(principal.getName());
+	public String profileCompany(Model model) {
+		UserCustom userCustom = (UserCustom)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User user = userService.findOne(userCustom.getId());
 		return companyService.findProfile(user, model);
 	}
 	

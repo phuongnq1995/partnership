@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.partnership.container.PartnershipFlash;
 import org.partnership.employee.model.Employee;
 import org.partnership.employee.repository.EmployeeRepository;
-import org.partnership.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,11 +36,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeRepository.findOne(id);
 	}
 	
-	public String findProfile(User user, Model model) {
-		if (!employeeRepository.checkEmployeePresent(user.getId())){
+	public String findProfile(long userId, Model model) {
+		if (!employeeRepository.checkEmployeePresent(userId)){
 			return "redirect:/employee/new";
 		}else{
-			long id = employeeRepository.findByUserId(user.getId()).getId();
+			long id = employeeRepository.findByUserId(userId).getId();
 			model.addAttribute("employee", employeeRepository.findOne(id));
 			return "showemployee";
 		}
