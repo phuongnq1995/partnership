@@ -75,6 +75,7 @@ public class EmployeeController {
 	
 	@RequestMapping(value = "/index")
 	private String index(Model model){
+		model.addAttribute("categories", categoryService.findAll());
 		return employeeService.getIndex(model);
 	}
 	

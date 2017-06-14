@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import org.partnership.category.model.Category;
 import org.partnership.category.service.CategoryService;
 import org.partnership.company.service.CompanyService;
+import org.partnership.container.PartnershipFlash;
 import org.partnership.converter.CategoryConverter;
 import org.partnership.converter.LevelConverter;
 import org.partnership.converter.LocationConverter;
@@ -90,13 +91,14 @@ public class PostController {
 	@RequestMapping(value = "/index")
 	private String index(Model model) {
 		model.addAttribute("locations", locationService.findAll());
+		model.addAttribute("categories", categoryService.findAll());
 		return postService.getIndex(model);
 	}
 
 	@RequestMapping(value = "/new")
 	private String newPost(Model model, Principal principal, RedirectAttributes redirectAttributes) {
 		if (!checkCompanyPresent(principal)) {
-			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGES", "Register your company !");
+			redirectAttributes.addFlashAttribute("MESSAGES", PartnershipFlash.getFlashSuccess("Register your company !"));
 			return "redirect:/company/new";
 		}
 		model.addAttribute("post", newPost(principal));

@@ -64,33 +64,12 @@
 			<div class="widget">
 				<h4>Category</h4>
 				<div class="search_categories">
-					<select name='search_categories[]' id='search_categories'
-						class='job-manager-category-dropdown '
-						data-placeholder='Choose a category&hellip;'
-						data-no_results_text='No results match'
-						data-multiple_text='Select Some Options'>
-						<option value="">Any category</option>
-						<option class="level-0" value="122">Accounting / Finance</option>
-						<option class="level-0" value="124">Automotive Jobs</option>
-						<option class="level-0" value="132">Construction /
-							Facilities</option>
-						<option class="level-0" value="137">Design, Art &amp;
-							Multimedia</option>
-						<option class="level-1" value="172">&nbsp;&nbsp;&nbsp;Adobe
-							Photoshop</option>
-						<option class="level-0" value="140">Education Training</option>
-						<option class="level-0" value="146">Healthcare</option>
-						<option class="level-0" value="157">Restaurant / Food
-							Service</option>
-						<option class="level-0" value="159">Sales &amp; Marketing</option>
-						<option class="level-1" value="178">&nbsp;&nbsp;&nbsp;Market
-							&amp; Customer Research</option>
-						<option class="level-1" value="179">&nbsp;&nbsp;&nbsp;Marketing
-							Strategy</option>
-						<option class="level-0" value="165">Telecommunications</option>
-						<option class="level-0" value="167">Transportation /
-							Logistics</option>
-					</select>
+					<select name="categories" multiple="multiple"
+							id="resume_category" class="chosen-select">
+							<c:forEach items="${categories}" var="category">
+								<option value="${category.getId()}">${category.getName()}</option>
+							</c:forEach>
+						</select>
 				</div>
 			</div>
 			<div class="widget widget_range_filter" style="margin-bottom: 10px">

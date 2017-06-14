@@ -18,7 +18,7 @@ public class AdminController {
 	@RequestMapping(value="/companies")
 	private String companies(Model model){
 		model.addAttribute("companies", companyService.findAll());
-		return "companies";
+		return "indexcompany";
 	}
 	
 	@RequestMapping(value="/companies/delete/{id}")
