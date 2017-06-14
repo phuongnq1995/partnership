@@ -23,14 +23,14 @@ public class SecurityServiceImpl implements SecurityService{
 
     public String findLoggedInUsername() {
         Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
-        if (userDetails instanceof UserDetails) {
-            return ((UserDetails)userDetails).getUsername();
+        if (userDetails instanceof UserCustom) {
+            return ((UserCustom)userDetails).getUsername();
         }
         return null;
     }
 
     public void autologin(String email, String password) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(email);
+        UserDetails userDetails = (UserCustom) userDetailsService.loadUserByUsername(email);
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
 
         authenticationManager.authenticate(usernamePasswordAuthenticationToken);

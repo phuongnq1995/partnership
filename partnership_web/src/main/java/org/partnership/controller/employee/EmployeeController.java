@@ -17,9 +17,11 @@ import org.partnership.employee.service.EmployeeService;
 import org.partnership.location.model.Location;
 import org.partnership.location.service.LocationService;
 import org.partnership.user.model.User;
+import org.partnership.user.service.UserCustom;
 import org.partnership.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -58,17 +60,19 @@ public class EmployeeController {
 		binder.registerCustomEditor(Location.class, new LocationConverter());
 	}
 
-	Employee newEmployee(Principal principal) {
+	Employee newEmployee() {
+		UserCustom user = (UserCustom)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Employee employee = new Employee();
-		employee.setUserId(userService.findUserByEmail(principal.getName()).getId());
+		employee.setUserId(user.getId());
 		return employee;
 	}
 
-	boolean checkEmployeePresent(Principal principal) {
-		if(principal == null){
+	boolean checkEmployeePresent() {
+		UserCustom user = (UserCustom)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(user == null){
 			return false;
 		}
-		if (employeeService.findByUserId(userService.findUserByEmail(principal.getName()).getId()) == null)
+		if (employeeService.findByUserId(user.getId()) == null)
 			return false;
 		return true;
 	}
@@ -80,9 +84,9 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
-	private String register(Model model, Principal principal) {
-		if (!checkEmployeePresent(principal)) {
-			model.addAttribute("employee", newEmployee(principal));
+	private String register(Model model) {
+		if (!checkEmployeePresent()) {
+			model.addAttribute("employee", newEmployee());
 			model.addAttribute("categories", categoryService.findAllParent());
 			model.addAttribute("listLocation", locationService.findAll());
 			model.addAttribute("MESSAGE", PartnershipFlash.getFlashSuccess("Please update your profile !"));		 
@@ -117,9 +121,10 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(value="/applyPost", method = RequestMethod.GET)
-	public @ResponseBody Employee applyPost(Principal principal) {
-		if (checkEmployeePresent(principal)) {
-			Employee employee1 = employeeService.findByUserId(userService.findUserByEmail(principal.getName()).getId());
+	public @ResponseBody Employee applyPost() {
+		UserCustom user = (UserCustom)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (user != null) {
+			Employee employee1 = employeeService.findByUserId(user.getId());
 			Employee employee2 = new Employee();
 			employee2.setFullname(employee1.getFullname());
 			employee2.setId(employee1.getId());
