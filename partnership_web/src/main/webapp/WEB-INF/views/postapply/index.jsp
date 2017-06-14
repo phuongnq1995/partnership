@@ -6,6 +6,9 @@
 <div id="titlebar" class="single">
 	<div class="container">
 		<div class="sixteen columns">
+			<c:if test="${MESSAGE != null}">
+				${MESSAGE}
+			</c:if>
 			<h1>Company Dashboard</h1>
 			<nav id="breadcrumbs" xmlns:v="http://rdf.data-vocabulary.org/#">
 				<ul>
@@ -18,20 +21,7 @@
 		</div>
 	</div>
 </div>
-<div class="row-fluid">
-	<c:if test="${SUCCESS_MESSAGE != null}">
-		<br>
-		<div class="flash info pull-right" id="flash">
-			<strong>${SUCCESS_MESSAGE}</strong>
-		</div>
-	</c:if>
-	<c:if test="${ERROR_MESSAGE != null}">
-		<br>
-		<div class="flash error pull-right" id="flash">
-			<strong>${ERROR_MESSAGE}</strong>
-		</div>
-	</c:if>
-</div>
+
 <div class="container full-width">
 	<article id="table-ajax"
 		class="sixteen columns woocommerce-account post-14 page type-page status-publish hentry">

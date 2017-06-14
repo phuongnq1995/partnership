@@ -20,7 +20,7 @@
 
 				<div class="resumes-content">
 					<h4>
-						${employee.getFullname()} 
+						${employee.getFullname()} <span>${employee.getJobName()}</span>
 					</h4>
 					<span class="icons"><i class="fa fa-map-marker"></i><a
 						class="google_map_link candidate-location"

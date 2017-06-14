@@ -3,7 +3,29 @@
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<link href="<c:url value="/resources/css/jquery-ui.css" />"
+	rel="stylesheet" media="all" type="text/css">
+<script src="<c:url value="/resources/js/datepicker/jquery-1.12.4.js"/>"></script>
+<script src="<c:url value="/resources/js/datepicker/1.12.1-jquery-ui.js"/>"></script>
 <div class="container full-width">
+	<div id="titlebar" class="single">
+		<div class="container">
+			<div class="sixteen columns">
+				<c:if test="${MESSAGE != null}">
+					${MESSAGE}
+				</c:if>
+				<h1>Employee Register</h1>
+				<nav id="breadcrumbs" xmlns:v="http://rdf.data-vocabulary.org/#">
+					<ul>
+						<li class="home"><span><a title="Go to WorkScout."
+								href="${pageContext.request.contextPath}/" class="home"><span>Home</span></a> </span></li>
+						<li class="current_item"><span><span>Company
+									Employee Register</span> </span></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
 	<article id="post-13"
 		class="sixteen columns post-13 page type-page status-publish hentry">
 		<div class="submit-page">
@@ -34,27 +56,26 @@
 
 				<fieldset class="form  fieldset-candidate_title">
 					<label for="candidate_title">Your Birthday<small>*(format:
-							yyyy-MM-dd)</small></label><span class="error text-danger" style="color: red;"><form:errors
+							dd-mm-yyyy)</small></label><span class="error text-danger" style="color: red;"><form:errors
 							path="birthday" /></span>
 					<div class="field">
-						<form:input type="date" class="input-text" path="birthday"
-							id="candidate_date" />
+						<form:input type="text" class="uni-calendar input-text" path="birthday"
+							id="candidate_date" placeholder="Your birthday"/>
 					</div>
 				</fieldset>
 
 				<fieldset class="form  fieldset-candidate_name">
-					<label for="candidate_email">Your Phone<small>*(format:
-							xxxx-xxx-xxxx, xxxx-xxx-xxx)</small></label><span class="error text-danger"
+					<label for="candidate_email">Your Phone<small>*</small>
+					</label><span class="error text-danger"
 						style="color: red;"><form:errors path="phone" /></span>
 					<div class="field">
 						<form:input type="tel" class="input-text" path="phone"
-							id="candidate_email" placeholder="Your phone"
-							pattern="^\d{4}-\d{3}-\d{3,4}$" />
+							id="candidate_email" placeholder="Your phone"/>
 					</div>
 				</fieldset>
 
 				<fieldset class="form  fieldset-candidate_location">
-					<label for="candidate_location">Location<small>*</small></label><span
+					<label for="candidate_location">City<small>*</small></label><span
 						class="error text-danger" style="color: red;"><form:errors
 							path="location" /></span>
 					<div class="field">
@@ -81,16 +102,29 @@
 							src="<c:url value="/resources/images/user.png" />" />
 					</div>
 				</fieldset>
-
+					<fieldset class="form  fieldset-candidate_location">
+					<label for="candidate_location">Job<small>*</small></label><span
+						class="error text-danger" style="color: red;"><form:errors
+							path="jobName" /></span>
+					<div class="field">
+						<form:select path="jobName" items="${categories}"
+							itemValue="name" itemLabel="name" id="candidate_title">
+						</form:select>
+					</div>
+				</fieldset>
+				
 				<fieldset class="form  fieldset-resume_category">
-					<label for="resume_category">Resume category<small>*</small></label>
+					<label for="resume_category">Resume skill<small>*</small></label>
 					<span class="error text-danger" style="color: red;"><form:errors
 							path="categories" /></span>
 					<div class="field">
 						<form:select path="categories" multiple="true"
 							id="resume_category" class="chosen-select">
-							<form:options items="${categories}" itemValue="id"
-								itemLabel="name" />
+							<c:forEach items="${categories}" var="category">
+								<form:option value="" disabled="true">${category.getName()}</form:option>
+								<form:options items="${category.getChildren()}" itemValue="id"
+								itemLabel="name" cssStyle="margin-left:10px"/>
+							</c:forEach>
 						</form:select>
 					</div>
 				</fieldset>
@@ -146,8 +180,6 @@
 			document.getElementById("uploadPreview").src = oFREvent.target.result;
 		};
 	};
-</script>
-<script>
 	var input = document.getElementById("resume_file");
 	input.onclick = function() {
 		this.value = null;
@@ -161,8 +193,6 @@
 			filename = path.substring(path.lastIndexOf("/") + 1, path.length);
 		document.getElementById("log").innerHTML = filename;
 	};
-</script>
-<script>
 	var today = new Date();
 	var dd = today.getDate();
 	var mm = today.getMonth() + 1; //January is 0!
@@ -175,4 +205,17 @@
 	}
 	today = yyyy + '-' + mm + '-' + dd;
 	document.getElementById("candidate_date").setAttribute("max", today);
+	
+	$(".uni-calendar").datepicker({
+			  	numberOfMonths: 1,
+				changeMonth: true,
+				dateFormat:"dd/mm/yy",
+				yearRange:"-80:+80",
+				changeYear: true,
+			   	beforeShow: function (input, inst) { 
+			        if($(input).hasClass('readonly')) {
+			        	  inst.dpDiv.style.display = 'none';
+			       }
+			    }
+	});
 </script>

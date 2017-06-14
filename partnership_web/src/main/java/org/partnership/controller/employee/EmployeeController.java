@@ -9,6 +9,7 @@ import javax.validation.Valid;
 
 import org.partnership.category.model.Category;
 import org.partnership.category.service.CategoryService;
+import org.partnership.container.PartnershipFlash;
 import org.partnership.converter.CategoryConverter;
 import org.partnership.converter.LocationConverter;
 import org.partnership.employee.model.Employee;
@@ -81,8 +82,9 @@ public class EmployeeController {
 	private String register(Model model, Principal principal) {
 		if (!checkEmployeePresent(principal)) {
 			model.addAttribute("employee", newEmployee(principal));
-			model.addAttribute("categories", categoryService.findAll());
+			model.addAttribute("categories", categoryService.findAllParent());
 			model.addAttribute("listLocation", locationService.findAll());
+			model.addAttribute("MESSAGE", PartnershipFlash.getFlashSuccess("Please update your profile !"));		 
 			return "newemployee";
 		}
 		return "redirect:/";
@@ -93,11 +95,11 @@ public class EmployeeController {
 			@ModelAttribute("employee") @Valid Employee employee, BindingResult bindingResult,
 			@RequestParam("fileUpload") MultipartFile[] fileUpload, Model model) throws IOException {
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("categories", categoryService.findAll());
+			model.addAttribute("categories", categoryService.findAllParent());
 			model.addAttribute("listLocation", locationService.findAll());
 			return "newemployee";
 		} else {
-			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", employeeService.newEmployee(employee, fileUpload));
+			redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashSuccess(employeeService.newEmployee(employee, fileUpload)));
 		}
 		return "redirect:/";
 	}

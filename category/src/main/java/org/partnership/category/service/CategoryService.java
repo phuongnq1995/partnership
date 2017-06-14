@@ -7,4 +7,6 @@ import org.partnership.category.model.Category;
 public interface CategoryService {
 	
 	List<Category> findAll();
+
+	List<Category> findAllParent();
 }

@@ -16,6 +16,10 @@ public class CategoryServiceImpl implements CategoryService{
 	public List<Category> findAll() {
 		return categoryRepostiory.findAll();
 	}
+
+	public List<Category> findAllParent() {
+		return categoryRepostiory.findAllParent();
+	}
 	
 	
 }

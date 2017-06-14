@@ -23,7 +23,6 @@
 	media="screen" rel="stylesheet" type="text/css">
 <script src="<c:url value="/resources/js/jquery.js"/>"></script>
 <script src="<c:url value="/resources/js/jquery.min.js"/>"></script>
-<script src="<c:url value="/resources/js/custom-fl.min.js"/>"></script> 
 </head>
 <body>
 	<div id="wrapper">
@@ -33,7 +32,6 @@
 
 		<tiles:insertAttribute name="footer" />
 	</div>
-	
 	<script src="<c:url value="/resources/js/jquery.jpanelmenu.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/jquery.superfish.min.js"/>"></script>
 	<script src="<c:url value="/resources/js/jquery.counterup.min.js"/>"></script>
@@ -46,6 +44,6 @@
 		type="text/javascript"></script>
 	<script src="<c:url value="/resources/chosen/docsupport/prism.js"/>"
 		type="text/javascript" charset="utf-8"></script>
-	
+	 <script src="<c:url value="/resources/js/custom-fl.min.js"/>"></script>
 </body>
 </html>

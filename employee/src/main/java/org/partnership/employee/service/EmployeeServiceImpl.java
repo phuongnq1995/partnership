@@ -2,6 +2,7 @@ package org.partnership.employee.service;
 
 import java.io.IOException;
 
+import org.partnership.container.PartnershipFlash;
 import org.partnership.employee.model.Employee;
 import org.partnership.employee.repository.EmployeeRepository;
 import org.partnership.user.model.User;
@@ -49,7 +50,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public String showProfile(long id, Model model, RedirectAttributes redirectAttributes) {
 		Employee employee = employeeRepository.findOne(id);
 		if(employee == null){
-			redirectAttributes.addFlashAttribute("ERROR_MESSAGE", "Not found !");
+			redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashError("Not found !"));
 			return "redirect:/";
 		}
 		model.addAttribute("employee", employee);

@@ -919,7 +919,6 @@ input.ico-02 { background: #fff url("images/ico-02.png") no-repeat scroll 96% 20
 #titlebar {
 	background-color: #f6f6f6;
 	position: relative;
-	padding: 70px 0px;
 	margin-bottom: 50px;
 }
 
@@ -969,8 +968,8 @@ input.ico-02 { background: #fff url("images/ico-02.png") no-repeat scroll 96% 20
 #titlebar #breadcrumbs span a,
 #titlebar #breadcrumbs span { font-size: 16px;}
 
-#titlebar.single { padding: 70px 0; }
-#titlebar.resume { margin-bottom: 45px; padding: 70px 0 65px 0;}
+#titlebar.single { padding: 0px 0; }
+#titlebar.resume { margin-bottom: 45px; padding: 0px 0 65px 0;}
 
 #titlebar .button {
 	right: 10px;

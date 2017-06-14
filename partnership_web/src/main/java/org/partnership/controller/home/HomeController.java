@@ -3,6 +3,7 @@ package org.partnership.controller.home;
 
 import javax.validation.Valid;
 
+import org.partnership.container.PartnershipFlash;
 import org.partnership.user.model.User;
 import org.partnership.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +35,9 @@ public class HomeController {
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model, String error, String logout) {
 		if (error != null)
-			model.addAttribute("ERROR_MESSAGE", "Your email and password is invalid.");
+			model.addAttribute("MESSAGE", PartnershipFlash.getFlashError("Your email and password is invalid."));
 		if (logout != null)
-			model.addAttribute("SUCCESS_MESSAGE", "You have been logged out successfully.");
+			model.addAttribute("MESSAGE", PartnershipFlash.getFlashSuccess("You have been logged out successfully."));
 		return "home";
 	}
 	

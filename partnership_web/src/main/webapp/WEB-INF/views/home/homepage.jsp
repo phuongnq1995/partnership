@@ -10,18 +10,8 @@
 
 	<div class="container">
 		<div class="sixteen columns">
-			<div class="message">
-				<c:if test="${SUCCESS_MESSAGE != null}">
-					<br>
-					<div class="flash flash-info pull-right" id="flash">
-						<strong style="color: green">${SUCCESS_MESSAGE}</strong>
-					</div>
-				</c:if>
-				<c:if test="${ERROR_MESSAGE != null}">
-					<br>
-					<div class="flash flash-error pull-right" id="flash">
-						<strong style="color: red">${ERROR_MESSAGE}</strong>
-					</div>
+				<c:if test="${MESSAGE != null}">
+					${MESSAGE}
 				</c:if>
 			</div>
 			<div class="search-container sc-jobs">

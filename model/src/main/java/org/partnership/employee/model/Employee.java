@@ -48,7 +48,7 @@ public class Employee implements Serializable {
 	private Date birthday;
 
 	@NotNull(message = "Phone can not be null.")
-	@Pattern(regexp = "^[0-9]{4}-[0-9]{3}-[0-9]{3,4}$", message = "Phone not valid.")
+	@Pattern(regexp = "^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message = "Phone not valid.")
 	private String phone;
 
 	@Lob
@@ -74,6 +74,10 @@ public class Employee implements Serializable {
 	@NotNull
 	@Column(name = "user_id")
 	private long userId;
+	
+	@NotNull
+	@Column(name="jobname")
+	private String jobName;
 
 	public long getId() {
 		return id;
@@ -158,4 +162,14 @@ public class Employee implements Serializable {
 	public Employee(){
 		
 	}
+
+	public String getJobName() {
+		return jobName;
+	}
+
+	public void setJobName(String jobName) {
+		this.jobName = jobName;
+	}
+	
+	
 }

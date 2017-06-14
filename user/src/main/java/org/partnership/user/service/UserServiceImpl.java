@@ -2,6 +2,8 @@ package org.partnership.user.service;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import org.partnership.container.PartnershipFlash;
 import org.partnership.user.model.Role;
 import org.partnership.user.model.User;
 import org.partnership.user.repository.UserRepository;
@@ -45,7 +47,7 @@ public class UserServiceImpl implements UserService {
 			    }
 		        messages = messages+" "+ err;
 			}
-			redirectAttributes.addFlashAttribute("ERROR_MESSAGE", messages);
+			redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashError(messages));
 			return "redirect:/";
 		}
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
@@ -54,7 +56,7 @@ public class UserServiceImpl implements UserService {
 		user.setRoles(roles);
 		userRepository.save(user);
 		securityService.autologin(user.getEmail(), user.getPasswordConfirm());
-		redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", "Welcome !");
+		redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashSuccess("Welcome !"));
 		return "redirect:/";
 	}
 
