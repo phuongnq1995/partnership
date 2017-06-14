@@ -29,10 +29,10 @@
 			<div class="widget">
 				<h4>Location</h4>
 				<div class="search_location">
-					<select name="search_location" id="search_location">
+					<select name="search_location" id="search_location" style="padding: 14px 18px;">
 						<option value="0">Select all</option>
 						<c:forEach items="${locations}" var="location">
-							<option value="${location.getId()}">${location.getName()}</option>
+							<option value="${location.getId()}" id="">${location.getName()}</option>
 						</c:forEach>
 					</select>
 
