@@ -5,6 +5,8 @@ import java.io.IOException;
 import org.partnership.container.PartnershipFlash;
 import org.partnership.employee.model.Employee;
 import org.partnership.employee.repository.EmployeeRepository;
+import org.partnership.user.model.Contact;
+import org.partnership.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +19,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
-
+	
+	@Autowired
+	private UserService userService;
+	
 	@Transactional
 	public String newEmployee(Employee employee, MultipartFile[] fileUpload) {
 		try {
@@ -53,6 +58,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 			return "redirect:/";
 		}
 		model.addAttribute("employee", employee);
+		model.addAttribute("contact", new Contact());
+		model.addAttribute("userReceive", userService.findOne(employee.getUserId()));
 		return "showemployee";
 	}
 

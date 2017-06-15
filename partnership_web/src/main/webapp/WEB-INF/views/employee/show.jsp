@@ -2,10 +2,16 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <div id="titlebar" class="resume">
 	<div class="container">
 		<div class="ten columns">
 			<div class="resume-titlebar photo-rounded">
+				<c:if test="${MESSAGE != null}">
+					${MESSAGE}
+				</c:if>
 				<c:choose>
 					<c:when test="${empty employee.getAvatar()}">
 						<td><img src="<c:url value="/resources/images/user.png"/>"
@@ -17,6 +23,7 @@
 							alt="Photo" />
 					</c:otherwise>
 				</c:choose>
+	
 
 				<div class="resumes-content">
 					<h4>
@@ -25,8 +32,9 @@
 					<span class="icons"><i class="fa fa-map-marker"></i><a
 						class="google_map_link candidate-location"
 						href="http://maps.google.com/maps?q=${employee.getLocation().getName()}&zoom=14&size=512x512&maptype=roadmap&sensor=false">
-							${employee.getLocation().getName()}</a></span> <span class="icons"><i
-						class="fa fa-birthday-cake"></i> &#36;${employee.getBirthday()}</span> <span
+							${employee.getLocation().getName()}</a></span>
+							<span class="icons"><i class="fa fa-birthday-cake"></i>
+								 <fmt:formatDate value="${employee.getBirthday()}" pattern="dd/MM/yyyy" /></span>  <span
 						class="icons"> <c:if test="${not empty employee.getCv()}">
 							<a rel="nofollow"
 								href="${pageContext.request.contextPath}/cvEmployee/${employee.getId()}"><i
@@ -47,7 +55,7 @@
 			<div class="two-buttons">
 				<div class="resume_contact">
 
-					<a href="#resume-dialog"
+					<a href="#resume-dialog" id="link-resume-dialog"
 						class="small-dialog popup-with-zoom-anim button"><i
 						class="fa fa-envelope"></i> Contact</a>
 					<div id="resume-dialog"
@@ -56,44 +64,30 @@
 							<h2>Send Message</h2>
 						</div>
 						<div class="small-dialog-content">
-							<div role="form" class="wpcf7" id="wpcf7-f2896-p2403-o1"
-								lang="en-US" dir="ltr">
+							<div >
 								<div class="screen-reader-response"></div>
-								<form action="/resume/albert-smith/#wpcf7-f2896-p2403-o1"
-									method="post" class="wpcf7-form" novalidate="novalidate">
+								<form:form action="${pageContext.request.contextPath}/employee/sendMessage" method="post" 
+									id="contactForm" modelAttribute="contact">
 									<div style="display: none;">
-										<input type="hidden" name="_wpcf7" value="2896" /> <input
-											type="hidden" name="_wpcf7_version" value="4.7" /> <input
-											type="hidden" name="_wpcf7_locale" value="en_US" /> <input
-											type="hidden" name="_wpcf7_unit_tag"
-											value="wpcf7-f2896-p2403-o1" /> <input type="hidden"
-											name="_wpnonce" value="ab5e5c8866" />
+										<sec:authentication var="principal" property="principal" />
+										<form:hidden path="userReceive" value="${userReceive.getId()}"/>
+										<form:hidden path="userSend" id="sender" value="${principal.id}"/>
 									</div>
 									<fieldset>
 										<label for="full-name">Full name</label>
 										<div class="field required-field">
-											<span class="wpcf7-form-control-wrap full-name"><input
-												type="text" name="full-name" value="" size="40"
-												class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required"
-												aria-required="true" aria-invalid="false" /></span>
-										</div>
-									</fieldset>
-									<fieldset>
-										<label for="full-name">Email</label>
-										<div class="field required-field">
-											<span class="wpcf7-form-control-wrap your-email"><input
-												type="email" name="your-email" value="" size="40"
-												class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email"
-												aria-required="true" aria-invalid="false" /></span>
+											<span class="wpcf7-form-control-wrap full-name"><form:input
+												type="text" path="senderName" size="40"
+												class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" id="senderName"/></span>
 										</div>
 									</fieldset>
 									<fieldset class="fieldset-message">
 										<label for="message">Message</label>
 										<div class="field required-field">
-											<span class="wpcf7-form-control-wrap your-message"><textarea
-													name="your-message" cols="40" rows="10"
-													class="wpcf7-form-control wpcf7-textarea"
-													aria-invalid="false"></textarea></span>
+											<span class="wpcf7-form-control-wrap your-message"><form:textarea
+													path="message" cols="40" rows="10"
+													class="wpcf7-form-control wpcf7-textarea"></form:textarea>
+											</span>
 										</div>
 									</fieldset>
 									<p class="send-app-btn">
@@ -101,7 +95,7 @@
 											class="wpcf7-form-control wpcf7-submit" />
 									</p>
 									<div class="wpcf7-response-output wpcf7-display-none"></div>
-								</form>
+								</form:form>
 							</div>
 						</div>
 					</div>
@@ -115,3 +109,32 @@
 	<p>&nbsp;</p>
 	<p>${employee.getDescription()}.</p>
 </div>
+<!-- <script type="text/javascript">
+$(document).ready(function(){
+    $("#link-resume-dialog").click(function(){
+    	alert("click");
+    	var userid = ${principal.id};
+    	alert("user:" + userid);
+    	$.ajax({
+    		type : "GET",
+    	    url:'${pageContext.request.contextPath}/employee/sendMessage',
+    	    dataType : 'json',
+    	    data : {
+    	    	userid : userid
+            },
+    	    success: function (data) {
+    	    	$("#sender").val(data.id);	
+    	    alert("success"+data.id);
+    	      /* $('#candidate_name').val(data.fullname);
+    	      if(data.cv != ""){
+	    	      $('#cv').attr("href","${pageContext.request.contextPath}/cvEmployee/"+data.id);
+	    	      $('#resume_file').val(data.cv);
+    	      }
+    	      $("#form-apply").attr("modelAttribute", "postApply"); */
+    	    }
+    	});
+    })
+});
+</script> -->
+    
+    

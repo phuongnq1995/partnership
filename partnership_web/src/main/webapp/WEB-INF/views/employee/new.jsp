@@ -56,7 +56,7 @@
 
 				<fieldset class="form  fieldset-candidate_title">
 					<label for="candidate_title">Your Birthday<small>*(format:
-							dd-mm-yyyy)</small></label><span class="error text-danger" style="color: red;"><form:errors
+							dd/mm/yyyy)</small></label><span class="error text-danger" style="color: red;"><form:errors
 							path="birthday" /></span>
 					<div class="field">
 						<form:input type="text" class="uni-calendar input-text" path="birthday"

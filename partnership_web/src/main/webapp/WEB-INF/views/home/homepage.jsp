@@ -4,7 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div
-	style="background-image: url(https://39sf152pf74z2negmt1gi8ik-wpengine.netdna-ssl.com/wp-content/uploads/2016/10/banner-home-02.jpg);"
+	style="background-image: url('<c:url value="/resources/images/banner-home-02.jpg"/>'); "
 	data-img-width="2000" data-img-height="1330" data-diff="300"
 	class="workscout-search-banner parallax background ">
 

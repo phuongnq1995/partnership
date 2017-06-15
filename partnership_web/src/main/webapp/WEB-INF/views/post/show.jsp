@@ -3,7 +3,7 @@
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <div id="titlebar">
 	<div class="container">
 		<div class="ten columns">
@@ -190,7 +190,7 @@
 					<li><i class="fa fa-calendar"></i>
 						<div>
 							<strong>Date Posted:</strong> <span>Posted
-								${post.getDaypost().toString()}</span>
+								<fmt:formatDate value="${post.getDaypost()}" pattern="dd/MM/yyyy" /></span>
 						</div></li>
 				</ul>
 				

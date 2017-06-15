@@ -3,6 +3,10 @@
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<link href="<c:url value="/resources/css/jquery-ui.css" />"
+	rel="stylesheet" media="all" type="text/css">
+<script src="<c:url value="/resources/js/datepicker/jquery-1.12.4.js"/>"></script>
+<script src="<c:url value="/resources/js/datepicker/1.12.1-jquery-ui.js"/>"></script>
 <div id="titlebar" class="single submit-page">
 	<div class="container">
 		<div class="sixteen columns">
@@ -89,8 +93,11 @@
 					<div class="field">
 						<form:select path="categories" multiple="true"
 							id="resume_category" class="chosen-select">
-							<form:options items="${categories}" itemValue="id"
-								itemLabel="name" />
+							<c:forEach items="${categories}" var="category">
+								<form:option value="" disabled="true">${category.getName()}</form:option>
+								<form:options items="${category.getChildren()}" itemValue="id"
+								itemLabel="name" cssStyle="margin-left:10px"/>
+							</c:forEach>
 						</form:select>
 					</div>
 				</fieldset>
@@ -166,7 +173,7 @@
 							1 month)</small>
 					</label>
 					<div class="field required-field">
-						<form:input type="date" class="input-text" path="dayend"
+						<form:input type="text" class="uni-calendar input-text" path="dayend"
 							id="dayend" />
 					</div>
 				</fieldset>
@@ -180,27 +187,17 @@
 	</article>
 </div>
 <script>
-	var today = new Date();
-	var endday = new Date();
-	var dd = today.getDate()+ 1;
-	var ddend = today.getDate();
-	var mm = today.getMonth() + 1; //January is 0!
-	var mmend = today.getMonth() + 2; //January is 0!
-	var yyyy = today.getFullYear();
-	if (dd < 10) {
-		dd = '0' + dd
-	}
-	if (ddend < 10) {
-		ddend = '0' + ddend
-	}
-	if (mm < 10) {
-		mm = '0' + mm
-	}
-	if (mmend < 10) {
-		mmend = '0' + mmend
-	}
-	today = yyyy + '-' + mm + '-' + dd;
-	endday = yyyy + '-' + mmend + '-' + ddend;
-	document.getElementById("dayend").setAttribute("min", today);
-	document.getElementById("dayend").setAttribute("max", endday);
+	
+	$(".uni-calendar").datepicker({
+	  	numberOfMonths: 1,
+		changeMonth: true,
+		dateFormat:"dd/mm/yy",
+		yearRange:"-80:+80",
+		changeYear: true,
+	   	beforeShow: function (input, inst) { 
+	        if($(input).hasClass('readonly')) {
+	        	  inst.dpDiv.style.display = 'none';
+	       }
+	    }
+	});
 </script>

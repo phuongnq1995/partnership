@@ -2,7 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ page isELIgnored="false"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <div id="titlebar" class="single with-map">
 	<div class="container">
 		<div class="sixteen columns">
@@ -110,11 +111,13 @@
 						
 						<div class="resumes-content">
 							<h4>
-								${employee.getFullname()}
+								${employee.getFullname()}<span>${employee.getJobName()}</span>
 							</h4>
 							<span class="icons"><i class="fa fa-map-marker">&nbsp;${employee.getLocation().getName()}</i></span>
+							<span class="icons"><i class="fa fa-birthday-cake"></i>
+								 <fmt:formatDate value="${employee.getBirthday()}" pattern="dd/MM/yyyy" /></span> 
 							<p>About Me&nbsp;${employee.getDescription()}&#8230;</p>
-
+		
 							<div class="skills">
 								<c:forEach items="${employee.getCategories()}" var="category">
 									<span>${category.getName()}</span>

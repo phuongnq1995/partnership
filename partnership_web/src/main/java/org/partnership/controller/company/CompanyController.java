@@ -1,7 +1,6 @@
 package org.partnership.controller.company;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.validation.Valid;
@@ -10,6 +9,7 @@ import org.partnership.category.model.Category;
 import org.partnership.company.model.Company;
 import org.partnership.company.service.CompanyService;
 import org.partnership.converter.CategoryConverter;
+import org.partnership.converter.CustomDateConverter;
 import org.partnership.converter.LocationConverter;
 import org.partnership.location.model.Location;
 import org.partnership.location.service.LocationService;
@@ -17,7 +17,6 @@ import org.partnership.user.model.User;
 import org.partnership.user.service.UserCustom;
 import org.partnership.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,7 +45,7 @@ public class CompanyController {
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));
+		binder.registerCustomEditor(Date.class, new CustomDateConverter());
 		binder.registerCustomEditor(Category.class, new CategoryConverter());
 		binder.registerCustomEditor(Location.class, new LocationConverter());
 	}

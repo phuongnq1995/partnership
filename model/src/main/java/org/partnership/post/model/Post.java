@@ -89,11 +89,11 @@ public class Post implements Serializable{
 	@Size(max = 1450, message = "Requirement have to max size 1450 character.")
 	private String requirement;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date daypost;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	@Future
 	private Date dayend;

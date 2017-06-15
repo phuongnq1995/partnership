@@ -12,8 +12,8 @@
 			<div id="logo">
 				<a href="${pageContext.request.contextPath}/" title="Partnership"
 					rel="home"><img
-					src="https://raw.githubusercontent.com/levunguyen/java-spring-internal-partnership/master/partnership-web/src/main/webapp/resource/images/logo/logo_homepage.png"
-					data-rjs="https://raw.githubusercontent.com/levunguyen/java-spring-internal-partnership/master/partnership-web/src/main/webapp/resource/images/logo/logo_homepage.png"
+					src="<c:url value="/resources/images/logo_homepage.png"/>"
+					data-rjs="<c:url value="/resources/images/logo_homepage.png"/>"
 					alt="Partnership" /></a>
 			</div>
 

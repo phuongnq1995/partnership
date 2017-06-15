@@ -1,22 +1,31 @@
 package org.partnership.controller.employee;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.Date;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
 import org.partnership.category.model.Category;
 import org.partnership.category.service.CategoryService;
 import org.partnership.container.PartnershipFlash;
 import org.partnership.converter.CategoryConverter;
 import org.partnership.converter.CustomDateConverter;
 import org.partnership.converter.LocationConverter;
+import org.partnership.converter.UserConverter;
 import org.partnership.employee.model.Employee;
 import org.partnership.employee.service.EmployeeService;
 import org.partnership.location.model.Location;
 import org.partnership.location.service.LocationService;
+import org.partnership.user.model.Contact;
+import org.partnership.user.model.User;
+import org.partnership.user.service.ContactService;
 import org.partnership.user.service.UserCustom;
 import org.partnership.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -48,11 +57,15 @@ public class EmployeeController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private ContactService contactService;
+	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(Date.class, new CustomDateConverter());
 		binder.registerCustomEditor(Category.class, new CategoryConverter());
 		binder.registerCustomEditor(Location.class, new LocationConverter());
+		binder.registerCustomEditor(User.class, new UserConverter());
 	}
 
 	Employee newEmployee() {
@@ -126,7 +139,15 @@ public class EmployeeController {
 			employee2.setCv(employee1.getCv());
 			return employee2;
 		}
-		System.out.println("Null");
 		return null;
+	}
+	
+	@RequestMapping(value="/sendMessage", method = RequestMethod.POST)
+	public String sendMessage(@Valid Contact contact, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+		if(bindingResult.hasErrors()){
+			redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashError("ERROR"));
+		}
+		redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashSuccess(contactService.saveContact(contact)));
+		return "redirect:/employee/"+employeeService.findByUserId(contact.getUserReceive().getId()).getId();
 	}
 }

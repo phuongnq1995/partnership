@@ -1,6 +1,5 @@
 package org.partnership.controller.company;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +11,7 @@ import org.partnership.category.service.CategoryService;
 import org.partnership.company.service.CompanyService;
 import org.partnership.container.PartnershipFlash;
 import org.partnership.converter.CategoryConverter;
+import org.partnership.converter.CustomDateConverter;
 import org.partnership.converter.LevelConverter;
 import org.partnership.converter.LocationConverter;
 import org.partnership.converter.WorkTypeConverter;
@@ -25,7 +25,6 @@ import org.partnership.post.service.PostService;
 import org.partnership.user.service.UserCustom;
 import org.partnership.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,7 +61,7 @@ public class PostController {
 
 	@InitBinder
 	private void initBinder(WebDataBinder binder) {
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"), true, 10));
+		binder.registerCustomEditor(Date.class, new CustomDateConverter());
 		binder.registerCustomEditor(Category.class, new CategoryConverter());
 		binder.registerCustomEditor(Location.class, new LocationConverter());
 		binder.registerCustomEditor(WorkType.class, new WorkTypeConverter());
@@ -79,7 +78,7 @@ public class PostController {
 	private String modelNewPost(Model model) {
 		model.addAttribute("types", postService.findListType());
 		model.addAttribute("levels", postService.findListLevel());
-		model.addAttribute("categories", categoryService.findAll());
+		model.addAttribute("categories", categoryService.findAllParent());
 		model.addAttribute("locations", locationService.findAll());
 		return "newpost";
 	}
