@@ -1,6 +1,10 @@
 package org.partnership.employee.service;
 
+import java.util.List;
+
 import org.partnership.employee.model.Employee;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -18,5 +22,9 @@ public interface EmployeeService {
 	Employee findByUserId(long id);
 
 	String getIndex(Model model);
+	
+	Page<Employee> findPage(int page);
+	
+	List<Employee> findAll();
 
 }

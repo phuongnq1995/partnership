@@ -1,12 +1,8 @@
 package org.partnership.controller.employee;
 
 import java.io.IOException;
-import java.security.Principal;
 import java.util.Date;
-
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-
 import org.partnership.category.model.Category;
 import org.partnership.category.service.CategoryService;
 import org.partnership.container.PartnershipFlash;
@@ -25,7 +21,6 @@ import org.partnership.user.service.UserCustom;
 import org.partnership.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -86,9 +81,11 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(value = "/index")
-	private String index(Model model){
+	private String index(Model model, @RequestParam(defaultValue="1") int page){
+		model.addAttribute("pages", employeeService.findPage(page));
 		model.addAttribute("categories", categoryService.findAll());
-		return employeeService.getIndex(model);
+		/*return employeeService.getIndex(model);*/
+		return "indexemployee";
 	}
 	
 	@RequestMapping(value = "/new", method = RequestMethod.GET)

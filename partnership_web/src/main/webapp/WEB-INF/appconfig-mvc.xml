@@ -12,7 +12,7 @@
 	<context:component-scan base-package="org.partnership.controller.*" />
 
 	<context:annotation-config />
-
+	
 	<mvc:annotation-driven />
 
 	<mvc:resources mapping="/resources/**" location="/resources/" />

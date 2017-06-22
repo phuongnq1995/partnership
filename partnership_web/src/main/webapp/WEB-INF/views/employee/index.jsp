@@ -8,7 +8,7 @@
 	<div class="container">
 		<div class="sixteen columns">
 			<div class="ten columns">
-				<span>We have ${employees.size()} resumes in our database</span>
+				<span>We have ${pages.getTotalPages() * pages.getSize()} resumes in our database</span>
 				<h2 class="showing_jobs">Showing all resumes</h2>
 			</div>
 
@@ -94,7 +94,7 @@
 				</div>
 				
 				<ul class="resumes">
-					<c:forEach items="${employees}" var="employee">
+					<c:forEach items="${pages.getContent()}" var="employee">
 					<li class="photo-rounded">
 						<a href="${employee.getId()}" >
 						<c:choose>
@@ -129,12 +129,34 @@
 						<div class="clearfix"></div></li>
 					</c:forEach>
 				</ul>
-
+				<nav class="job-manager-pagination pagination">
+					<ul>
+						<c:forEach var="page" begin="1" end="${pages.getTotalPages()}">
+							<li>
+								<c:choose>
+									<c:when test="${pages.getNumber()+1 == page}">
+										<span class="current" data-page="${page}">${page}</span>
+									</c:when>
+									<c:otherwise>
+										<a href="${pageContext.request.contextPath}/employee/index?page=${page}" data-page="${page}">${page}</a>
+									</c:otherwise>
+								</c:choose>
+							</li>
+						</c:forEach>
+						<!-- <li><span class="current" data-page="1"></span></li> -->
+						<c:if test="${pages.hasNextPage()}">
+							<li style="float: right; position: absolute; right: 0;"><a
+							href="${pageContext.request.contextPath}/employee/index?page=${pages.getNumber()+2}" data-page="{page}">Next</a></li>
+						</c:if>
+						<c:if test="${pages.hasPreviousPage()}">
+							<li style="float: left; position: absolute; left:0;"><a
+							href="${pageContext.request.contextPath}/employee/index?page=${pages.getNumber()}" data-page="{page}">Previous</a></li>
+						</c:if>
+					</ul>
+				</nav>
 			</div>
 			<footer class="entry-footer"> </footer>
 			<!-- .entry-footer -->
 		</div>
 	</article>
-
-
 </div>

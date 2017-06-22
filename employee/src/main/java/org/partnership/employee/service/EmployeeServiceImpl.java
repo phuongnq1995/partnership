@@ -1,6 +1,7 @@
 package org.partnership.employee.service;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.partnership.container.PartnershipFlash;
 import org.partnership.employee.model.Employee;
@@ -8,6 +9,9 @@ import org.partnership.employee.repository.EmployeeRepository;
 import org.partnership.user.model.Contact;
 import org.partnership.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -71,5 +75,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 		model.addAttribute("employees", employeeRepository.findAll());
 		return "indexemployee";
 	}
+	
+	public Page<Employee> findPage(int page){
+		Pageable pageable = createPageRequest(page);
+		return employeeRepository.findAll(pageable);
+	}
 
+	public List<Employee> findAll() {
+		return employeeRepository.findAll();
+	}
+	
+	private Pageable createPageRequest(int page) {
+	    return new PageRequest(page-1, 1);
+	}
+	
 }
