@@ -48,6 +48,12 @@ public class Contact implements Serializable{
 	@Size(min=3, max=1000)
 	@Column
 	private String message;
+	
+	//0 = not seen
+	//1 = seen
+	//2 = deleted
+	@Column
+	private int status;
 
 	public long getId() {
 		return id;
@@ -95,6 +101,14 @@ public class Contact implements Serializable{
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	
 }

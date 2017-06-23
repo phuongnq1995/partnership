@@ -14,17 +14,6 @@
 		<put-attribute name="footer"
 			value="/WEB-INF/views/templates/defaultFooter.jsp" />
 	</definition>
-	
-		<!-- Cv Definition -->
-	<definition name="cv-definition"
-		template="/WEB-INF/views/templates/defaultLayout.jsp">
-		<put-attribute name="title" value="" />
-		<put-attribute name="header"
-			value="/WEB-INF/views/templates/blank.jsp" />
-		<put-attribute name="body" value="" />
-		<put-attribute name="footer"
-			value="/WEB-INF/views/templates/blank.jsp" />
-	</definition>
 
 	<!-- Home Page -->
 	<definition name="home" extends="base-definition">
@@ -87,9 +76,9 @@
 		<put-attribute name="body" value="/WEB-INF/views/postapply/index.jsp" />
 	</definition>
 	
-	<!-- New cv -->
-	<definition name="newcv" extends="cv-definition">
-		<put-attribute name="title" value="Create your cv" />
-		<put-attribute name="body" value="/WEB-INF/views/cv/new.jsp" />
+	<!-- Show contact -->
+	<definition name="showcontact" extends="base-definition">
+		<put-attribute name="title" value="My Contact" />
+		<put-attribute name="body" value="/WEB-INF/views/contact/show.jsp" />
 	</definition>
 </tiles-definitions>

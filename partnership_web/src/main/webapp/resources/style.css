@@ -8956,3 +8956,10 @@ body.page-id-2646 .infobox {
 
 .page-id-6002 #titlebar {margin-bottom: 0px; }
 
+.was-seen{
+	background: rgba(243,243,243,.85);
+	color: #222;
+}
+.znot-seen{
+	font-weight: bold;
+}

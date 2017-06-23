@@ -40,7 +40,16 @@
 									<a href="${pageContext.request.contextPath}/admin/companies">Admin</a>
 					</security:authorize>
 					</li>
-					<li><a href="blog/index.html">Blog</a></li>
+					<c:if test="${pageContext.request.userPrincipal != null}">
+						<li>
+							<a href="${pageContext.request.contextPath}/showContact">My Contact
+								<c:if test="${notseensize != 0}">
+									<span class="badge" id="notseensize"><c:out value="${notseensize}" /></span>
+								</c:if>
+							</a>
+						</li>
+					</c:if>
+					
 				</ul>
 				<ul class="float-right">
 					<c:choose>

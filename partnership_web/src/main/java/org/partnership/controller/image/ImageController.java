@@ -3,6 +3,7 @@ package org.partnership.controller.image;
 import org.partnership.company.service.CompanyService;
 import org.partnership.employee.service.EmployeeService;
 import org.partnership.post.repository.PostApplyRepository;
+import org.partnership.user.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,6 +26,9 @@ public class ImageController {
 	
 	@Autowired
 	private PostApplyRepository postApplyService;
+	
+	@Autowired
+	private ContactService contactService;
 	
 	@RequestMapping(value = "/imageCompany/{id}", method = RequestMethod.GET, produces = MediaType.IMAGE_JPEG_VALUE)
 	@ResponseBody
