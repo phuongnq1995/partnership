@@ -61,3 +61,4 @@ crashlytics-build.properties
 ## Jrebel:
 rebel.xml
 *rebel.xml
+*/rebel.xml
