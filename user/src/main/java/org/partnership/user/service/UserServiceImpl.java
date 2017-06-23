@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Service
@@ -33,19 +34,20 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	public String save(User user, BindingResult bindingResult, String role, RedirectAttributes redirectAttributes) {
 		if (!user.getPassword().equals(user.getPasswordConfirm()))
-			bindingResult.rejectValue("passwordConfirm", "Diff.userForm.passwordConfirm");
+			bindingResult.rejectValue("passwordConfirm", "These passwords don't match.");
 		if (userRepository.findUserPresent(user.getEmail())){
-			bindingResult.rejectValue("email", "Duplicate.email");
+			bindingResult.rejectValue("email", "Someone already has that email.");
 		}
 		if (bindingResult.hasErrors()){
 			String messages = "";
-			String err = "";
 			for (Object object : bindingResult.getAllErrors()) {
-			    if(object instanceof FieldError) {
-			        FieldError fieldError = (FieldError) object;
-			        err =  fieldError.getDefaultMessage();
+			    if(object instanceof ObjectError) {
+			    	FieldError objectError = (FieldError) object;
+			        if(objectError.getDefaultMessage() != null)
+			        	messages += objectError.getDefaultMessage() + "<br> ";
+			        else
+			        	messages += objectError.getCode() + "<br>";
 			    }
-		        messages = messages+" "+ err;
 			}
 			redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashError(messages));
 			return "redirect:/";

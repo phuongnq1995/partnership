@@ -13,7 +13,7 @@
 			<nav id="breadcrumbs" xmlns:v="http://rdf.data-vocabulary.org/#">
 				<ul>
 					<li class="home"><span><a title="Go to WorkScout."
-							href="../workscout.html" class="home"><span>Company</span></a> </span></li>
+							href="${pageContext.request.contextPath}/" class="home"><span>Company</span></a> </span></li>
 					<li class="current_item"><span><span>Apply list
 								Dashboard</span> </span></li>
 				</ul>
@@ -45,6 +45,7 @@
 						<th>Email</th>
 						<th>Message</th>
 						<th>Cv</th>
+					</tr>
 				</thead>
 				<tbody id="response-data">
 				<tbody>

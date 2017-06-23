@@ -4,6 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <div id="titlebar">
 	<div class="container">
 		<div class="ten columns">
@@ -194,12 +196,13 @@
 						</div></li>
 				</ul>
 				
-<%-- 				<c:choose>
-				<c:when test="${pageContext.request.userPrincipal.name != null}"> --%>
+				
+				<security:authorize access="hasRole('ROLE_EMPLOYEE')">
 				<div class="job_application application">
+					
 					<a  id="new-apply" href="#apply-dialog"
 						class="small-dialog popup-with-zoom-anim button">Apply for job</a>
-
+					
 					<div id="apply-dialog"
 						class="small-dialog zoom-anim-dialog mfp-hide apply-popup">
 						<div class="small-dialog-headline">
@@ -265,15 +268,20 @@
 						</div>
 					</div>
 					</div>
-			<%-- 		</c:when>
-					<c:otherwise>
-						<div class="job_application application">
-							<p class="small-dialog popup-with-zoom-anim button">Log in or sign up to apply</p>
-						</div>
-					</c:otherwise>
-					
-				</c:choose> --%>
-					
+				</security:authorize>
+				<security:authorize access="hasRole('ROLE_COMPANY')" >
+					<div class="job_application application">
+							<p class=" button">Sign up employee to apply</p>
+					</div>
+				</security:authorize>
+				<c:if test="${pageContext.request.userPrincipal == null}">
+					<div class="job_application application">
+						
+							<p class="button popup-with-zoom-anim">
+								<a href="#signup-dialog" class="small-dialog popup-with-zoom-anim">Sign up employee to apply</a>
+							</p>
+					</div>
+				</c:if>
 				</div>
 			</div>
 		</div>
@@ -286,12 +294,14 @@ $(document).ready(function(){
     	    url:'${pageContext.request.contextPath}/employee/applyPost',
     	    type: "GET",
     	    success: function (data) {
-    	      $('#candidate_name').val(data.fullname);
-    	      if(data.cv != ""){
-	    	      $('#cv').attr("href","${pageContext.request.contextPath}/cvEmployee/"+data.id);
-	    	      $('#resume_file').val(data.cv);
-    	      }
-    	      $("#form-apply").attr("modelAttribute", "postApply");
+	    	      if(data != null){
+	    	      $('#candidate_name').val(data.fullname);
+	    	      if(data.cv != ""){
+		    	      $('#cv').attr("href","${pageContext.request.contextPath}/cvEmployee/"+data.id);
+		    	      $('#resume_file').val(data.cv);
+	    	      }
+	    	      $("#form-apply").attr("modelAttribute", "postApply");
+	    	      }
     	    }
     	  });
     });

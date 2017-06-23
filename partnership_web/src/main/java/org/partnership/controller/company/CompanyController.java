@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.partnership.category.model.Category;
 import org.partnership.company.model.Company;
 import org.partnership.company.service.CompanyService;
+import org.partnership.container.PartnershipFlash;
 import org.partnership.converter.CategoryConverter;
 import org.partnership.converter.CustomDateConverter;
 import org.partnership.converter.LocationConverter;
@@ -80,8 +81,8 @@ public class CompanyController {
 		if (bindingResult.hasErrors())
 			return "newcompany";
 		else {
-			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE",
-					companyService.newCompany(company, fileUpload, location));
+			redirectAttributes.addFlashAttribute("MESSAGE",
+					PartnershipFlash.getFlashSuccess(companyService.newCompany(company, fileUpload, location)) );
 		}
 		return "redirect:/";
 	}

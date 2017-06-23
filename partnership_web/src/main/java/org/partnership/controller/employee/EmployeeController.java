@@ -1,8 +1,11 @@
 package org.partnership.controller.employee;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Date;
+
 import javax.validation.Valid;
+
 import org.partnership.category.model.Category;
 import org.partnership.category.service.CategoryService;
 import org.partnership.container.PartnershipFlash;
@@ -20,6 +23,9 @@ import org.partnership.user.service.ContactService;
 import org.partnership.user.service.UserCustom;
 import org.partnership.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -127,14 +133,18 @@ public class EmployeeController {
 	
 	@RequestMapping(value="/applyPost", method = RequestMethod.GET)
 	public @ResponseBody Employee applyPost() {
-		UserCustom user = (UserCustom)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		if (user != null) {
-			Employee employee1 = employeeService.findByUserId(user.getId());
-			Employee employee2 = new Employee();
-			employee2.setFullname(employee1.getFullname());
-			employee2.setId(employee1.getId());
-			employee2.setCv(employee1.getCv());
-			return employee2;
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+		if(authorities.contains(new SimpleGrantedAuthority("ROLE_EMPLOYEE"))){
+			UserCustom user = (UserCustom)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			if (user != null) {
+				Employee employee1 = employeeService.findByUserId(user.getId());
+				Employee employee2 = new Employee();
+				employee2.setFullname(employee1.getFullname());
+				employee2.setId(employee1.getId());
+				employee2.setCv(employee1.getCv());
+				return employee2;
+			}
 		}
 		return null;
 	}
