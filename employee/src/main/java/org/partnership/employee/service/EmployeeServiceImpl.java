@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.partnership.container.PartnershipFlash;
+import org.partnership.container.PartnershipStatic;
 import org.partnership.employee.model.Employee;
 import org.partnership.employee.repository.EmployeeRepository;
 import org.partnership.user.model.Contact;
@@ -86,7 +87,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 	
 	private Pageable createPageRequest(int page) {
-	    return new PageRequest(page-1, 1);
+	    return new PageRequest(page-1, PartnershipStatic.PER_PAGE);
 	}
 	
 }

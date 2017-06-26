@@ -10,7 +10,7 @@
 				<span class="showing_jobs" style="display: none"> Browse Jobs
 				</span>
 				<h2>
-					We have <em class="count_jobs">${posts.size()}</em> <em
+					We have <em class="count_jobs">${pages.getTotalPages() * pages.getSize()}</em> <em
 						class="job_text">job offers</em> for you
 				</h2>
 			</div>
@@ -138,7 +138,7 @@
 					<i class="fa fa-spinner fa-pulse"></i>
 				</div>
 				<ul class="job_listings job-list full ">
-					<c:forEach items="${posts}" var="perpost">
+					<c:forEach items="${pages.getContent()}" var="perpost">
 						<li class="job_listing"><a
 							href="${pageContext.request.contextPath}/post/${perpost.getId()}">
 								<c:choose>
@@ -193,11 +193,27 @@
 				</ul>
 				<nav class="job-manager-pagination pagination">
 					<ul>
-						<li><span class="current" data-page="1">1</span></li>
-						<li><a href="#" data-page="2">2</a></li>
-						<li><a href="#" data-page="3">3</a></li>
-						<li style="float: right; position: absolute; right: 0;"><a
-							href="#" data-page="2">Next</a></li>
+						<c:forEach var="page" begin="1" end="${pages.getTotalPages()}">
+							<li>
+								<c:choose>
+									<c:when test="${pages.getNumber()+1 == page}">
+										<span class="current" data-page="${page}">${page}</span>
+									</c:when>
+									<c:otherwise>
+										<a href="${pageContext.request.contextPath}/post/index?page=${page}" data-page="${page}">${page}</a>
+									</c:otherwise>
+								</c:choose>
+							</li>
+						</c:forEach>
+						<!-- <li><span class="current" data-page="1"></span></li> -->
+						<c:if test="${pages.hasNextPage()}">
+							<li style="float: right; position: absolute; right: 0;"><a
+							href="${pageContext.request.contextPath}/post/index?page=${pages.getNumber()+2}" data-page="{page}">Next</a></li>
+						</c:if>
+						<c:if test="${pages.hasPreviousPage()}">
+							<li style="float: left; position: absolute; left:0;"><a
+							href="${pageContext.request.contextPath}/post/index?page=${pages.getNumber()}" data-page="{page}">Previous</a></li>
+						</c:if>
 					</ul>
 				</nav>
 			</div>

@@ -277,7 +277,7 @@
 				<c:if test="${pageContext.request.userPrincipal == null}">
 					<div class="job_application application">
 						
-							<p class="button popup-with-zoom-anim">
+							<p class="button ">
 								<a href="#signup-dialog" class="small-dialog popup-with-zoom-anim">Sign up employee to apply</a>
 							</p>
 					</div>

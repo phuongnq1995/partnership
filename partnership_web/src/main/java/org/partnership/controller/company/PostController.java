@@ -91,10 +91,10 @@ public class PostController {
 	}
 
 	@RequestMapping(value = "/index")
-	private String index(Model model) {
+	private String index(Model model, @RequestParam(defaultValue="1")int page) {
 		model.addAttribute("locations", locationService.findAll());
 		model.addAttribute("categories", categoryService.findAll());
-		return postService.getIndex(model);
+		return postService.getIndex(model, page);
 	}
 
 	@RequestMapping(value = "/new")

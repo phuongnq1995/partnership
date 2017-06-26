@@ -2,8 +2,8 @@ package org.partnership.post.service;
 
 import java.util.Calendar;
 import java.util.List;
-
 import org.partnership.container.PartnershipFlash;
+import org.partnership.container.PartnershipStatic;
 import org.partnership.post.model.Level;
 import org.partnership.post.model.Post;
 import org.partnership.post.model.PostApply;
@@ -13,6 +13,8 @@ import org.partnership.post.repository.PostApplyRepository;
 import org.partnership.post.repository.PostRepository;
 import org.partnership.post.repository.WorkTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
@@ -67,8 +69,9 @@ public class PostServiceImpl implements PostService {
 		return "showpost";
 	}
 
-	public String getIndex(Model model) {
-		model.addAttribute("posts", postRepository.findAll());
+	public String getIndex(Model model, int page) {
+		Pageable pageable = createPageRequest(page);
+		model.addAttribute("posts", postRepository.findAll(pageable));
 		return "indexpost";
 	}
 
@@ -102,5 +105,9 @@ public class PostServiceImpl implements PostService {
 
 	public List<PostApply> findPostsApply(long postId) {
 		return postApplyRepository.findByPostId(postId);
+	}
+	
+	private Pageable createPageRequest(int page) {
+	    return new PageRequest(page-1, PartnershipStatic.PER_PAGE);
 	}
 }
