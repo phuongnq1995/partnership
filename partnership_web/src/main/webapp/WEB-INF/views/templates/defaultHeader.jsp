@@ -118,10 +118,9 @@
 								</div>
 								<div class="small-dialog-content woo-reg-box">
 									<form method="POST"
-										action="${pageContext.request.contextPath}/login"
-										class="login workscout_form">
+										class="login workscout_form" id="form-login">
 										<div class="form-group">
-											<span>${message}</span> <span>${error}</span>
+											<span id="login-error" class="required"></span>
 										</div>
 										<p class="form-row form-row-wide">
 											<label for="username">Email address <span
@@ -137,11 +136,11 @@
 										</p>
 										<p class="form-row">
 											<input type="hidden" name="${_csrf.parameterName}"
-												value="${_csrf.token}" class="form-control" /><input
-												type="submit" class="button" name="login" value="Login" />
+												value="${_csrf.token}" class="form-control" /><a
+												type="submit" class="button" id="login-submit">Login</a>
 										</p>
 										<p class="lost_password">
-											<a href="my-account/lost-password/index.html">Lost your
+											<a href="#">Lost your
 												password?</a>
 										</p>
 									</form>
@@ -175,3 +174,24 @@
 		</div>
 	</div>
 </header>
+<script type="text/javascript">
+$(document).ready(function($) {
+   $("#login-submit").click(function(event)  {
+	   event.preventDefault();
+        $.ajax({
+        	url:"${pageContext.request.contextPath}/login",
+            type: "POST",
+            data: $("#form-login").serialize(),
+            async: true,
+            cache: false,
+            success: function(data, status) {
+                if(data == "true"){
+                	location.reload();
+                }else{
+                	$("#login-error").html("Your email and password is invalid.");
+                }
+            },
+    	});
+    });
+});
+</script>

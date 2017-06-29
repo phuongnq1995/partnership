@@ -71,7 +71,7 @@ public class PostServiceImpl implements PostService {
 
 	public String getIndex(Model model, int page) {
 		Pageable pageable = createPageRequest(page);
-		model.addAttribute("posts", postRepository.findAll(pageable));
+		model.addAttribute("pages", postRepository.findAll(pageable));
 		return "indexpost";
 	}
 

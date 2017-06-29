@@ -17,13 +17,18 @@
 		<intercept-url pattern="/employee/new" access="hasRole('ROLE_EMPLOYEE')" />
 		<intercept-url pattern="/employee" access="hasRole('ROLE_EMPLOYEE')" />
 
-		<form-login login-page="/" default-target-url="/"
-			authentication-failure-url="/login?error" username-parameter="email"
+		<form-login authentication-failure-handler-ref="myFailureHandler"
+		 	authentication-success-handler-ref="mySuccessHandler" username-parameter="email"
 			password-parameter="password" />
 		<logout logout-success-url="/" />
 
 	</http>
-
+	
+	<beans:bean id="mySuccessHandler"
+      class="org.partnership.converter.AuthSuccessHandler"/>
+   	<beans:bean id="myFailureHandler" class=
+     "org.partnership.converter.AuthFailureHandler"/>
+	
 	<authentication-manager alias="authenticationManager">
 		<authentication-provider user-service-ref="userDetailsServiceImpl">
 			<password-encoder ref="encoder"></password-encoder>

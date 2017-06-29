@@ -10,7 +10,7 @@
 				<span class="showing_jobs" style="display: none"> Browse Jobs
 				</span>
 				<h2>
-					We have <em class="count_jobs">${pages.getTotalPages() * pages.getSize()}</em> <em
+					We have <em class="count_jobs">${pages.getContent().size()}</em> <em
 						class="job_text">job offers</em> for you
 				</h2>
 			</div>

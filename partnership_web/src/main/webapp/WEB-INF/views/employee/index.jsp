@@ -8,7 +8,7 @@
 	<div class="container">
 		<div class="sixteen columns">
 			<div class="ten columns">
-				<span>We have ${pages.getTotalPages() * pages.getSize()} resumes in our database</span>
+				<span>We have ${pages.getContent().size()} resumes in our database</span>
 				<h2 class="showing_jobs">Showing all resumes</h2>
 			</div>
 
