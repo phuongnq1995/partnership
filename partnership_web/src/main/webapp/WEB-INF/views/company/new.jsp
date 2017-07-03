@@ -6,12 +6,10 @@
 <div class="clearfix"></div>
 <div class="submit-page" id="titlebar">
 	<div class="container">
-		<c:if test="${ERROR_MESSAGE != null}">
-			<div class="col-sm-5 alert alert-danger">
-				<h3>${ERROR_MESSAGE}</h3>
-			</div>
-		</c:if>
 		<div class="sixteen columns">
+			<c:if test="${MESSAGE != null}">
+					${MESSAGE}
+				</c:if>
 			<h2>
 				<i class="fa fa-plus-circle"></i> Company Details
 			</h2>

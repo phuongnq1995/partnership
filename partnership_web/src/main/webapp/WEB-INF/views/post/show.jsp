@@ -9,6 +9,9 @@
 <div id="titlebar">
 	<div class="container">
 		<div class="ten columns">
+			<c:if test="${MESSAGE != null}">
+					${MESSAGE}
+			</c:if>
 			<span><a
 				href="../../job-category/restaurant-food-service/restaurant-food-service.html">Restaurant
 					/ Food Service</a></span>

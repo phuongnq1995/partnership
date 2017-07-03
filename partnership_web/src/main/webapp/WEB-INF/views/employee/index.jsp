@@ -7,8 +7,11 @@
 <div id="titlebar" class="single with-map">
 	<div class="container">
 		<div class="sixteen columns">
+			<c:if test="${MESSAGE != null}">
+					${MESSAGE}
+			</c:if>
 			<div class="ten columns">
-				<span>We have ${pages.getContent().size()} resumes in our database</span>
+				<span>We have ${pages.getTotalElements()} resumes in our database</span>
 				<h2 class="showing_jobs">Showing all resumes</h2>
 			</div>
 

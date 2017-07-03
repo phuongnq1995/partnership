@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.partnership.company.model.Company;
 import org.partnership.company.repository.CompanyRepository;
+import org.partnership.container.PartnershipFlash;
 import org.partnership.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,7 +63,7 @@ public class CompanyServiceIpml implements CompanyService {
 	public String showProfile(long id, Model model, RedirectAttributes redirectAttributes) {
 		Company company = companyRepository.findOne(id);
 		if(company == null){
-			redirectAttributes.addFlashAttribute("ERROR_MESSAGE", "Not found !");
+			redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashError("Not found !"));
 			return "redirect:/";
 		}
 		model.addAttribute("company", company);	

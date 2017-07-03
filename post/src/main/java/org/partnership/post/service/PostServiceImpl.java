@@ -93,7 +93,7 @@ public class PostServiceImpl implements PostService {
 			e.printStackTrace();
 		}
 		postApplyRepository.save(postApply);
-		redirectAttributes.addFlashAttribute("SUCCESS", PartnershipFlash.getFlashSuccess("Apply success !"));
+		redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashSuccess("Apply success !"));
 		return "redirect:/post/"+postApply.getId();
 	}
 

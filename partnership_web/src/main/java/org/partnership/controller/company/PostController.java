@@ -100,7 +100,7 @@ public class PostController {
 	@RequestMapping(value = "/new")
 	private String newPost(Model model, RedirectAttributes redirectAttributes) {
 		if (!checkCompanyPresent()) {
-			redirectAttributes.addFlashAttribute("MESSAGES", PartnershipFlash.getFlashSuccess("Register your company !"));
+			redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashSuccess("Register your company !"));
 			return "redirect:/company/new";
 		}
 		model.addAttribute("post", newPost());
