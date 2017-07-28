@@ -52,6 +52,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}else{
 			long id = employeeRepository.findByUserId(userId).getId();
 			model.addAttribute("employee", employeeRepository.findOne(id));
+			model.addAttribute("contact", new Contact());
 			return "showemployee";
 		}
 	}

@@ -39,6 +39,9 @@
 					<security:authorize access="hasRole('ROLE_ADMIN')">
 									<a href="${pageContext.request.contextPath}/admin/companies">Admin</a>
 					</security:authorize>
+					<security:authorize access="hasRole('ROLE_COMPANY')">
+									<a href="${pageContext.request.contextPath}/post/applylists">Apply post</a>
+					</security:authorize>
 					</li>
 					<c:if test="${pageContext.request.userPrincipal != null}">
 						<li>

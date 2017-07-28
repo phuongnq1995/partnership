@@ -42,7 +42,8 @@
 
 		<div class="woocommerce-MyAccount-content">
 			<form class="list-search" method="POST" action="searchPost">
-				<div class="container wpjm-container right-sidebar margin-top-55">
+			
+				<div class="container wpjm-container right-sidebar">
 					<!-- #secondary -->
 
 					<article id="post-2871"
@@ -50,29 +51,24 @@
 						<div class="padding-right">
 
 							<div class="search_keywords">
-								<button type="submit">
-									<i class="fa fa-search"></i>
-								</button>
-								<input type="text" name="keywords" id="keywords"
-									placeholder="job title, keywords or company name"
-									value="${keywords}" />
+								<a class="button pull-right" style="background-color:#a73939">Delete</a>
+								<a class="button pull-right" style="margin-right: 15px;">Accept</a>
 								<div class="clearfix"></div>
 							</div>
 							<input type="hidden" name="${_csrf.parameterName}"
 								value="${_csrf.token}" />
 
-							<div class="job_listings" data-location="" data-keywords=""
-								data-show_filters="false" data-show_pagination="true"
-								data-per_page="10" data-orderby="featured" data-order="DESC"
-								data-categories="">
+							<div class="job_listings margin-top-15" data-show_filters="false"
+								data-show_pagination="true" data-orderby="featured"
+								data-order="DESC">
 								<!-- Listings Loader -->
 								<div class="listings-loader">
 									<i class="fa fa-spinner fa-pulse"></i>
 								</div>
 								<ul class="job_listings job-list full ">
 									<c:forEach items="${pages.getContent()}" var="perpost">
-										<li class="job_listing"><a
-											href="${pageContext.request.contextPath}/post/${perpost.getId()}">
+										<li class="job_listing">
+											<div class="admin-post">
 												<c:choose>
 													<c:when test="${empty post.getCompany().getLogo()}">
 														<td><img alt="Photo" width="70px" height="70px"
@@ -85,11 +81,17 @@
 													</c:otherwise>
 												</c:choose>
 												<div class="job-list-content">
+													<h4 class="checkboxes pull-right" style="margin-bottom: 0;">
+														<input type="checkbox" name="check_post"
+															id="salary_check_${perpost.getId()}" class="filter_by_check"> <label
+															for="salary_check_${perpost.getId()}"></label>
+													</h4>
 													<h4>
 														${perpost.getTitle()}
 														<c:forEach items="${perpost.getTypes()}" var="type">
 															<span class="job-type ${type.getName()}">${type.getName()}</span>
 														</c:forEach>
+
 													</h4>
 
 													<div class="job-icons">
@@ -119,8 +121,9 @@
 														<p>${fn:substring(perpost.getDescription(), 0, 100)}</p>
 													</div>
 												</div>
-										</a>
-											<div class="clearfix"></div></li>
+											</div>
+
+										</li>
 									</c:forEach>
 								</ul>
 								<nav class="job-manager-pagination pagination">

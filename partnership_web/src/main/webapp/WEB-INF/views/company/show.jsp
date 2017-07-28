@@ -42,7 +42,8 @@
 		<div class="six columns">
 			<div class="two-buttons">
 				<div class="job-manager-form wp-job-manager-bookmarks-form">
-					<div><a class="bookmark-notice button dark bookmark-notice" href="${pageContext.request.contextPath}/post/applylists">Show apply</a></div>
+					<div><a class="bookmark-notice button dark bookmark-notice" 
+					href="${pageContext.request.contextPath}/post/applylists">Show apply</a></div>
 				</div>
 				<div class="resume_contact">
 					<a href="#resume-dialog"

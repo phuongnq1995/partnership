@@ -58,6 +58,13 @@
 	</article>
 </div>
 <script type="text/javascript">
+$( document ).ready(function() {
+	var size = ${posts.size()};
+	if(size > 0){
+		var idStart = ${posts.get(0).getId()};
+		showApply(idStart);
+	}
+});
     function showApply(id){
     	var link = "${pageContext.request.contextPath}/post/showPostApply/"+ id ;
     	$.ajax({

@@ -2,10 +2,11 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="s"%>
+<c:set var="principalId"><sec:authentication property="principal.id" /></c:set>
 <div id="titlebar" class="resume">
 	<div class="container">
 		<div class="ten columns">
@@ -54,8 +55,9 @@
 
 		<div class="six columns">
 			<div class="two-buttons">
+			
 				<div class="resume_contact">
-
+					<c:if test="${employee.getUserId() != principalId && principalId != ''}">
 					<a href="#resume-dialog" id="link-resume-dialog"
 						class="small-dialog popup-with-zoom-anim button"><i
 						class="fa fa-envelope"></i> Contact</a>
@@ -72,13 +74,13 @@
 									<div style="display: none;">
 										<sec:authentication var="principal" property="principal" />
 										<form:hidden path="userReceive" value="${userReceive.getId()}"/>
-										<form:hidden path="userSend" id="sender" value="${principal.id}"/>
+										<form:hidden path="userSend" id="sender" value="${principalId}"/>
 									</div>
 									<fieldset>
 										<label for="full-name">Full name</label>
 										<div class="field required-field">
 											<span class="wpcf7-form-control-wrap full-name"><form:input
-												type="text" path="senderName" size="40"
+												type="text" path="senderName" size="40" value="${pageContext.request.userPrincipal.name}"
 												class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" id="senderName"/></span>
 										</div>
 									</fieldset>
@@ -100,6 +102,7 @@
 							</div>
 						</div>
 					</div>
+					</c:if>
 				</div>
 			</div>
 		</div>
@@ -110,32 +113,6 @@
 	<p>&nbsp;</p>
 	<p>${employee.getDescription()}.</p>
 </div>
-<!-- <script type="text/javascript">
-$(document).ready(function(){
-    $("#link-resume-dialog").click(function(){
-    	alert("click");
-    	var userid = ${principal.id};
-    	alert("user:" + userid);
-    	$.ajax({
-    		type : "GET",
-    	    url:'${pageContext.request.contextPath}/employee/sendMessage',
-    	    dataType : 'json',
-    	    data : {
-    	    	userid : userid
-            },
-    	    success: function (data) {
-    	    	$("#sender").val(data.id);	
-    	    alert("success"+data.id);
-    	      /* $('#candidate_name').val(data.fullname);
-    	      if(data.cv != ""){
-	    	      $('#cv').attr("href","${pageContext.request.contextPath}/cvEmployee/"+data.id);
-	    	      $('#resume_file').val(data.cv);
-    	      }
-    	      $("#form-apply").attr("modelAttribute", "postApply"); */
-    	    }
-    	});
-    })
-});
-</script> -->
+
     
     

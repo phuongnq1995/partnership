@@ -108,7 +108,7 @@ public class EmployeeController {
 
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	private String createEmployee(RedirectAttributes redirectAttributes,
-			@ModelAttribute("employee") @Valid Employee employee, BindingResult bindingResult,
+			@Valid Employee employee, BindingResult bindingResult,
 			@RequestParam("fileUpload") MultipartFile[] fileUpload, Model model) throws IOException {
 		if (bindingResult.hasErrors()) {
 			model.addAttribute("categories", categoryService.findAllParent());
