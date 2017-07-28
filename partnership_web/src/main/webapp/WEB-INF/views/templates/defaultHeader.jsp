@@ -185,8 +185,13 @@ $(document).ready(function($) {
             async: true,
             cache: false,
             success: function(data, status) {
-                if(data == "true"){
-                	location.reload();
+                if(data != "false"){
+                	if(data != "isAdmin"){
+                		location.reload();
+                	}else{
+                		var url = "${pageContext.request.contextPath}/admin/companies";
+                		window.location.replace(url);
+                	}
                 }else{
                 	$("#login-error").html("Your email and password is invalid.");
                 }

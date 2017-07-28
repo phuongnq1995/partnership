@@ -22,11 +22,6 @@
 	</definition>
 	
 	<!-- Company Page -->
-	<definition name="indexcompany" extends="base-definition">
-		<put-attribute name="title" value="Company" />
-		<put-attribute name="body"
-			value="/WEB-INF/views/company/index.jsp" />
-	</definition>
 
 	<definition name="newcompany" extends="base-definition">
 		<put-attribute name="title" value="Register Company" />
@@ -80,5 +75,18 @@
 	<definition name="showcontact" extends="base-definition">
 		<put-attribute name="title" value="My Contact" />
 		<put-attribute name="body" value="/WEB-INF/views/contact/show.jsp" />
+	</definition>
+	
+	<!-- Admin page -->
+	<definition name="admincompanies" extends="base-definition">
+		<put-attribute name="title" value="Manage Companies" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/companies.jsp" />
+	</definition>
+	
+	<definition name="adminposts" extends="base-definition">
+		<put-attribute name="title" value="Manage Posts" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/posts.jsp" />
 	</definition>
 </tiles-definitions>

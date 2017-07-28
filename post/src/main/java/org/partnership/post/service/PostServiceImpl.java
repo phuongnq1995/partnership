@@ -1,7 +1,9 @@
 package org.partnership.post.service;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+
 import org.partnership.container.PartnershipFlash;
 import org.partnership.container.PartnershipStatic;
 import org.partnership.post.model.Level;
@@ -15,6 +17,7 @@ import org.partnership.post.repository.WorkTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
@@ -71,8 +74,14 @@ public class PostServiceImpl implements PostService {
 
 	public String getIndex(Model model, int page) {
 		Pageable pageable = createPageRequest(page);
-		model.addAttribute("pages", postRepository.findAll(pageable));
+		model.addAttribute("pages", postRepository.findByDayendAfter(new Date(), pageable));
 		return "indexpost";
+	}
+	
+	public String getAdminPost(Model model, int page) {
+		Pageable pageable = createPageRequest(page);
+		model.addAttribute("pages", postRepository.findAll(pageable));
+		return "adminposts";
 	}
 
 	public List<Post> findByKeyWordsAndLocation(String keywords, int location_id) {
@@ -108,6 +117,6 @@ public class PostServiceImpl implements PostService {
 	}
 	
 	private Pageable createPageRequest(int page) {
-	    return new PageRequest(page-1, PartnershipStatic.PER_PAGE);
+	    return new PageRequest(page-1, PartnershipStatic.PER_PAGE, Sort.Direction.DESC, "daypost");
 	}
 }

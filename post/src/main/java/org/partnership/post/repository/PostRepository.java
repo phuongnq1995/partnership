@@ -1,8 +1,11 @@
 package org.partnership.post.repository;
 
+import java.util.Date;
 import java.util.List;
 
 import org.partnership.post.model.Post;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,11 +18,14 @@ public interface PostRepository extends JpaRepository<Post, Long>{
 	//where lowcase(p.title) like %:keywords% or lowcase(p.company.name) like %:keyword%
 	
 	@Query("select p from Post p where lower(p.title) like %:keywords% or lower(p.company.name) like %:keywords%" )
-		List<Post> findByKeyWords(@Param("keywords") String keywords);
+	List<Post> findByKeyWords(@Param("keywords") String keywords);
 		//where lowcase(p.title) like %:keywords% or lowcase(p.company.name) like %:keyword%
 	
 	@Query("select p from Post p INNER JOIN p.locations l where l.id = :locationId ")
-		List<Post> findByLocation(@Param("locationId") int location_id);
+	List<Post> findByLocation(@Param("locationId") int location_id);
 	
 	List<Post> findByCompanyId(long companyId);
+	
+	Page<Post> findByDayendAfter(Date current, Pageable pageable);
+
 }
