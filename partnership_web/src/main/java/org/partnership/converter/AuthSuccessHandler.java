@@ -22,7 +22,6 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler{
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, 
       Authentication authentication) 
       throws ServletException, IOException {
-    	clearAuthenticationAttributes(request);
         response.setStatus(HttpServletResponse.SC_OK);
         response.getWriter().print(isAdminPage(authentication));
         response.getWriter().flush();
@@ -39,18 +38,4 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler{
         return "isUser";
     }
     
-    protected void clearAuthenticationAttributes(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if (session == null) {
-            return;
-        }
-        session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-    }
- 
-    public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
-        this.redirectStrategy = redirectStrategy;
-    }
-    protected RedirectStrategy getRedirectStrategy() {
-        return redirectStrategy;
-    }
 }
