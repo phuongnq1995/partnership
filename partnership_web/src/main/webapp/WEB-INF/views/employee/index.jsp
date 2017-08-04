@@ -35,21 +35,24 @@
 						data-placeholder='Choose a skill'
 						data-no_results_text='No results match'
 						data-multiple_text='Select Some Options'>
-						<c:forEach items="${categories}" var="category">
-							<option class="level-0" value="${category.getId()}">${category.getName()}</option>
+						<c:forEach items="${categoriesOriginal}" var="category">
+							<option class="level-0" disabled="disabled">${category.getName()}</option>
+							<c:forEach items="${category.getChildren()}" var="children">
+								<option style="margin-left:10px" value="${children.getId()}">${children.getName()}</option>
+							</c:forEach>
+							<option>
 						</c:forEach>
 					</select>
 
 				</div>
 			</div>
 
-
 			<div class="widget">
 				<h4>Filter by Categories</h4>
 				<div class="search_categories resume-filter">
 					<select name="categories" multiple="multiple"
 							id="resume_category" class="chosen-select">
-							<c:forEach items="${categories}" var="category">
+							<c:forEach items="${categoriesOriginal}" var="category">
 								<option value="${category.getId()}">${category.getName()}</option>
 							</c:forEach>
 						</select>

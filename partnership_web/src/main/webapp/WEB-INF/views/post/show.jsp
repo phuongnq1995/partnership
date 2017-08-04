@@ -9,9 +9,7 @@
 <div id="titlebar">
 	<div class="container">
 		<div class="ten columns">
-			<c:if test="${MESSAGE != null}">
-					${MESSAGE}
-			</c:if>
+			
 			<span><a
 				href="../../job-category/restaurant-food-service/restaurant-food-service.html">Restaurant
 					/ Food Service</a></span>
@@ -22,7 +20,9 @@
 				</c:forEach>
 			</h1>
 			
-				<strong style="color: green" id="flash"></strong>
+			<c:if test="${MESSAGE != null}">
+					${MESSAGE}
+			</c:if>
 			
 		</div>
 		<div class="six columns">
@@ -248,7 +248,7 @@
 										<label class="fake-upload-btn">
 											<div class="job-manager-uploaded-files"></div> <input type='file'
 											name="fileUpload" class="input-text wp-job-manager-file-upload"
-											accept="|pdf|" id="resume_file" />
+											accept="|pdf|" id="fileUploadCv" />
 											<div class="upload-btn">
 												<i class="fa fa-upload"></i>Browse
 											</div>
@@ -298,12 +298,13 @@ $(document).ready(function(){
     	    type: "GET",
     	    success: function (data) {
 	    	      if(data != null){
-	    	      $('#candidate_name').val(data.fullname);
-	    	      if(data.cv != ""){
-		    	      $('#cv').attr("href","${pageContext.request.contextPath}/cvEmployee/"+data.id);
-		    	      $('#resume_file').val(data.cv);
-	    	      }
-	    	      $("#form-apply").attr("modelAttribute", "postApply");
+		    	      $('#candidate_name').val(data.fullname);
+		    	      if(data.cv != null){
+			    	      $('#cv').attr("href","${pageContext.request.contextPath}/cvEmployee/"+data.id);
+		    	      }else{
+		    	    	  $("#cv").attr("style","display: none;");
+		    	      }
+		    	      $("#form-apply").attr("modelAttribute", "postApply");
 	    	      }
     	    }
     	  });

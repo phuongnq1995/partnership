@@ -16,6 +16,8 @@
 		
 		<intercept-url pattern="/employee/new" access="hasRole('ROLE_EMPLOYEE')" />
 		<intercept-url pattern="/employee" access="hasRole('ROLE_EMPLOYEE')" />
+		
+		<intercept-url pattern="*/applylists" access="hasRole('ROLE_COMPANY')"/>
 
 		<form-login authentication-failure-handler-ref="myFailureHandler"
 		 	authentication-success-handler-ref="mySuccessHandler" username-parameter="email"

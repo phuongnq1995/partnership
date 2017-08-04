@@ -15,6 +15,7 @@ import org.partnership.converter.CustomDateConverter;
 import org.partnership.converter.LevelConverter;
 import org.partnership.converter.LocationConverter;
 import org.partnership.converter.WorkTypeConverter;
+import org.partnership.employee.service.EmployeeService;
 import org.partnership.location.model.Location;
 import org.partnership.location.service.LocationService;
 import org.partnership.post.model.Level;
@@ -58,6 +59,9 @@ public class PostController {
 
 	@Autowired
 	private PostService postService;
+	
+	@Autowired
+	private EmployeeService employeeService;
 
 	@InitBinder
 	private void initBinder(WebDataBinder binder) {
@@ -140,7 +144,14 @@ public class PostController {
 	@RequestMapping(value="/applyPost", method = RequestMethod.POST)
 	public String applyPost(@ModelAttribute PostApply postApply, @RequestParam("fileUpload") 
 		MultipartFile fileUpload, RedirectAttributes redirectAttributes){
+		if(fileUpload.isEmpty() ){
+			byte[] cv = employeeService.findByUserId(userService.findUserByEmail(postApply.getEmail()).getId()).getCv();
+			if(cv != null){
+				postApply.setCv(cv);
+			}
+		}
 		return postService.newApplyPost(postApply, fileUpload, redirectAttributes);
+		
 	}
 	
 	@RequestMapping(value="/applylists")

@@ -1,5 +1,6 @@
 package org.partnership.post.service;
 
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -34,7 +35,7 @@ public class PostServiceImpl implements PostService {
 
 	@Autowired
 	private WorkTypeRepository workTypeRepository;
-	
+
 	@Autowired
 	private PostApplyRepository postApplyRepository;
 
@@ -55,14 +56,17 @@ public class PostServiceImpl implements PostService {
 			post.setDayend(dayend.getTime());
 		}
 		postRepository.save(post);
-		redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashSuccess("Create Success !"));
-		return "redirect:/post/"+post.getId();
+		redirectAttributes.addFlashAttribute("MESSAGE",
+				PartnershipFlash.getFlashSuccess("Create Success !"));
+		return "redirect:/post/" + post.getId();
 	}
 
-	public String show(long id, RedirectAttributes redirectAttributes, Model model) {
+	public String show(long id, RedirectAttributes redirectAttributes,
+			Model model) {
 		Post post = postRepository.findOne(id);
-		if(post == null){
-			redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashError("Not found !"));
+		if (post == null) {
+			redirectAttributes.addFlashAttribute("MESSAGE",
+					PartnershipFlash.getFlashError("Not found !"));
 			return "redirect:/";
 		}
 		model.addAttribute("post", post);
@@ -74,10 +78,11 @@ public class PostServiceImpl implements PostService {
 
 	public String getIndex(Model model, int page) {
 		Pageable pageable = createPageRequest(page);
-		model.addAttribute("pages", postRepository.findByDayendAfter(new Date(), pageable));
+		model.addAttribute("pages",
+				postRepository.findByDayendAfter(new Date(), pageable));
 		return "indexpost";
 	}
-	
+
 	public String getAdminPost(Model model, int page) {
 		Pageable pageable = createPageRequest(page);
 		model.addAttribute("pages", postRepository.findAll(pageable));
@@ -85,25 +90,34 @@ public class PostServiceImpl implements PostService {
 	}
 
 	public List<Post> findByKeyWordsAndLocation(String keywords, int location_id) {
-		if(keywords.equals("") && location_id == 0){
+		if (keywords.equals("") && location_id == 0) {
 			return postRepository.findAll();
-		}else if(location_id == 0){
+		} else if (location_id == 0) {
 			return postRepository.findByKeyWords(keywords);
-		}else if(keywords.equals("")){
+		} else if (keywords.equals("")) {
 			return postRepository.findByLocation(location_id);
 		}
 		return postRepository.findByKeyWordsAndLocation(keywords, location_id);
 	}
 
-	public String newApplyPost(PostApply postApply, MultipartFile fileUpload, RedirectAttributes redirectAttributes) {
+	@SuppressWarnings("null")
+	public String newApplyPost(PostApply postApply, MultipartFile fileUpload,
+			RedirectAttributes redirectAttributes) {
 		try {
-			postApply.setCv(fileUpload.getBytes());
-		} catch (Exception e) {
-			e.printStackTrace();
+			if (postApply == null) {
+				postApply.setCv(fileUpload.getBytes());
+			}
+		} catch (IOException e) {
+			postApply.setCv(null);
 		}
-		postApplyRepository.save(postApply);
-		redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashSuccess("Apply success !"));
-		return "redirect:/post/"+postApply.getId();
+		if (postApply.getCv().length > 0) {
+			postApplyRepository.save(postApply);
+			redirectAttributes.addFlashAttribute("MESSAGE",
+					PartnershipFlash.getFlashSuccess("Apply success !"));
+		}else{
+			redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashError("Please choice your cv !"));
+		}
+		return "redirect:/post/" + postApply.getPostId();
 	}
 
 	public String getPostsOfCompany(long companyId, Model model) {
@@ -115,8 +129,14 @@ public class PostServiceImpl implements PostService {
 	public List<PostApply> findPostsApply(long postId) {
 		return postApplyRepository.findByPostId(postId);
 	}
-	
+
 	private Pageable createPageRequest(int page) {
-	    return new PageRequest(page-1, PartnershipStatic.PER_PAGE, Sort.Direction.DESC, "daypost");
+		return new PageRequest(page - 1, PartnershipStatic.PER_PAGE,
+				Sort.Direction.DESC, "daypost");
+	}
+
+	public List<Post> findTop4ByOrderByDaypostDesc() {
+		
+		return postRepository.findTop4ByOrderByDaypostDesc();
 	}
 }

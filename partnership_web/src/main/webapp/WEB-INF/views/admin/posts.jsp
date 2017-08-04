@@ -70,13 +70,13 @@
 										<li class="job_listing">
 											<div class="admin-post">
 												<c:choose>
-													<c:when test="${empty post.getCompany().getLogo()}">
+													<c:when test="${empty perpost.getCompany().getLogo()}">
 														<td><img alt="Photo" width="70px" height="70px"
 															src="<c:url value="/resources/images/company.png"/>" /></td>
 													</c:when>
 													<c:otherwise>
 														<img width="70px" height="70px"
-															src="${pageContext.request.contextPath}/imageCompany/${company.getId()}"
+															src="${pageContext.request.contextPath}/imageCompany/${perpost.getCompany().getId()}"
 															alt="Photo" />
 													</c:otherwise>
 												</c:choose>

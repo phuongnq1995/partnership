@@ -3,6 +3,7 @@ package org.partnership.category.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -45,6 +46,9 @@ public class Category implements Serializable{
 	@LazyCollection(LazyCollectionOption.FALSE)
 	private List<Category> children;
 	
+	@Column
+	private String icon;
+	
 	public int getId() {
 		return id;
 	}
@@ -59,6 +63,14 @@ public class Category implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 
 	public List<Employee> getListEmployee() {

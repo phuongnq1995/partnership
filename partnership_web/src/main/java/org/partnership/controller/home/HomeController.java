@@ -3,7 +3,10 @@ package org.partnership.controller.home;
 
 import javax.validation.Valid;
 
+import org.partnership.category.service.CategoryService;
 import org.partnership.container.PartnershipFlash;
+import org.partnership.post.model.PostApply;
+import org.partnership.post.service.PostService;
 import org.partnership.user.model.Contact;
 import org.partnership.user.model.User;
 import org.partnership.user.service.ContactService;
@@ -30,8 +33,18 @@ public class HomeController {
 	@Autowired
 	private ContactService contactService;
 	
+	@Autowired
+	private CategoryService categoryService;
+	
+	@Autowired
+	private PostService postService;
+	
 	@RequestMapping(value = "/")
-	private String home() {
+	private String home(Model model) {
+		model.addAttribute("categories", categoryService.findAllParent());
+		model.addAttribute("posts", postService.findTop4ByOrderByDaypostDesc());
+		model.addAttribute("mostPost", postService.findTop4ByOrderByDaypostDesc());
+		model.addAttribute("postApply", new PostApply());
 		return "home";
 	}
 

@@ -28,4 +28,11 @@ public interface PostRepository extends JpaRepository<Post, Long>{
 	
 	Page<Post> findByDayendAfter(Date current, Pageable pageable);
 
+	List<Post> findTop4ByOrderByDaypostDesc();
+	
+	@Query(value="select * from partnership_building.post p inner join ("
+	+"select count(id) as quantity, a.post_id as a_post_id from partnership_building.post_apply a"
+		+"group by a.post_id 	"
+			+") b on b.a_post_id = p.id order by quantity desc", nativeQuery=true)
+	List<Post> findTop4ByOrderByApplyAsc();
 }

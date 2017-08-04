@@ -13,7 +13,8 @@
 			<nav id="breadcrumbs" xmlns:v="http://rdf.data-vocabulary.org/#">
 				<ul>
 					<li class="home"><span><a title="Go to WorkScout."
-							href="${pageContext.request.contextPath}/" class="home"><span>Company</span></a> </span></li>
+							href="${pageContext.request.contextPath}/" class="home"><span>Company</span></a>
+					</span></li>
 					<li class="current_item"><span><span>Apply list
 								Dashboard</span> </span></li>
 				</ul>
@@ -25,13 +26,14 @@
 <div class="container full-width">
 	<article id="table-ajax"
 		class="sixteen columns woocommerce-account post-14 page type-page status-publish hentry">
-		<nav class="woocommerce-MyAccount-navigation">
+		<%-- <nav class="woocommerce-MyAccount-navigation">
 			<ul class="list-group">
 				<c:forEach var="post" items="${posts}">
 					<li>
 						<button onclick="showApply('${post.getId()}')" id="show-apply">${post.getTitle()}</button>
-						<span class="badge badge-notify">new</span>
+						<span class="badge badge-notify">${post.getDaypost()} to ${post.getDayend()}</span>
 					</li>
+					
 				</c:forEach>
 			</ul>
 		</nav>
@@ -50,7 +52,19 @@
 				<tbody id="response-data">
 				<tbody>
 			</table>
-		</div> 
+		</div>  --%>
+
+		<div class="columns eight  omega">
+			<p class="pfix"></p>
+			<h4 style="margin-bottom: 20px">List Apply</h4>
+			<div class="accordion">
+				<c:forEach var="post" items="${posts}">
+					<h3 class="" onclick="showApply('${post.getId()}')">${post.getTitle()} (${post.getDaypost()} to ${post.getDayend()})</h3>
+					<div style="display: none;" id="response-data-${post.getId()}">
+					</div>
+				</c:forEach>
+			</div>
+		</div>
 
 		<footer class="entry-footer"> </footer>
 		<!-- .entry-footer -->
@@ -58,32 +72,42 @@
 	</article>
 </div>
 <script type="text/javascript">
-$( document ).ready(function() {
-	var size = ${posts.size()};
-	if(size > 0){
-		var idStart = ${posts.get(0).getId()};
-		showApply(idStart);
+	$(document).ready(function() {
+		var size = '${posts.size()}';
+		if (size > 0) {
+			var idStart = '${posts.get(0).getId()}';
+			showApply(idStart);
+		}
+	});
+	function showApply(id) {
+		var link = "${pageContext.request.contextPath}/post/showPostApply/"+ id;
+		$.ajax({
+					url : link,
+					type : "GET",
+					success : function(data) {
+						$('#response-data-'+id).empty();
+						var trHTML = '';
+						$.each(data,function(key, value) {
+											trHTML += "<table id='table-response'"
+												+"class='resume-manager-resumes'>"
+											+"<thead><tr><th>Full Name</th><th>Email</th>"
+													+"<th>Message</th><th>Cv</th></tr></thead><tbody>"
+												+'<tr><td>'
+													+ value.fullname
+													+ '</td><td>'
+													+ value.email
+													+ '</td><td>'
+													+ value.message
+													+ '</td><td>'
+													+ '<a href="${pageContext.request.contextPath}/cvApply/'+value.id+
+    	                '"><i class="fa fa-link"></i>View cv</a>'
+													+ '</td></tr>'
+													+"<tbody></table>";
+										});
+						$('#response-data-'+id).append(trHTML);
+					}
+				});
 	}
-});
-    function showApply(id){
-    	var link = "${pageContext.request.contextPath}/post/showPostApply/"+ id ;
-    	$.ajax({
-    	    url : link,
-    	    type: "GET",
-    	    success: function (data) {
-    	    	$('#response-data').empty();
-    	    	var trHTML = '';
-    	    	$.each(data, function (key,value) {
-    	    		trHTML += 
-    	                '<tr><td>' + value.fullname + 
-    	                '</td><td>' + value.email + 
-    	                '</td><td>' + value.message + 
-    	                '</td><td>' + '<a href="${pageContext.request.contextPath}/cvApply/'+value.id+
-    	                '"><i class="fa fa-link"></i>View cv</a>' + 
-    	                '</td></tr>';     
-    	          });
-    	          $('#response-data').append(trHTML);
-    	    }
-    	  }); 
-    }
+
+	
 </script>

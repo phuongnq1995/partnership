@@ -32,7 +32,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -90,6 +89,7 @@ public class EmployeeController {
 	private String index(Model model, @RequestParam(defaultValue="1") int page){
 		model.addAttribute("pages", employeeService.findPage(page));
 		model.addAttribute("categories", categoryService.findAll());
+		model.addAttribute("categoriesOriginal", categoryService.findAllParent());
 		/*return employeeService.getIndex(model);*/
 		return "indexemployee";
 	}

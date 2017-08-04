@@ -32,4 +32,6 @@ public interface PostService {
 
 	List<PostApply> findPostsApply(long postId);
 	
+	List<Post> findTop4ByOrderByDaypostDesc();
+	
 }
