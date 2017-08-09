@@ -138,7 +138,7 @@
 											</label>
 										</p>
 										<p class="form-row">
-											<input type="hidden" name="${_csrf.parameterName}"
+											<input type="hidden" name="${_csrf.parameterName}" type="submit"
 												value="${_csrf.token}" class="form-control" /><a
 												type="submit" class="button" id="login-submit">Login</a>
 										</p>
