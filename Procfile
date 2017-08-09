@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar target/dependency/webapp-runner.jar --post $PORT target/partnership_web.war
+web: java $JAVA_OPTS -jar target/dependency/webapp-runner.jar --post $PORT target/*.war
