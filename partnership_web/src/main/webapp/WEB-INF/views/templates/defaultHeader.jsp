@@ -178,24 +178,26 @@
 	</div>
 </header>
 <script type="text/javascript">
-$("#form-login").submit(function(){
-    $.ajax({
-        url:"${pageContext.request.contextPath}/login",
-        type: "POST",
-        data: $("#form-login").serialize(),
-        cache: false,
-        success: function(data, status) {
-            if(data != "false"){
-                if(data != "isAdmin"){
-                	location.reload();
-                }else{
-                	var url = "${pageContext.request.contextPath}/admin/companies";
-                		window.location.replace(url);
-                }
-            }else{
-            	$("#login-error").html("Your email and password is invalid.");
-            }
-        },
-   	});
+$(document).ready(function($) {
+	    $("#login-submit").click(function(event)  {
+	    $.ajax({
+	        url:"${pageContext.request.contextPath}/login",
+	        type: "POST",
+	        data: $("#form-login").serialize(),
+	        cache: false,
+	        success: function(data, status) {
+	            if(data != "false"){
+	                if(data != "isAdmin"){
+	                	location.reload();
+	                }else{
+	                	var url = "${pageContext.request.contextPath}/admin/companies";
+	                		window.location.replace(url);
+	                }
+	            }else{
+	            	$("#login-error").html("Your email and password is invalid.");
+	            }
+	        },
+	   	});
+	});
 });
 </script>
