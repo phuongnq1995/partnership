@@ -134,13 +134,6 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>${hibernate-validator.version}</version>
 		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-war-plugin -->
-		<dependency>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-war-plugin</artifactId>
-			<version>2.6</version>
-		</dependency>
 
 	</dependencies>
 </project>

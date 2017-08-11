@@ -7,14 +7,14 @@
 <div id="titlebar" class="single with-map">
 	<div class="container">
 		<div class="sixteen columns">
-			<c:if test="${MESSAGE != null}">
-					${MESSAGE}
-			</c:if>
+
 			<div class="ten columns">
 				<span>We have ${pages.getTotalElements()} resumes in our database</span>
 				<h2 class="showing_jobs">Showing all resumes</h2>
 			</div>
-
+			<c:if test="${MESSAGE != null}">
+					${MESSAGE}
+			</c:if>
 			<div class="six columns">
 				<a href="../submit-resume/submit-resume.html" class="button">Post
 					a Resume, It&#039;s Free!</a>

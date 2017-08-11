@@ -12,12 +12,11 @@
 	class="workscout-search-banner parallax background ">
 
 	<div class="container">
-		<div class="sixteen columns">
-			<c:if test="${MESSAGE != null}">
+		<c:if test="${MESSAGE != null}">
 					${MESSAGE}
 				</c:if>
-		</div>
 		<div class="search-container sc-jobs">
+			
 			<!-- Form -->
 			<h2>Find Job</h2>
 			<form method="GET" action="/searchForm">
@@ -284,17 +283,17 @@
 													<security:authorize access="hasRole('ROLE_COMPANY')">
 														<div class="job_application application">
 															<a href="#signup-dialog"
-																	class="small-dialog popup-with-zoom-anim button">Sign up
-																	employee to apply</a>
+																class="small-dialog popup-with-zoom-anim button">Sign
+																up employee to apply</a>
 														</div>
 													</security:authorize>
 													<c:if test="${pageContext.request.userPrincipal == null}">
 														<div class="job_application application">
 
-																<a href="#signup-dialog"
-																	class="small-dialog popup-with-zoom-anim button">Sign up
-																	employee to apply</a>
-															
+															<a href="#signup-dialog"
+																class="small-dialog popup-with-zoom-anim button">Sign
+																up employee to apply</a>
+
 														</div>
 													</c:if>
 												</div>
@@ -317,25 +316,43 @@
 
 </div>
 <script type="text/javascript">
-$(document).ready(function(){
-    $("#new-apply").click(function(){
-    	$.ajax({
-    	    url:'${pageContext.request.contextPath}/employee/applyPost',
-    	    type: "GET",
-    	    success: function (data) {
-	    	      if(data != null){
-		    	      $('#candidate_name').val(data.fullname);
-		    	      if(data.cv != null){
-			    	      $('#cv').attr("href","${pageContext.request.contextPath}/cvEmployee/"+data.id);
-		    	      }else{
-		    	    	  $("#cv").attr("style","display: none;");
-		    	      }
-		    	      $("#form-apply").attr("modelAttribute", "postApply");
-	    	      }
-    	    }
-    	  });
-    });
-});
+	$(document)
+			.ready(
+					function() {
+						$("#new-apply")
+								.click(
+										function() {
+											$
+													.ajax({
+														url : '${pageContext.request.contextPath}/employee/applyPost',
+														type : "GET",
+														success : function(data) {
+															if (data != null) {
+																$(
+																		'#candidate_name')
+																		.val(
+																				data.fullname);
+																if (data.cv != null) {
+																	$('#cv')
+																			.attr(
+																					"href",
+																					"${pageContext.request.contextPath}/cvEmployee/"
+																							+ data.id);
+																} else {
+																	$("#cv")
+																			.attr(
+																					"style",
+																					"display: none;");
+																}
+																$("#form-apply")
+																		.attr(
+																				"modelAttribute",
+																				"postApply");
+															}
+														}
+													});
+										});
+					});
 </script>
 
 
