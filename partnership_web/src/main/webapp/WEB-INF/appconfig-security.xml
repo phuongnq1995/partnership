@@ -23,7 +23,7 @@
 		 	authentication-success-handler-ref="mySuccessHandler" username-parameter="email"
 			password-parameter="password" />
 		<logout logout-success-url="/" />
-
+		<csrf disabled="true"/>
 	</http>
 	
 	<beans:bean id="mySuccessHandler"
