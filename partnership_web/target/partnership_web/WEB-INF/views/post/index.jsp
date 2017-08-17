@@ -6,9 +6,7 @@
 <div id="titlebar" class="single with-map">
 	<div class="container">
 		<div class="sixteen columns">
-			<c:if test="${MESSAGE != null}">
-				${MESSAGE}
-			</c:if>
+			
 			<div class="ten columns">
 				<span class="showing_jobs" style="display: none"> Browse Jobs
 				</span>
@@ -16,6 +14,9 @@
 					We have <em class="count_jobs">${pages.getTotalElements()}</em> <em
 						class="job_text">job offers</em> for you
 				</h2>
+				<c:if test="${MESSAGE != null}">
+				${MESSAGE}
+			</c:if>
 			</div>
 		</div>
 	</div>

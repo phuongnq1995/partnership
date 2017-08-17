@@ -19,11 +19,16 @@
 			
 			<!-- Form -->
 			<h2>Find Job</h2>
-			<form method="GET" action="/searchForm">
+			<form method="GET" action="${pageContext.request.contextPath}/post/searchForm">
 				<input type="text" id="keywords" name="keywords" class="ico-01"
-					placeholder="job title, keywords or company name" value="" /> <input
-					type="text" id="location" name="location" class="ico-02"
-					placeholder="city, province or region" value="" />
+					placeholder="job title, keywords or company name" value="" /> 
+					
+				<select id="location" name="locationId" class="ico-02">
+					<option value="0" >Select</option>
+					<c:forEach items="${locations}" var="location">
+						<option value="${location.getId()}">${location.getName()}</option>
+					</c:forEach>
+				</select>
 				<button>
 					<i class="fa fa-search"></i>
 				</button>
@@ -316,43 +321,25 @@
 
 </div>
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						$("#new-apply")
-								.click(
-										function() {
-											$
-													.ajax({
-														url : '${pageContext.request.contextPath}/employee/applyPost',
-														type : "GET",
-														success : function(data) {
-															if (data != null) {
-																$(
-																		'#candidate_name')
-																		.val(
-																				data.fullname);
-																if (data.cv != null) {
-																	$('#cv')
-																			.attr(
-																					"href",
-																					"${pageContext.request.contextPath}/cvEmployee/"
-																							+ data.id);
-																} else {
-																	$("#cv")
-																			.attr(
-																					"style",
-																					"display: none;");
-																}
-																$("#form-apply")
-																		.attr(
-																				"modelAttribute",
-																				"postApply");
-															}
-														}
-													});
-										});
-					});
+$(document).ready(function() {
+	$("#new-apply").click(function() {
+		$.ajax({
+			url : '${pageContext.request.contextPath}/employee/applyPost',
+			type : "GET",
+			success : function(data) {
+			if (data != null) {
+				$('#candidate_name').val(data.fullname);
+				if (data.cv != null) {
+					$('#cv').attr("href","${pageContext.request.contextPath}/cvEmployee/"+ data.id);
+				} else {
+					$("#cv").attr("style","display: none;");
+				}
+				$("#form-apply").attr("modelAttribute","postApply");
+			}
+			}
+		});
+	});
+});
 </script>
 
 

@@ -7,9 +7,7 @@
 	<div class="container">
 
 		<div class="sixteen columns">
-			<c:if test="${MESSAGE != null}">
-					${MESSAGE}
-				</c:if>
+			
 			<h1>Admin Dashboard</h1>
 			<nav id="breadcrumbs" xmlns:v="http://rdf.data-vocabulary.org/#">
 				<ul>
@@ -19,6 +17,9 @@
 								Dashboard</span> </span></li>
 				</ul>
 			</nav>
+			<c:if test="${MESSAGE != null}">
+					${MESSAGE}
+				</c:if>
 		</div>
 	</div>
 </div>

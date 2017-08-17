@@ -6,6 +6,7 @@ import org.partnership.post.model.Level;
 import org.partnership.post.model.Post;
 import org.partnership.post.model.PostApply;
 import org.partnership.post.model.WorkType;
+import org.springframework.data.domain.Page;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -24,7 +25,7 @@ public interface PostService {
 	
 	String getAdminPost(Model model, int page);
 
-	List<Post> findByKeyWordsAndLocation(String keywords, int location_id);
+	String findByKeyWordsAndLocation(Model model, int page, String keywords, int location_id, Integer[] categoriesId);
 
 	String newApplyPost(PostApply postApply, MultipartFile fileUpload, RedirectAttributes redirectAttributesredirectAttributes);
 

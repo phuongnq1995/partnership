@@ -7,12 +7,13 @@
 <div class="submit-page" id="titlebar">
 	<div class="container">
 		<div class="sixteen columns">
-			<c:if test="${MESSAGE != null}">
-					${MESSAGE}
-				</c:if>
+
 			<h2>
 				<i class="fa fa-plus-circle"></i> Company Details
 			</h2>
+			<c:if test="${MESSAGE != null}">
+					${MESSAGE}
+				</c:if>
 		</div>
 	</div>
 </div>
@@ -22,8 +23,8 @@
 		<div class="submit-page">
 			<form:form method="POST" modelAttribute="company" action="new"
 				enctype="multipart/form-data">
-				
-				<form:hidden path="userId"/>
+
+				<form:hidden path="userId" />
 				<span class="error text-danger" style="color: red;"><form:errors
 						path="userId" /></span>
 				<fieldset class="form fieldset-company_name">
@@ -92,7 +93,7 @@
 							onchange="PreviewImage();"
 							class="input-text wp-job-manager-file-upload" accept="image/*"
 							name="fileUpload" id="uploadImage" />
-							<div class="upload-btn" >
+							<div class="upload-btn">
 								<i class="fa fa-upload"></i> Browse
 							</div>
 						</label><img id="uploadPreview"

@@ -1,6 +1,8 @@
 package org.partnership.post.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -16,10 +18,12 @@ import org.partnership.post.repository.PostApplyRepository;
 import org.partnership.post.repository.PostRepository;
 import org.partnership.post.repository.WorkTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -89,15 +93,21 @@ public class PostServiceImpl implements PostService {
 		return "adminposts";
 	}
 
-	public List<Post> findByKeyWordsAndLocation(String keywords, int location_id) {
-		if (keywords.equals("") && location_id == 0) {
-			return postRepository.findAll();
+	@Transactional
+	public String findByKeyWordsAndLocation(Model model, int page, String keywords, int location_id, Integer[] categoriesId) {
+		Pageable pageable = createPageRequest(page);
+		if (keywords.equals("") && location_id == 0 ) {
+			model.addAttribute("pages", postRepository.findAll(pageable));
 		} else if (location_id == 0) {
-			return postRepository.findByKeyWords(keywords);
+			model.addAttribute("pages", postRepository.findByKeyWords(keywords, pageable));
 		} else if (keywords.equals("")) {
-			return postRepository.findByLocation(location_id);
+			model.addAttribute("pages", postRepository.findByLocation(location_id, pageable));
+		} else {
+			model.addAttribute("pages", postRepository.findByKeyWordsAndLocation(keywords, location_id, pageable));
 		}
-		return postRepository.findByKeyWordsAndLocation(keywords, location_id);
+		model.addAttribute("keywords", keywords);
+		model.addAttribute("locationId", location_id);
+		return "indexpost";
 	}
 
 	@SuppressWarnings("null")
@@ -139,4 +149,5 @@ public class PostServiceImpl implements PostService {
 		
 		return postRepository.findTop4ByOrderByDaypostDesc();
 	}
+
 }

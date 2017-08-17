@@ -21,8 +21,8 @@
 		</div>
 	</div>
 </div>
-<form class="list-search" method="POST"
-				action="searchPost">
+<form class="list-search" method="GET"
+				action="${pageContext.request.contextPath}/post/searchForm">
 <div class="container wpjm-container right-sidebar margin-top-55">
 	<!-- Widgets -->
 	<div class="five columns sidebar" role="complementary">
@@ -33,10 +33,11 @@
 			<div class="widget">
 				<h4>Location</h4>
 				<div class="search_location">
-					<select name="search_location" id="search_location" style="padding: 14px 18px;">
+					<select name="locationId" id="search_location" style="padding: 14px 18px;">
 						<option value="0">Select all</option>
 						<c:forEach items="${locations}" var="location">
-							<option value="${location.getId()}" id="">${location.getName()}</option>
+							<option value="${location.getId()}" ${location.getId() == locationId ? "selected='selected'" : ''} 
+								id="">${location.getName()}</option>
 						</c:forEach>
 					</select>
 
@@ -71,7 +72,10 @@
 					<select name="categories" multiple="multiple"
 							id="resume_category" class="chosen-select">
 							<c:forEach items="${categories}" var="category">
-								<option value="${category.getId()}">${category.getName()}</option>
+								<option value="${category.getId()}" disabled="disabled">${category.getName()}</option>
+								<c:forEach items="${category.getChildren()}" var="chil">
+									<option value="${chil.getId()}" >${chil.getName()}</option>
+								</c:forEach>
 							</c:forEach>
 						</select>
 				</div>

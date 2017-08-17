@@ -28,20 +28,28 @@
 							<li><a href="browse-categories/index.html">Browse
 									Categories</a></li>
 							<li><a href="${pageContext.request.contextPath}/companies">Browse Companies</a></li>
-							<li><a href="submit-resume/index.html">Submit Resume</a></li>
+							<li><security:authorize access="hasRole('ROLE_EMPLOYEE')">
+									<a href="${pageContext.request.contextPath}/employee">
+										Submit Resume</a>
+								</security:authorize> <security:authorize access="hasRole('ROLE_COMPANY')">
+									<a href="${pageContext.request.contextPath}/company">
+										Submit Resume</a>
+								</security:authorize></li>
 						</ul></li>
 					<li><a href="#">For Employers</a>
 						<ul class="sub-menu">
 							<li><a href="${pageContext.request.contextPath}/employee/index">Browse Candidates</a></li>
 							<li><a href="${pageContext.request.contextPath}/post/new">Post a Job</a></li>
-						</ul></li>
+							<security:authorize access="hasRole('ROLE_COMPANY')">
+								<li><a href="${pageContext.request.contextPath}/post/applylists">Apply post</a></li>
+							</security:authorize>
+						</ul>
+					</li>
 					<li>
 					<security:authorize access="hasRole('ROLE_ADMIN')">
 									<a href="${pageContext.request.contextPath}/admin/companies">Admin</a>
 					</security:authorize>
-					<security:authorize access="hasRole('ROLE_COMPANY')">
-									<a href="${pageContext.request.contextPath}/post/applylists">Apply post</a>
-					</security:authorize>
+					
 					</li>
 					<c:if test="${pageContext.request.userPrincipal != null}">
 						<li>
@@ -120,7 +128,7 @@
 									<h2>Login</h2>
 								</div>
 								<div class="small-dialog-content woo-reg-box">
-									<form method="POST"
+									<form method="POST" 
 										class="login workscout_form" id="form-login">
 										<div class="form-group">
 											<span id="login-error" class="required"></span>
@@ -138,9 +146,9 @@
 											</label>
 										</p>
 										<p class="form-row">
-											<input type="hidden" name="${_csrf.parameterName}"
-												value="${_csrf.token}" class="form-control" /><a
-												type="submit" class="button" id="login-submit">Login</a>
+											<input type="hidden" name="${_csrf.parameterName}" 
+												value="${_csrf.token}" /><input
+												type="submit" class="button" value="Login" />
 										</p>
 										<p class="lost_password">
 											<a href="#">Lost your
@@ -178,24 +186,28 @@
 	</div>
 </header>
 <script type="text/javascript">
-$("#form-login").submit(function(){
-    $.ajax({
-        url:"${pageContext.request.contextPath}/login",
-        type: "POST",
-        data: $("#form-login").serialize(),
-        cache: false,
-        success: function(data, status) {
-            if(data != "false"){
-                if(data != "isAdmin"){
-                	location.reload();
-                }else{
-                	var url = "${pageContext.request.contextPath}/admin/companies";
-                		window.location.replace(url);
-                }
-            }else{
-            	$("#login-error").html("Your email and password is invalid.");
-            }
-        },
-   	});
+
+$("#form-login").submit(function(e) {
+	    $.ajax({
+	        url:"${pageContext.request.contextPath}/login",
+	        type: "POST",
+	        data: $("#form-login").serialize(),
+	        cache: false,
+	        async: false,
+	        success: function(data, status) {
+	            if(data != "false"){
+	                if(data != "isAdmin"){
+	                	location.reload();
+	                }else{
+	                	var url = "${pageContext.request.contextPath}/admin/companies";
+	                		window.location.replace(url);
+	                }
+	            }else{
+	            	$("#login-error").html("Your email and password is invalid.");
+	            }
+	        },
+	   	});
+	    e.preventDefault();
 });
+
 </script>

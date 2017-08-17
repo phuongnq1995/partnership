@@ -10,12 +10,13 @@
 <div id="titlebar" class="single submit-page">
 	<div class="container">
 		<div class="sixteen columns">
-			<c:if test="${MESSAGE != null}">
-				${MESSAGE}
-			</c:if>
+			
 			<h2>
 				<i class="fa fa-plus-circle"></i> Post a Job
 			</h2>
+			<c:if test="${MESSAGE != null}">
+				${MESSAGE}
+			</c:if>
 		</div>
 	</div>
 </div>

@@ -1,10 +1,16 @@
 package org.partnership.controller.home;
 
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.partnership.category.service.CategoryService;
 import org.partnership.container.PartnershipFlash;
+import org.partnership.location.model.Location;
+import org.partnership.location.service.LocationService;
+import org.partnership.post.model.Post;
 import org.partnership.post.model.PostApply;
 import org.partnership.post.service.PostService;
 import org.partnership.user.model.Contact;
@@ -39,12 +45,16 @@ public class HomeController {
 	@Autowired
 	private PostService postService;
 	
+	@Autowired
+	private LocationService locationService;
+	
 	@RequestMapping(value = "/")
 	private String home(Model model) {
 		model.addAttribute("categories", categoryService.findAllParent());
 		model.addAttribute("posts", postService.findTop4ByOrderByDaypostDesc());
 		model.addAttribute("mostPost", postService.findTop4ByOrderByDaypostDesc());
 		model.addAttribute("postApply", new PostApply());
+		model.addAttribute("locations", locationService.findAll());
 		return "home";
 	}
 
