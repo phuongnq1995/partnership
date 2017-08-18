@@ -78,7 +78,7 @@
 									<form:form method="POST" modelAttribute="user"
 										action="${pageContext.request.contextPath}/registration"
 										class="register workscout_form">
-										<p
+										<p>
 											class="form-row form-row-wide${status.error ? 'has-error' : ''}">
 											<label for="reg_email">Email address <span
 												class="required">*</span> <i class="ln ln-icon-Mail"></i> <form:input

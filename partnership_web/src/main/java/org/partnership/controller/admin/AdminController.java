@@ -1,9 +1,7 @@
 package org.partnership.controller.admin;
 
-import java.util.Arrays;
-
 import org.partnership.company.service.CompanyService;
-import org.partnership.post.model.Post;
+import org.partnership.employee.service.EmployeeService;
 import org.partnership.post.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +20,9 @@ public class AdminController {
 	private CompanyService companyService;
 	@Autowired
 	private PostService postServices;
+	
+	@Autowired
+	private EmployeeService employeeService; 
 	
 	@RequestMapping(value="/companies")
 	private String companies(Model model){
@@ -47,5 +48,17 @@ public class AdminController {
 			return postServices.acceptPost(model, page, redirectAttributes, acceptIds);
 		}
 		return postServices.deletedPost(model, page, redirectAttributes, acceptIds);
+	}
+	
+	@RequestMapping(value="/employees")
+	private String employees(Model model){
+		model.addAttribute("employees", employeeService.findAll());
+		return "adminemployees";
+	}
+	
+	@RequestMapping(value="/employees/delete/{id}")
+	private String deleteEmployee(@PathVariable long id, RedirectAttributes redirectAttributes){
+		redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", employeeService.delete(id));
+		return "redirect:/admin/employees";
 	}
 }

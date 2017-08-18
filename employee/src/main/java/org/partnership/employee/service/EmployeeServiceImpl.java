@@ -3,6 +3,7 @@ package org.partnership.employee.service;
 import java.io.IOException;
 import java.util.List;
 
+import org.partnership.company.model.Company;
 import org.partnership.container.PartnershipFlash;
 import org.partnership.container.PartnershipStatic;
 import org.partnership.employee.model.Employee;
@@ -89,6 +90,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	private Pageable createPageRequest(int page) {
 	    return new PageRequest(page-1, PartnershipStatic.PER_PAGE);
+	}
+	
+	public String delete(long id) {
+		Employee employee = employeeRepository.findOne(id);
+		if (employee != null) {
+			employeeRepository.delete(id);
+			return "Delete success !";
+		}
+		return "Delete fail !";
 	}
 	
 }

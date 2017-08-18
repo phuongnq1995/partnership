@@ -47,30 +47,29 @@
 				<thead>
 					<tr>
 						<th>Name</th>
-						<th>Description</th>
-						<th>Address</th>
-						<th>Logo</th>
+						<th>Avatar</th>
+						<th>Phone</th>
+						<th>Job</th>
 						<th>Actions</th>
 				</thead>
 				<tbody>
-					<c:forEach var="company" items="${companies}">
+					<c:forEach var="employee" items="${employees}">
 						<tr>
-							<td>${company.getName()}</td>
-							<td>${s:substring(company.getTagline(),0,10)}..</td>
-							<td>${company.getAddress()}</td>
+							<td>${employee.getFullname()}</td>
 							<c:choose>
-								<c:when test="${empty company.getLogo()}">
-									<td><img
-										src="<c:url value="/resources/images/company.png"/>"
-										width="100px" height="100px" /></td>
+								<c:when test="${empty employee.getAvatar()}">
+									<td><img src="<c:url value="/resources/images/user.png"/>"
+									width="100px" height="100px" class="candidate_photo" /></td>
 								</c:when>
 								<c:otherwise>
-									<td><img
-										src="${pageContext.request.contextPath}/imageCompany/${company.getId()}"
-										width="100px" height="100px" /></td>
+									<td><img width="100px" height="100px"
+									src="${pageContext.request.contextPath}/imageEmployee/${employee.getId()}"
+									alt="Photo"  class="candidate_photo"/></td>
 								</c:otherwise>
 							</c:choose>
-							<td><a href="companies/delete/${company.getId()}"
+							<td>${employee.getPhone()}</td>
+							<td>${employee.getJobName()}</td>
+							<td><a href="companies/delete/${employee.getId()}"
 								class="button">Delete </a></td>
 
 						</tr>

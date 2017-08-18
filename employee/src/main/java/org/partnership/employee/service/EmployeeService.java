@@ -25,5 +25,7 @@ public interface EmployeeService {
 	Page<Employee> findPage(int page);
 	
 	List<Employee> findAll();
+	
+	String delete(long id);
 
 }
