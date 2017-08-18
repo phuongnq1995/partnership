@@ -101,5 +101,7 @@ public class HomeController {
 		contactService.saveContact(contact);
 		return contactService.countCountactByNotSeen(contact.getUserReceive().getId(), 0);
 	}
+	
+
 
 }

@@ -167,4 +167,6 @@ public class PostController {
 	public @ResponseBody List<PostApply> postApplies(@PathVariable("id") long postId){
 		return postService.findPostsApply(postId);
 	}
+	
+
 }

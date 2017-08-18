@@ -34,4 +34,9 @@ public interface PostService {
 	
 	List<Post> findTop4ByOrderByDaypostDesc();
 	
+	String acceptPost(Model model, int page, RedirectAttributes redirectAttributes, long[] lists);
+	
+	String deletedPost(Model model, int page, RedirectAttributes redirectAttributes, long[] lists);
+	
+	
 }

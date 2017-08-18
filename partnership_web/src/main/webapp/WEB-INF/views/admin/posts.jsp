@@ -30,19 +30,19 @@
 
 		<nav class="woocommerce-MyAccount-navigation">
 			<ul>
-				<li><a href="../my-bookmarks/my-bookmarks.html"> Companies</a></li>
-				<li class=""><a href="https://workscout.in/my-account/">Candidates</a>
+				<li><a href="${pageContext.request.contextPath}/admin/companies"> Companies</a></li>
+				<li class=""><a href="${pageContext.request.contextPath}/admin/candidates">Candidates</a>
 				</li>
-				<li class=""><a href="https://workscout.in/my-account/orders/">Post</a>
+				<li class=""><a href="${pageContext.request.contextPath}/admin/posts">Post</a>
 				</li>
 				<li class=""><a
-					href="https://workscout.in/my-account/downloads/">User</a></li>
+					href="${pageContext.request.contextPath}/admin/users">User</a></li>
 				<li class="">
 			</ul>
 		</nav>
 
 		<div class="woocommerce-MyAccount-content">
-			<form class="list-search" method="POST" action="searchPost">
+			<form class="list-search" method="POST" action="${pageContext.request.contextPath}/admin/acceptPosts" id="admin-post">
 			
 				<div class="container wpjm-container right-sidebar">
 					<!-- #secondary -->
@@ -52,10 +52,13 @@
 						<div class="padding-right">
 
 							<div class="search_keywords">
-								<a class="button pull-right" style="background-color:#a73939">Delete</a>
-								<a class="button pull-right" style="margin-right: 15px;">Accept</a>
+								<a class="button pull-right" id="delete-post"  style="background-color:#a73939">Delete</a>
+								<a class="button pull-right" id="accept-post" 
+								 style="margin-right: 15px;" >Accept</a>
 								<div class="clearfix"></div>
 							</div>
+							
+							<input type="hidden" value="1" name="mode" id="mode-admin"/>
 							<input type="hidden" name="${_csrf.parameterName}"
 								value="${_csrf.token}" />
 
@@ -83,7 +86,7 @@
 												</c:choose>
 												<div class="job-list-content">
 													<h4 class="checkboxes pull-right" style="margin-bottom: 0;">
-														<input type="checkbox" name="check_post"
+														<input type="checkbox" name="check_post" value="${perpost.getId()}"
 															id="salary_check_${perpost.getId()}" class="filter_by_check"> <label
 															for="salary_check_${perpost.getId()}"></label>
 													</h4>
@@ -168,3 +171,15 @@
 
 	</article>
 </div>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#accept-post").click(function() {
+		$("#admin-post").submit();
+	});
+	
+	$("#delete-post").click(function() {
+		$("#mode-admin").val(0);
+		$("#admin-post").submit();
+	});
+});
+</script>

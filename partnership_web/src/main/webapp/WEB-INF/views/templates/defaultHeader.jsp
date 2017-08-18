@@ -25,9 +25,7 @@
 					<li><a href="#">For Candidates</a>
 						<ul class="sub-menu">
 							<li><a href="${pageContext.request.contextPath}/post/index">Browse Jobs</a></li>
-							<li><a href="browse-categories/index.html">Browse
-									Categories</a></li>
-							<li><a href="${pageContext.request.contextPath}/companies">Browse Companies</a></li>
+							<li><a href="${pageContext.request.contextPath}/company/index">Browse Companies</a></li>
 							<li><security:authorize access="hasRole('ROLE_EMPLOYEE')">
 									<a href="${pageContext.request.contextPath}/employee">
 										Submit Resume</a>

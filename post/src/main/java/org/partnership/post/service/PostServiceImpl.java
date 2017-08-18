@@ -80,14 +80,35 @@ public class PostServiceImpl implements PostService {
 	public String getIndex(Model model, int page) {
 		Pageable pageable = createPageRequest(page);
 		model.addAttribute("pages",
-				postRepository.findByDayendAfter(new Date(), pageable));
+				postRepository.findByDayendAfterAndStatus(new Date(), 1, pageable));
 		return "indexpost";
 	}
-
+	
+	@Transactional
 	public String getAdminPost(Model model, int page) {
 		Pageable pageable = createPageRequest(page);
-		model.addAttribute("pages", postRepository.findAll(pageable));
+		model.addAttribute("pages", postRepository.findByDayendAfterAndStatus(new Date(), 0, pageable));
 		return "adminposts";
+	}
+	
+	@Transactional
+	public String acceptPost(Model model, int page, RedirectAttributes redirectAttributes, long[] list){
+		for(int i = 0 ; i < list.length; i++){
+			Post post = postRepository.getOne(list[i]);
+			post.setStatus(1);//Da duyet
+			postRepository.save(post);
+		}
+		return getAdminPost(model, page);
+	}
+	
+	@Transactional
+	public String deletedPost(Model model, int page, RedirectAttributes redirectAttributes, long[] list){
+		for(int i = 0 ; i < list.length; i++){
+			Post post = postRepository.getOne(list[i]);
+			post.setStatus(2);//Da xoa
+			postRepository.save(post);
+		}
+		return getAdminPost(model, page);
 	}
 
 	@Transactional
@@ -151,7 +172,6 @@ public class PostServiceImpl implements PostService {
 	}
 
 	public List<Post> findTop4ByOrderByDaypostDesc() {
-		
 		return postRepository.findTop4ByOrderByDaypostDesc();
 	}
 

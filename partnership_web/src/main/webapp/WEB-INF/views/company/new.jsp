@@ -21,7 +21,7 @@
 	<article
 		class="sixteen columns post-2869 page type-page status-publish hentry">
 		<div class="submit-page">
-			<form:form method="POST" modelAttribute="company" action="new"
+			<form:form method="POST" modelAttribute="company" action="new?${_csrf.parameterName}=${_csrf.token}"
 				enctype="multipart/form-data">
 
 				<form:hidden path="userId" />

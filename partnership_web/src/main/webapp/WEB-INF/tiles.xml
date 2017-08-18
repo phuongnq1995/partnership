@@ -27,6 +27,11 @@
 		<put-attribute name="title" value="Register Company" />
 		<put-attribute name="body" value="/WEB-INF/views/company/new.jsp" />
 	</definition>
+	
+	<definition name="indexcompany" extends="base-definition">
+		<put-attribute name="title" value="Companies" />
+		<put-attribute name="body" value="/WEB-INF/views/company/index.jsp" />
+	</definition>
 
 	<definition name="showcompany" extends="base-definition">
 		<put-attribute name="title" value="Company" />

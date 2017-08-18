@@ -37,7 +37,7 @@ public interface PostRepository extends JpaRepository<Post, Long>{
 	
 	List<Post> findByCompanyId(long companyId);
 	
-	Page<Post> findByDayendAfter(Date current, Pageable pageable);
+	Page<Post> findByDayendAfterAndStatus(Date current, int status, Pageable pageable);
 
 	List<Post> findTop4ByOrderByDaypostDesc();
 	
