@@ -6,7 +6,6 @@ import org.partnership.post.model.Level;
 import org.partnership.post.model.Post;
 import org.partnership.post.model.PostApply;
 import org.partnership.post.model.WorkType;
-import org.springframework.data.domain.Page;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;

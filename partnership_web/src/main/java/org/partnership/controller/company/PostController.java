@@ -1,5 +1,6 @@
 package org.partnership.controller.company;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -132,9 +133,11 @@ public class PostController {
 	}
 	
 	@RequestMapping(value="/searchForm")
-	public String searchForm(@RequestParam("keywords") String keywords, @RequestParam("locationId") int locationId,
-			@RequestParam(value="categories", required=false) Integer[] categoriesId, @RequestParam(defaultValue="1")int page, Model model){
-		System.out.println("categoriesId:"+categoriesId);
+	public String searchForm(@RequestParam("keywords") String keywords, 
+			@RequestParam(value="locationId", defaultValue = "0") int locationId,
+			@RequestParam(value="categories", required=false) Integer[] categoriesId, 
+			@RequestParam(defaultValue="1")int page, Model model){
+
 		model.addAttribute("locations", locationService.findAll());
 		model.addAttribute("categories", categoryService.findAllParent());
 		return postService.findByKeyWordsAndLocation(model, page, keywords, locationId, categoriesId);

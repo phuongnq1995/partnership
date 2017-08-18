@@ -1,3 +1,4 @@
+<%@page import="java.util.Arrays"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
@@ -69,12 +70,21 @@
 			<div class="widget">
 				<h4>Category</h4>
 				<div class="search_categories">
+				
 					<select name="categories" multiple="multiple"
 							id="resume_category" class="chosen-select">
 							<c:forEach items="${categories}" var="category">
 								<option value="${category.getId()}" disabled="disabled">${category.getName()}</option>
 								<c:forEach items="${category.getChildren()}" var="chil">
-									<option value="${chil.getId()}" >${chil.getName()}</option>
+									<c:set var="contains" value="false" />
+									<c:forEach var="item" items="${categoriesId}" varStatus="loop" >
+									  <c:if test="${item eq chil.getId()}">
+									    <c:set var="contains" value="true" />
+									  </c:if>
+									</c:forEach>
+									<option value="${chil.getId()}" ${ contains == true ? "selected='selected'" : ''} >
+										${chil.getName()}
+									</option>
 								</c:forEach>
 							</c:forEach>
 						</select>

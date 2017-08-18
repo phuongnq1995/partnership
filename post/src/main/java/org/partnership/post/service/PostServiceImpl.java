@@ -1,8 +1,6 @@
 package org.partnership.post.service;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +16,6 @@ import org.partnership.post.repository.PostApplyRepository;
 import org.partnership.post.repository.PostRepository;
 import org.partnership.post.repository.WorkTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -96,15 +93,23 @@ public class PostServiceImpl implements PostService {
 	@Transactional
 	public String findByKeyWordsAndLocation(Model model, int page, String keywords, int location_id, Integer[] categoriesId) {
 		Pageable pageable = createPageRequest(page);
-		if (keywords.equals("") && location_id == 0 ) {
-			model.addAttribute("pages", postRepository.findAll(pageable));
-		} else if (location_id == 0) {
+		if(location_id == 0 && categoriesId == null){
+			System.out.println("1");
 			model.addAttribute("pages", postRepository.findByKeyWords(keywords, pageable));
-		} else if (keywords.equals("")) {
-			model.addAttribute("pages", postRepository.findByLocation(location_id, pageable));
-		} else {
+		} else if(location_id == 0){
+			System.out.println("2");
+			model.addAttribute("pages", postRepository.findByKeyWordsAndCategory(
+					keywords, categoriesId, pageable));
+		} else if(categoriesId == null){
+			System.out.println("3");
 			model.addAttribute("pages", postRepository.findByKeyWordsAndLocation(keywords, location_id, pageable));
+		} else {
+			System.out.println("4");
+			model.addAttribute("pages", postRepository.findByKeyWordsAndLocationAndCategory(
+					keywords, location_id, categoriesId, pageable));
 		}
+			
+		model.addAttribute("categoriesId", categoriesId);
 		model.addAttribute("keywords", keywords);
 		model.addAttribute("locationId", location_id);
 		return "indexpost";
