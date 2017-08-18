@@ -55,7 +55,8 @@
 				<tbody>
 					<c:forEach var="company" items="${companies}">
 						<tr>
-							<td>${company.getName()}</td>
+							<td><a href="${pageContext.request.contextPath}/company/${company.getId()}">
+								${company.getName()}</a></td>
 							<td>${s:substring(company.getTagline(),0,10)}..</td>
 							<td>${company.getAddress()}</td>
 							<c:choose>

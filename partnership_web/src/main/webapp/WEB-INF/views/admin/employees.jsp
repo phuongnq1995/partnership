@@ -55,7 +55,7 @@
 				<tbody>
 					<c:forEach var="employee" items="${employees}">
 						<tr>
-							<td>${employee.getFullname()}</td>
+							<td><a href="${pageContext.request.contextPath}/employee/${employee.getId()}">${employee.getFullname()}</a></td>
 							<c:choose>
 								<c:when test="${empty employee.getAvatar()}">
 									<td><img src="<c:url value="/resources/images/user.png"/>"
