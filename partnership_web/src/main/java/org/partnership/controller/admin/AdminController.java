@@ -61,4 +61,9 @@ public class AdminController {
 		redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", employeeService.delete(id));
 		return "redirect:/admin/employees";
 	}
+	
+	@RequestMapping(value="/statistic")
+	public String getStatisticPage(Model model){
+		return companyService.getTop10Company(model);
+	}
 }

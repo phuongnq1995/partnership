@@ -172,7 +172,7 @@ public class PostServiceImpl implements PostService {
 	}
 
 	public List<Post> findTop4ByOrderByDaypostDesc() {
-		return postRepository.findTop4ByOrderByDaypostDesc();
+		return postRepository.findTop4ByStatusOrderByDaypostDesc(1);
 	}
 
 }

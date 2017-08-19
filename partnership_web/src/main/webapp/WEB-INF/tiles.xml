@@ -83,6 +83,13 @@
 	</definition>
 	
 	<!-- Admin page -->
+	
+	<definition name="statistic" extends="base-definition">
+		<put-attribute name="title" value="Statistic" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/admin/reposts.jsp" />
+	</definition>
+	
 	<definition name="admincompanies" extends="base-definition">
 		<put-attribute name="title" value="Manage Companies" />
 		<put-attribute name="body"

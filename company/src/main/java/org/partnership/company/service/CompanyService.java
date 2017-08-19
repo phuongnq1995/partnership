@@ -23,4 +23,6 @@ public interface CompanyService {
 	String showProfile(long id, Model model, RedirectAttributes redirectAttributes);
 	
 	Company findByUserId(long id);
+	
+	String getTop10Company(Model model);
 }

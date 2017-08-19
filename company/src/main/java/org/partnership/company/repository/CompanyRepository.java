@@ -1,5 +1,7 @@
 package org.partnership.company.repository;
 
+import java.util.List;
+
 import org.partnership.company.model.Company;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,4 +14,10 @@ public interface CompanyRepository extends JpaRepository<Company, Long>{
 	
 	@Query("select c from Company c where c.userId =:userId")
 	public Company findByUserId(@Param("userId") long userId);
+	
+	@Query(value="SELECT c.id as id, c.name as name, count(p.id) as quantity "
+			+ " FROM company c LEFT JOIN post p on c.id = p.company_id WHERE p.status = 1 "
+			+ " GROUP BY id, name "
+			+ " ORDER BY quantity DESC limit 10", nativeQuery=true)
+	public List<Object[]> getTop10Company();
 }

@@ -1,6 +1,7 @@
 package org.partnership.company.service;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import org.partnership.company.model.Company;
@@ -72,6 +73,12 @@ public class CompanyServiceIpml implements CompanyService {
 
 	public Company findByUserId(long userId) {
 		return companyRepository.findByUserId(userId);
+	}
+	
+	public String getTop10Company(Model model){
+		List<Object[]> companies =  companyRepository.getTop10Company();
+		model.addAttribute("companies", companies);
+		return "statistic";
 	}
 	
 }
