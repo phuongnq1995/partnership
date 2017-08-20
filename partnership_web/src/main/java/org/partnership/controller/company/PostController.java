@@ -1,6 +1,5 @@
 package org.partnership.controller.company;
 
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -63,7 +62,7 @@ public class PostController {
 	
 	@Autowired
 	private EmployeeService employeeService;
-
+	
 	@InitBinder
 	private void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(Date.class, new CustomDateConverter());
@@ -168,5 +167,4 @@ public class PostController {
 		return postService.findPostsApply(postId);
 	}
 	
-
 }

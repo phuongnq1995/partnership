@@ -6,32 +6,31 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <%@ taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="s"%>
 <div id="titlebar">
 	<div class="container">
 		<div class="ten columns">
 			
-			<span><a
-				href="../../job-category/restaurant-food-service/restaurant-food-service.html">Restaurant
-					/ Food Service</a></span>
+			<span>
+				${parentNameCategory}
+			</span>
 			<h1>
 				${post.getTitle()}
 				<c:forEach items="${post.getTypes()}" var="type">
 					<span class="job-type ${type.getName()}">${type.getName()}</span>
 				</c:forEach>
+
 			</h1>
+			<div class="skills">
+				<c:forEach items="${post.getCategories()}" var="category">
+					<span>${category.getName()}</span>
+				</c:forEach>
+			</div>
 			
 			<c:if test="${MESSAGE != null}">
 					${MESSAGE}
 			</c:if>
 			
-		</div>
-		<div class="six columns">
-			<div class="job-manager-form wp-job-manager-bookmarks-form">
-				<div>
-					<a class="bookmark-notice button dark bookmark-notice"
-						href="https://workscout.in/my-account/">Contact</a>
-				</div>
-			</div>
 		</div>
 	</div>
 </div>
@@ -45,7 +44,7 @@
 			<!-- Company Info -->
 			<div class="company-info left-company-logo">
 				<a
-					href="${pageContext.request.contextPath}/company/${company.getId()}">
+					href="${pageContext.request.contextPath}/company/${post.getCompany().getId()}">
 					<c:choose>
 						<c:when test="${empty post.getCompany().getLogo()}">
 							<td><img alt="Photo" width="100px" height="100px"
@@ -53,7 +52,7 @@
 						</c:when>
 						<c:otherwise>
 							<img width="100px" height="100px"
-								src="${pageContext.request.contextPath}/imageCompany/${company.getId()}"
+								src="${pageContext.request.contextPath}/imageCompany/${post.getCompany().getId()}"
 								alt="Photo" />
 						</c:otherwise>
 					</c:choose>
@@ -61,13 +60,13 @@
 				<div class="content">
 					<h4>
 						<a
-							href="${pageContext.request.contextPath}/company/${company.getId()}">
+							href="${pageContext.request.contextPath}/company/${post.getCompany().getId()}">
 							<strong>${post.getCompany().getName()}</strong>
 						</a>
 					</h4>
-					<c:if test="${not empty company.getWebsite()}">
+					<c:if test="${not empty post.getCompany().getWebsite()}">
 						<a rel="nofollow" onclick="Redirect();"
-							href="${company.getWebsite()}"><i class="fa fa-link"></i>Website</a>
+							href="${post.getCompany().getWebsite()}"><i class="fa fa-link"></i>Website</a>
 					</c:if>
 				</div>
 				<div class="clearfix"></div>
@@ -100,7 +99,7 @@
 													</c:when>
 													<c:otherwise>
 														<img width="70px" height="70px"
-															src="${pageContext.request.contextPath}/imageCompany/${company.getId()}"
+															src="${pageContext.request.contextPath}/imageCompany/${post.getCompany().getId()}"
 															alt="Photo" />
 													</c:otherwise>
 												</c:choose>
@@ -134,6 +133,11 @@
 																</c:otherwise>
 															</c:choose>
 														</span>
+													</div>
+													<div class="skills">
+														<c:forEach items="${perpost.getCategories()}" var="percategory">
+															<span>${percategory.getName()}</span>
+														</c:forEach>
 													</div>
 												</div>
 										</a>

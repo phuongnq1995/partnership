@@ -73,7 +73,6 @@
 									<form:form action="${pageContext.request.contextPath}/employee/sendMessage" method="post" 
 										id="contactForm" modelAttribute="contact">
 										<div style="display: none;">
-											
 											<form:hidden path="userReceive" value="${userReceive.getId()}"/>
 											<form:hidden path="userSend" id="sender" value="${principal.id}"/>
 										</div>

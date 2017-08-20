@@ -70,7 +70,7 @@
 						</ul>
 						<div class="clearfix"></div>
 						<div class="margin-top-30"></div>
-						<a href="https://workscout.in/browse-categories/"
+						<a href="#"
 							class="button centered">Browse All Categories</a>
 						<div class="margin-bottom-50"></div>
 					</div>

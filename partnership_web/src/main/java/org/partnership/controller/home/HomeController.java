@@ -1,14 +1,10 @@
 package org.partnership.controller.home;
 
 
-import java.util.Arrays;
-import java.util.List;
 
 import javax.validation.Valid;
-
 import org.partnership.category.service.CategoryService;
 import org.partnership.container.PartnershipFlash;
-import org.partnership.location.model.Location;
 import org.partnership.location.service.LocationService;
 import org.partnership.post.model.Post;
 import org.partnership.post.model.PostApply;
@@ -52,9 +48,16 @@ public class HomeController {
 	private String home(Model model) {
 		model.addAttribute("categories", categoryService.findAllParent());
 		model.addAttribute("posts", postService.findTop4ByOrderByDaypostDesc());
-		model.addAttribute("mostPost", postService.findTop4ByOrderByDaypostDesc());
+		model.addAttribute("mostPost", postService.findTop4PostRecent());
 		model.addAttribute("postApply", new PostApply());
 		model.addAttribute("locations", locationService.findAll());
+		for(Post post : postService.findTop4ByOrderByDaypostDesc()){
+			System.out.println("mostPost:"+post.getDaypost());
+		}
+		for(Post post : postService.findTop4PostRecent()){
+			System.out.println("recentPost:"+post.getDaypost());
+		}
+		
 		return "home";
 	}
 

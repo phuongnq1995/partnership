@@ -48,6 +48,11 @@
 		<put-attribute name="title" value="Register Employee" />
 		<put-attribute name="body" value="/WEB-INF/views/employee/new.jsp" />
 	</definition>
+	
+	<definition name="editemployee" extends="base-definition">
+		<put-attribute name="title" value="Update Employee" />
+		<put-attribute name="body" value="/WEB-INF/views/employee/edit.jsp" />
+	</definition>
 
 	<definition name="showemployee" extends="base-definition">
 		<put-attribute name="title" value="Employee" />

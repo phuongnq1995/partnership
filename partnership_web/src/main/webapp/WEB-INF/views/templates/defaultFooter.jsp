@@ -5,7 +5,7 @@
 	<div class="container">
 		             <div class="seven columns">
                 <aside id="text-3" class="footer-widget widget_text"><h4>About</h4>			<div class="textwidget"><p>Partnership is a site connect people with many business.</p>
-<a href="https://themeforest.net/item/workscout-job-board-wordpress-theme/13591801?ref=purethemes" class="button">Learn More</a></div>
+<a href="#" class="button">Learn More</a></div>
 		</aside>            </div>
                      <div class="three columns">
                 <aside id="nav_menu-2" class="footer-widget widget_nav_menu"><h4>For Candidates</h4><div class="menu-footer-for-candidates-container"><ul id="menu-footer-for-candidates" class="menu"><li id="menu-item-2843" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2843"><a href="#">Browse Jobs</a></li>
@@ -27,7 +27,7 @@
 <li id="menu-item-2866" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2866"><a href="#">Job Page Alternative</a></li>
 <li id="menu-item-2867" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2867"><a href="#">Resume Page</a></li>
 <li id="menu-item-2868" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2868"><a href="#">Blog</a></li>
-<li id="menu-item-2872" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2872"><a href="contact/index.html">Contact</a></li>
+<li id="menu-item-2872" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2872"><a href="#">Contact</a></li>
 </ul></div></aside>            </div>
         	</div>
 
@@ -37,7 +37,7 @@
 			<div class="sixteen columns">
 				
                 <h4>Follow us</h4><ul class="social-icons"><li><a target="_blank" class="facebook" title="Facebook" href="#"><i class="icon-facebook"></i></a></li><li><a target="_blank" class="twitter" title="Twitter" href="#"><i class="icon-twitter"></i></a></li><li><a target="_blank" class="gplus" title="GooglePlus" href="#"><i class="icon-gplus"></i></a></li><li><a target="_blank" class="linkedin" title="LinkdedIn" href="#"><i class="icon-linkedin"></i></a></li></ul>				
-				<div class="copyrights">&copy; Theme by Purethemes.net. All Rights Reserved.</div>
+				<div class="copyrights">&copy; Release by phuongnq.</div>
 			</div>
 		</div>
 	</div>

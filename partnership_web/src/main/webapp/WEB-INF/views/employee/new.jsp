@@ -11,14 +11,13 @@
 	<div id="titlebar" class="single">
 		<div class="container">
 			<div class="sixteen columns">
-				
-				<h1>Employee Register</h1>
+				<h1>Employee Profile</h1>
 				<nav id="breadcrumbs" xmlns:v="http://rdf.data-vocabulary.org/#">
 					<ul>
 						<li class="home"><span><a title="Go to WorkScout."
 								href="${pageContext.request.contextPath}/" class="home"><span>Home</span></a> </span></li>
-						<li class="current_item"><span><span>Company
-									Employee Register</span> </span></li>
+						<li class="current_item"><span>
+									Employee Profile </span></li>
 					</ul>
 				</nav>
 				<c:if test="${MESSAGE != null}">
@@ -164,7 +163,6 @@
 					</div>
 					<p id="log"></p>
 				</fieldset>
-
 				<p class="send-btn-border">
 					<input type="submit" name="submit_resume" class="button big"
 						value="Register &rarr;" />

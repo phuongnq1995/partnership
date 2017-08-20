@@ -1,10 +1,11 @@
 package org.partnership.post.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
+import org.partnership.category.model.Category;
 import org.partnership.container.PartnershipFlash;
 import org.partnership.container.PartnershipStatic;
 import org.partnership.post.model.Level;
@@ -71,9 +72,19 @@ public class PostServiceImpl implements PostService {
 			return "redirect:/";
 		}
 		model.addAttribute("post", post);
-		model.addAttribute("company", post.getCompany());
-		model.addAttribute("posts", postRepository.findAll());
+		model.addAttribute("posts", postRepository.findByCompanyIdAndDayendAfterAndStatus(
+				post.getCompany().getId(), new Date(), 1));
 		model.addAttribute("postApply", new PostApply());
+		String parentNameCategory = "";
+		List<Integer> idsParentCategory = new ArrayList<Integer>();
+		for(Category category : post.getCategories()){
+			if(!idsParentCategory.contains(category.getParent().getId())){
+				idsParentCategory.add(category.getParent().getId());
+				parentNameCategory += (category.getParent().getName() + "/");
+			}
+		}
+		
+		model.addAttribute("parentNameCategory", parentNameCategory.substring(0, parentNameCategory.length()-1));
 		return "showpost";
 	}
 
@@ -157,7 +168,7 @@ public class PostServiceImpl implements PostService {
 	}
 
 	public String getPostsOfCompany(long companyId, Model model) {
-		List<Post> posts = postRepository.findByCompanyId(companyId);
+		List<Post> posts = postRepository.findByCompanyIdAndDayendAfterAndStatus(companyId, new Date(), 1);
 		model.addAttribute("posts", posts);
 		return "indexapply";
 	}
@@ -174,5 +185,11 @@ public class PostServiceImpl implements PostService {
 	public List<Post> findTop4ByOrderByDaypostDesc() {
 		return postRepository.findTop4ByStatusOrderByDaypostDesc(1);
 	}
+	
+	public List<Post> findTop4PostRecent() {
+		return postRepository.findTop4ByOrderByApplyAsc();
+	}
+	
+	
 
 }

@@ -21,7 +21,6 @@ import org.partnership.user.model.Contact;
 import org.partnership.user.model.User;
 import org.partnership.user.service.ContactService;
 import org.partnership.user.service.UserCustom;
-import org.partnership.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -53,9 +52,6 @@ public class EmployeeController {
 
 	@Autowired
 	private CategoryService categoryService;
-
-	@Autowired
-	private UserService userService;
 
 	@Autowired
 	private ContactService contactService;
@@ -117,7 +113,34 @@ public class EmployeeController {
 		} else {
 			redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashSuccess(employeeService.newEmployee(employee, fileUpload)));
 		}
+		return "redirect:/employee/"+employee.getId();
+	}
+	
+	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
+	private String edit(Model model, @PathVariable long id) {
+		UserCustom user = (UserCustom)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Employee employee = employeeService.findOne(id);
+		if (employee.getUserId() == user.getId()){
+			model.addAttribute("employee", employee);
+			model.addAttribute("categories", categoryService.findAllParent());
+			model.addAttribute("listLocation", locationService.findAll());
+			return "editemployee";
+		}
 		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	private String update(RedirectAttributes redirectAttributes,
+			@Valid Employee employee, BindingResult bindingResult,
+			@RequestParam("fileUpload") MultipartFile[] fileUpload, Model model) throws IOException {
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("categories", categoryService.findAllParent());
+			model.addAttribute("listLocation", locationService.findAll());
+			return "editemployee";
+		} else {
+			redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashSuccess(employeeService.newEmployee(employee, fileUpload)));
+		}
+		return "redirect:/employee/"+employee.getId();
 	}
 	
 	@RequestMapping(value = "")

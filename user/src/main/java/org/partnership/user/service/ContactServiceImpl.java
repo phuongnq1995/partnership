@@ -7,6 +7,7 @@ import org.partnership.user.model.Contact;
 import org.partnership.user.repository.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ContactServiceImpl implements ContactService{
@@ -14,10 +15,11 @@ public class ContactServiceImpl implements ContactService{
 	@Autowired
 	ContactRepository contactRepository;
 	
+	@Transactional
 	public String saveContact(Contact contact){
 		contact.setSendTime(new Date());
 		contactRepository.save(contact);
-		return "Save success !";
+		return "Send success !";
 	}
 
 	public long countCountactByNotSeen(long userId, int i) {

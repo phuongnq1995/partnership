@@ -2,8 +2,6 @@ package org.partnership.employee.service;
 
 import java.io.IOException;
 import java.util.List;
-
-import org.partnership.company.model.Company;
 import org.partnership.container.PartnershipFlash;
 import org.partnership.container.PartnershipStatic;
 import org.partnership.employee.model.Employee;
@@ -40,7 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			e.printStackTrace();
 		}
 		employeeRepository.save(employee);
-		return "Create Success !";
+		return "Update profile success !";
 	}
 
 	public Employee findOne(long id) {
