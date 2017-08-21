@@ -7,7 +7,7 @@ import org.partnership.container.PartnershipStatic;
 import org.partnership.employee.model.Employee;
 import org.partnership.employee.repository.EmployeeRepository;
 import org.partnership.user.model.Contact;
-import org.partnership.user.service.UserService;
+import org.partnership.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,7 +25,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private EmployeeRepository employeeRepository;
 	
 	@Autowired
-	private UserService userService;
+	private UserRepository userRepository;
 	
 	@Transactional
 	public String newEmployee(Employee employee, MultipartFile[] fileUpload) {
@@ -64,7 +64,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}
 		model.addAttribute("employee", employee);
 		model.addAttribute("contact", new Contact());
-		model.addAttribute("userReceive", userService.findOne(employee.getUserId()));
 		return "showemployee";
 	}
 
@@ -90,9 +89,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	    return new PageRequest(page-1, PartnershipStatic.PER_PAGE);
 	}
 	
+	@Transactional
 	public String delete(long id) {
 		Employee employee = employeeRepository.findOne(id);
 		if (employee != null) {
+			userRepository.delete(employee.getUserId());
 			employeeRepository.delete(id);
 			return "Delete success !";
 		}

@@ -158,6 +158,7 @@ public class PostServiceImpl implements PostService {
 			postApply.setCv(null);
 		}
 		if (postApply.getCv().length > 0) {
+			postApply.setDaycreate(new Date());
 			postApplyRepository.save(postApply);
 			redirectAttributes.addFlashAttribute("MESSAGE",
 					PartnershipFlash.getFlashSuccess("Apply success !"));
@@ -174,7 +175,7 @@ public class PostServiceImpl implements PostService {
 	}
 
 	public List<PostApply> findPostsApply(long postId) {
-		return postApplyRepository.findByPostId(postId);
+		return postApplyRepository.findByPostIdOrderByDaycreateDesc(postId);
 	}
 
 	private Pageable createPageRequest(int page) {

@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
 		user.setRoles(roles);
 		userRepository.save(user);
 		securityService.autologin(user.getEmail(), user.getPasswordConfirm());
-		redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashSuccess("Welcome !"));
+		redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashSuccess("Register success, please update your profile to be found"));
 		return "redirect:/";
 	}
 

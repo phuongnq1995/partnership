@@ -9,9 +9,9 @@
 		<div class="sixteen columns">
 			
 			<h1>My Contact</h1>
-			<nav id="breadcrumbs" xmlns:v="http://rdf.data-vocabulary.org/#">
+			<nav id="breadcrumbs" xmlns:v="#">
 				<ul>
-					<li class="home"><span><a title="Go to WorkScout."
+					<li class="home"><span><a title="Go to Home"
 							href="${pageContext.request.contextPath}" class="home"><span>Home</span></a>
 					</span></li>
 					<li class="current_item"><span><span>My Contact
@@ -31,7 +31,7 @@
 		<nav class="woocommerce-MyAccount-navigation">
 			<ul class="list-group">
 
-				<a href="https://workscout.in/candidate-dashboard/" class="button"
+				<a href="#" class="button"
 					style="width: 100%;"> Compose </a>
 
 				<li><a href="${pageContext.request.contextPath}/showContact" >

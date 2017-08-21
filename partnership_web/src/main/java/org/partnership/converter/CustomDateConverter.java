@@ -27,15 +27,21 @@ public class CustomDateConverter extends PropertyEditorSupport {
 	public String getAsText() {
 		if(super.getAsText() != null){
 			Date date = null;
-			/*SimpleDateFormat sf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");*/
-			SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-				try {
-					date = sf.parse(super.getAsText());
+			try {
+				SimpleDateFormat sf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
+				date = sf.parse(super.getAsText());
+				return new SimpleDateFormat("dd/MM/yyyy").format(date);
 				} catch (ParseException e) {
 					date = null;
-					e.printStackTrace();
 				}
-			return new SimpleDateFormat("dd/MM/yyyy").format(date);
+			try {
+				SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+				date = sf.parse(super.getAsText());
+				return new SimpleDateFormat("dd/MM/yyyy").format(date);
+				} catch (ParseException e) {
+					date = null;
+				}
+			return "";
 		}else{
 			return null;
 		}

@@ -2,6 +2,10 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ page isELIgnored="false"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="s"%>
 
 <div id="titlebar" class="resume">
 	<div class="container">
@@ -38,72 +42,67 @@
 				</div>
 			</div>
 		</div>
-
 		<div class="six columns">
 			<div class="two-buttons">
 				<div class="resume_contact">
-					<a href="#resume-dialog"
-						class="small-dialog popup-with-zoom-anim button"><i
-						class="fa fa-envelope"></i> Contact</a>
-					<div id="resume-dialog"
-						class="small-dialog zoom-anim-dialog mfp-hide apply-popup">
-						<div class="small-dialog-headline">
-							<h2>Send Message</h2>
-						</div>
-						<div class="small-dialog-content">
-							<div role="form" class="wpcf7" id="wpcf7-f2896-p2403-o1"
-								lang="en-US" dir="ltr">
-								<div class="screen-reader-response"></div>
-								<form action="/resume/albert-smith/#wpcf7-f2896-p2403-o1"
-									method="post" class="wpcf7-form" novalidate="novalidate">
-									<div style="display: none;">
-										<input type="hidden" name="_wpcf7" value="2896" /> <input
-											type="hidden" name="_wpcf7_version" value="4.7" /> <input
-											type="hidden" name="_wpcf7_locale" value="en_US" /> <input
-											type="hidden" name="_wpcf7_unit_tag"
-											value="wpcf7-f2896-p2403-o1" /> <input type="hidden"
-											name="_wpnonce" value="ab5e5c8866" />
-									</div>
-									<fieldset>
-										<label for="full-name">Full name</label>
-										<div class="field required-field">
-											<span class="wpcf7-form-control-wrap full-name"><input
-												type="text" name="full-name" value="" size="40"
-												class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required"
-												aria-required="true" aria-invalid="false" /></span>
+					<sec:authorize access="hasAnyRole('ROLE_EMPLOYEE','ROLE_COMPANY','ROLE_ADMIN')">
+						<sec:authentication var="principal" property="principal" />
+						<c:choose>
+						<c:when test="${principal.id != company.getUserId()}">
+							
+						<a href="#resume-dialog" id="link-resume-dialog"
+							class="small-dialog popup-with-zoom-anim button"><i
+							class="fa fa-envelope"></i> Contact</a>
+						<div id="resume-dialog"
+							class="small-dialog zoom-anim-dialog mfp-hide apply-popup">
+							<div class="small-dialog-headline">
+								<h2>Send Message</h2>
+							</div>
+							<div class="small-dialog-content">
+								<div >
+									<div class="screen-reader-response"></div>
+									<form:form action="${pageContext.request.contextPath}/company/sendMessage" method="post" 
+										id="contactForm" modelAttribute="contact">
+										<div style="display: none;">
+											<form:hidden path="userReceive" value="${company.getUserId()}"/>
+											<form:hidden path="userSend" id="sender" value="${principal.id}"/>
 										</div>
-									</fieldset>
-									<fieldset>
-										<label for="full-name">Email</label>
-										<div class="field required-field">
-											<span class="wpcf7-form-control-wrap your-email"><input
-												type="email" name="your-email" value="" size="40"
-												class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email"
-												aria-required="true" aria-invalid="false" /></span>
-										</div>
-									</fieldset>
-									<fieldset class="fieldset-message">
-										<label for="message">Message</label>
-										<div class="field required-field">
-											<span class="wpcf7-form-control-wrap your-message"><textarea
-													name="your-message" cols="40" rows="10"
-													class="wpcf7-form-control wpcf7-textarea"
-													aria-invalid="false"></textarea></span>
-										</div>
-									</fieldset>
-									<p class="send-app-btn">
-										<input type="submit" value="Send"
-											class="wpcf7-form-control wpcf7-submit" />
-									</p>
-									<div class="wpcf7-response-output wpcf7-display-none"></div>
-								</form>
+										<fieldset>
+											<label for="full-name">Full name</label>
+											<div class="field required-field">
+												<span class="wpcf7-form-control-wrap full-name"><form:input
+													type="text" path="senderName" size="40" value="${pageContext.request.userPrincipal.name}"
+													class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" id="senderName"/></span>
+											</div>
+										</fieldset>
+										<fieldset class="fieldset-message">
+											<label for="message">Message</label>
+											<div class="field required-field">
+												<span class="wpcf7-form-control-wrap your-message"><form:textarea
+														path="message" cols="40" rows="10"
+														class="wpcf7-form-control wpcf7-textarea"></form:textarea>
+												</span>
+											</div>
+										</fieldset>
+										<p class="send-app-btn">
+											<input type="submit" value="Send"
+												class="wpcf7-form-control wpcf7-submit" />
+										</p>
+										<div class="wpcf7-response-output wpcf7-display-none"></div>
+									</form:form>
+								</div>
 							</div>
 						</div>
-					</div>
+						</c:when>
+						<c:otherwise>
+							<a href="${pageContext.request.contextPath}/company/edit" 
+								class="button"> Update profile</a>
+						</c:otherwise>
+						</c:choose>
+					</sec:authorize>
 				</div>
 			</div>
 		</div>
-
 	</div>
 </div>
 <div class="container ">

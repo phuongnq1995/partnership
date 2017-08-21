@@ -12,9 +12,12 @@ import org.partnership.container.PartnershipFlash;
 import org.partnership.converter.CategoryConverter;
 import org.partnership.converter.CustomDateConverter;
 import org.partnership.converter.LocationConverter;
+import org.partnership.converter.UserConverter;
 import org.partnership.location.model.Location;
 import org.partnership.location.service.LocationService;
+import org.partnership.user.model.Contact;
 import org.partnership.user.model.User;
+import org.partnership.user.service.ContactService;
 import org.partnership.user.service.UserCustom;
 import org.partnership.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,11 +47,15 @@ public class CompanyController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private ContactService contactService;
+	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		binder.registerCustomEditor(Date.class, new CustomDateConverter());
 		binder.registerCustomEditor(Category.class, new CategoryConverter());
 		binder.registerCustomEditor(Location.class, new LocationConverter());
+		binder.registerCustomEditor(User.class, new UserConverter());
 	}
 
 	Company newCompany() {
@@ -86,6 +93,30 @@ public class CompanyController {
 		}
 		return "redirect:/";
 	}
+	
+	@RequestMapping(value = "/edit")
+	private String edit(Model model) {
+		UserCustom user = (UserCustom)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if(user != null){
+			Company company = companyService.findByUserId(user.getId());
+			model.addAttribute("company", company);
+			model.addAttribute("listLocation", locationService.findAll());
+			return "editcompany";
+		}
+		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	private String update(RedirectAttributes redirectAttributes, @Valid Company company, @RequestParam("location") String location, 
+			BindingResult bindingResult, @RequestParam("fileUpload") MultipartFile fileUpload) throws IOException {
+		if (bindingResult.hasErrors())
+			return "editcompany";
+		else {
+			redirectAttributes.addFlashAttribute("MESSAGE",
+					PartnershipFlash.getFlashSuccess(companyService.newCompany(company, fileUpload, location)) );
+		}
+		return "redirect:/";
+	}
 
 	@RequestMapping(value = "")
 	public String profileCompany(Model model) {
@@ -103,5 +134,14 @@ public class CompanyController {
 	@RequestMapping(value = "/{id}")
 	public String profileCompany(@PathVariable("id") long id, Model model, RedirectAttributes redirectAttributes) {
 		return companyService.showProfile(id, model, redirectAttributes);
+	}
+	
+	@RequestMapping(value="/sendMessage", method = RequestMethod.POST)
+	public String sendMessage(@Valid Contact contact, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+		if(bindingResult.hasErrors()){
+			redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashError("ERROR"));
+		}
+		redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashSuccess(contactService.saveContact(contact)));
+		return "redirect:/employee/"+companyService.findByUserId(contact.getUserReceive().getId()).getId();
 	}
 }

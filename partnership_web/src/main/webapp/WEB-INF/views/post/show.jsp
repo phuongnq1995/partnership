@@ -28,14 +28,14 @@
 			</div>
 			
 			<c:if test="${MESSAGE != null}">
-					${MESSAGE}
+				<br>
+				${MESSAGE}
 			</c:if>
 			
 		</div>
 	</div>
 </div>
-<!-- Content
-================================================== -->
+
 <div class="container right-sidebar">
 	<div class="sixteen columns"></div>
 	<!-- Recent Jobs -->

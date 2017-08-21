@@ -98,10 +98,19 @@
 							<div class="upload-btn">
 								<i class="fa fa-upload"></i> Browse
 							</div>
-						</label><img id="uploadPreview"
-							style="width: 120px; height: 130px; border: none;"
-							src="<c:url value="/resources/images/user.png" />" />
-						<form:hidden path="avatar"/>
+						</label>
+						
+						<c:choose>
+							<c:when test="${empty employee.getAvatar()}">
+								<td><img id="uploadPreview" src="<c:url value="/resources/images/user.png"/>"
+									style="width: 120px; height: 130px; border: none;" /></td>
+							</c:when>
+							<c:otherwise>
+								<img id="uploadPreview" style="width: 120px; height: 130px; border: none;"
+									src="${pageContext.request.contextPath}/imageEmployee/${employee.getId()}"
+									alt="Photo" />
+							</c:otherwise>
+						</c:choose>
 					</div>
 				</fieldset>
 					<fieldset class="form  fieldset-candidate_location">
@@ -213,7 +222,7 @@
 				dateFormat:"dd/mm/yy",
 				yearRange:"-80:+80",
 				changeYear: true,
-			   	beforeShow: function (input, inst) { 
+			   	beforeShow: function (input, inst) {
 			        if($(input).hasClass('readonly')) {
 			        	  inst.dpDiv.style.display = 'none';
 			       }

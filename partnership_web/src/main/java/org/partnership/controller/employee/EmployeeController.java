@@ -116,11 +116,11 @@ public class EmployeeController {
 		return "redirect:/employee/"+employee.getId();
 	}
 	
-	@RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
-	private String edit(Model model, @PathVariable long id) {
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	private String edit(Model model) {
 		UserCustom user = (UserCustom)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		Employee employee = employeeService.findOne(id);
-		if (employee.getUserId() == user.getId()){
+		if(user != null){
+			Employee employee = employeeService.findByUserId(user.getId());
 			model.addAttribute("employee", employee);
 			model.addAttribute("categories", categoryService.findAllParent());
 			model.addAttribute("listLocation", locationService.findAll());

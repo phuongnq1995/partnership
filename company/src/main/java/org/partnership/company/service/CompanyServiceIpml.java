@@ -1,12 +1,11 @@
 package org.partnership.company.service;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.List;
-
 import org.partnership.company.model.Company;
 import org.partnership.company.repository.CompanyRepository;
 import org.partnership.container.PartnershipFlash;
+import org.partnership.user.model.Contact;
 import org.partnership.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,6 +66,7 @@ public class CompanyServiceIpml implements CompanyService {
 			redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashError("Not found !"));
 			return "redirect:/";
 		}
+		model.addAttribute("contact", new Contact());
 		model.addAttribute("company", company);	
 		return "showcompany";
 	}

@@ -58,7 +58,8 @@
 				<div class="resume_contact">
 					<sec:authorize access="hasAnyRole('ROLE_EMPLOYEE','ROLE_COMPANY','ROLE_ADMIN')">
 						<sec:authentication var="principal" property="principal" />
-						<c:if test="${principal.id != employee.getUserId()}">
+						<c:choose>
+						<c:when test="${principal.id != employee.getUserId()}">
 						<a href="#resume-dialog" id="link-resume-dialog"
 							class="small-dialog popup-with-zoom-anim button"><i
 							class="fa fa-envelope"></i> Contact</a>
@@ -73,11 +74,11 @@
 									<form:form action="${pageContext.request.contextPath}/employee/sendMessage" method="post" 
 										id="contactForm" modelAttribute="contact">
 										<div style="display: none;">
-											<form:hidden path="userReceive" value="${userReceive.getId()}"/>
+											<form:hidden path="userReceive" value="${employee.getUserId()}"/>
 											<form:hidden path="userSend" id="sender" value="${principal.id}"/>
 										</div>
 										<fieldset>
-											<label for="full-name">Full name</label>
+											<label for="full-name">Full name-${principal.id}</label>
 											<div class="field required-field">
 												<span class="wpcf7-form-control-wrap full-name"><form:input
 													type="text" path="senderName" size="40" value="${pageContext.request.userPrincipal.name}"
@@ -102,7 +103,12 @@
 								</div>
 							</div>
 						</div>
-						</c:if>
+						</c:when>
+						<c:otherwise>
+							<a href="${pageContext.request.contextPath}/employee/edit" 
+								class="button"> Update profile</a>
+						</c:otherwise>
+						</c:choose>
 					</sec:authorize>
 				</div>
 			</div>
