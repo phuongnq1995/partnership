@@ -37,8 +37,8 @@
 					<li><a href="#">For Employers</a>
 						<ul class="sub-menu">
 							<li><a href="${pageContext.request.contextPath}/employee/index">Browse Candidates</a></li>
-							<li><a href="${pageContext.request.contextPath}/post/new">Post a Job</a></li>
 							<security:authorize access="hasRole('ROLE_COMPANY')">
+								<li><a href="${pageContext.request.contextPath}/post/new">Post a Job</a></li>
 								<li><a href="${pageContext.request.contextPath}/post/applylists">Apply post</a></li>
 							</security:authorize>
 						</ul>

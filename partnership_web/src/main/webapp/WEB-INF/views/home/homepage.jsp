@@ -64,13 +64,13 @@
 						<ul id="popular-categories">
 							<c:forEach items="${categories}" var="category">
 								<li><a
-									href="https://workscout.in/job-category/construction-facilities/">
+									href="javascript:void(0)">
 										<i class="${category.getIcon()}"></i>${category.getName()}</a></li>
 							</c:forEach>
 						</ul>
 						<div class="clearfix"></div>
 						<div class="margin-top-30"></div>
-						<a href="#"
+						<a href="javascript:void(0)"
 							class="button centered">Browse All Categories</a>
 						<div class="margin-bottom-50"></div>
 					</div>
@@ -341,5 +341,4 @@ $(document).ready(function() {
 	});
 });
 </script>
-
 

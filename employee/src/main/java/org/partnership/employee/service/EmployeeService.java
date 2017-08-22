@@ -27,5 +27,7 @@ public interface EmployeeService {
 	List<Employee> findAll();
 	
 	String delete(long id);
+	
+	String findByKeyWordsAndCategories(Model model, int page, String keywords,Integer[] skills);
 
 }

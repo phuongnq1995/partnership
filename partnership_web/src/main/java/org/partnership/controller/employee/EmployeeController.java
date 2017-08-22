@@ -180,4 +180,13 @@ public class EmployeeController {
 		redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashSuccess(contactService.saveContact(contact)));
 		return "redirect:/employee/"+employeeService.findByUserId(contact.getUserReceive().getId()).getId();
 	}
+	
+	@RequestMapping(value="/searchForm")
+	public String searchForm(@RequestParam("keywords") String keywords, 
+			@RequestParam(value="search_skills[]", required=false) Integer[] skills,
+			@RequestParam(defaultValue="1")int page, Model model){
+
+		model.addAttribute("categories", categoryService.findAllParent());
+		return employeeService.findByKeyWordsAndCategories(model, page, keywords, skills);
+	}
 }

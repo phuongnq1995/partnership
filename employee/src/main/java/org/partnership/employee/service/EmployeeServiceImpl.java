@@ -23,10 +23,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Transactional
 	public String newEmployee(Employee employee, MultipartFile[] fileUpload) {
 		try {
@@ -44,11 +44,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public Employee findOne(long id) {
 		return employeeRepository.findOne(id);
 	}
-	
+
 	public String findProfile(long userId, Model model) {
-		if (!employeeRepository.checkEmployeePresent(userId)){
+		if (!employeeRepository.checkEmployeePresent(userId)) {
 			return "redirect:/employee/new";
-		}else{
+		} else {
 			long id = employeeRepository.findByUserId(userId).getId();
 			model.addAttribute("employee", employeeRepository.findOne(id));
 			model.addAttribute("contact", new Contact());
@@ -58,7 +58,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	public String showProfile(long id, Model model, RedirectAttributes redirectAttributes) {
 		Employee employee = employeeRepository.findOne(id);
-		if(employee == null){
+		if (employee == null) {
 			redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashError("Not found !"));
 			return "redirect:/";
 		}
@@ -75,8 +75,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 		model.addAttribute("employees", employeeRepository.findAll());
 		return "indexemployee";
 	}
-	
-	public Page<Employee> findPage(int page){
+
+	public Page<Employee> findPage(int page) {
 		Pageable pageable = createPageRequest(page);
 		return employeeRepository.findAll(pageable);
 	}
@@ -84,11 +84,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public List<Employee> findAll() {
 		return employeeRepository.findAll();
 	}
-	
+
 	private Pageable createPageRequest(int page) {
-	    return new PageRequest(page-1, PartnershipStatic.PER_PAGE);
+		return new PageRequest(page - 1, PartnershipStatic.PER_PAGE);
 	}
-	
+
 	@Transactional
 	public String delete(long id) {
 		Employee employee = employeeRepository.findOne(id);
@@ -99,5 +99,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}
 		return "Delete fail !";
 	}
-	
+
+	@Transactional
+	public String findByKeyWordsAndCategories(Model model, int page, String keywords, Integer[] skills) {
+		Pageable pageable = createPageRequest(page);
+		if (skills == null) {
+			System.out.println("1");
+			model.addAttribute("pages", employeeRepository.findByKeyWords(keywords, pageable));
+		} else {
+			System.out.println("2");
+			model.addAttribute("pages", employeeRepository.findByKeyWordsAndCategory(keywords, skills, pageable));
+		}
+		model.addAttribute("keywords", keywords);
+		model.addAttribute("skills", skills);
+		return "indexpost";
+	}
+
 }
