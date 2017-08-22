@@ -84,7 +84,6 @@ public class EmployeeController {
 	@RequestMapping(value = "/index")
 	private String index(Model model, @RequestParam(defaultValue="1") int page){
 		model.addAttribute("pages", employeeService.findPage(page));
-		model.addAttribute("categories", categoryService.findAll());
 		model.addAttribute("categoriesOriginal", categoryService.findAllParent());
 		/*return employeeService.getIndex(model);*/
 		return "indexemployee";
@@ -186,7 +185,14 @@ public class EmployeeController {
 			@RequestParam(value="search_skills[]", required=false) Integer[] skills,
 			@RequestParam(defaultValue="1")int page, Model model){
 
-		model.addAttribute("categories", categoryService.findAllParent());
+		model.addAttribute("categoriesOriginal", categoryService.findAllParent());
 		return employeeService.findByKeyWordsAndCategories(model, page, keywords, skills);
+	}
+	
+	@RequestMapping(value="/searchByCategory/{categoryId}")
+	public String searchByCategory(@PathVariable("categoryId") int categoryId, 
+			@RequestParam(defaultValue="1")int page, Model model){
+		model.addAttribute("categoriesOriginal", categoryService.findAllParent());
+		return employeeService.findByJobId(categoryId, page, model);
 	}
 }

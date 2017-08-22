@@ -15,17 +15,15 @@
 			<c:if test="${MESSAGE != null}">
 					${MESSAGE}
 			</c:if>
-			<div class="six columns">
-				<a href="../submit-resume/submit-resume.html" class="button">Post
-					a Resume, It&#039;s Free!</a>
-			</div>
 		</div>
 	</div>
 </div>
 <div class="container wpjm-container right-sidebar margin-top-55">
+<form class="list-search" method="POST"
+				action="${pageContext.request.contextPath}/employee/searchForm">
 	<!-- Widgets -->
 	<div class="five columns sidebar " role="complementary">
-		<form class="resume_filters in_sidebar">
+		
 			<!-- Skills -->
 			<div class="widget">
 				<h4>Filter by Skills</h4>
@@ -46,52 +44,19 @@
 
 				</div>
 			</div>
-
-			<div class="widget">
-				<h4>Filter by Categories</h4>
-				<div class="search_categories resume-filter">
-					<select name="categories" multiple="multiple"
-							id="resume_category" class="chosen-select">
-							<c:forEach items="${categoriesOriginal}" var="category">
-								<option value="${category.getId()}">${category.getName()}</option>
-							</c:forEach>
-						</select>
-				</div>
-			</div>
-
-			<div class="widget widget_range_filter">
-				<h4 class="checkboxes" style="margin-bottom: 0;">
-					<input type="checkbox" name="filter_by_rate_check"
-						id="filter_by_rate" class="filter_by_check"> <label
-						for="filter_by_rate">Filter by Rate</label>
-				</h4>
-				<div class="widget_range_filter-inside">
-					<div class="rate_amount range-indicator">
-						<span class="from"></span> &mdash; <span class="to"></span>
-					</div>
-					<input type="hidden" name="filter_by_rate" id="rate_amount"
-						type="checkbox">
-					<div id="rate-range"></div>
-				</div>
-			</div>
-		</form>
-
 	</div>
 	<!-- #secondary -->
 	<article class="eleven columns">
 		<div class="padding-right">
-			<form class="list-search" method="GET"
-				action="https://workscout.in/resumes/">
-				<div class="search_resumes">
+				<div class="search_keywords">
 					<button>
 						<i class="fa fa-search"></i>
 					</button>
-					<input type="text" name="search_keywords" id="search_keywords"
-						placeholder="Search freelancer services (e.g. logo design)"
+					<input type="text" name="keywords" id="keywords"
+						placeholder="Search employee by name, description"
 						value="" />
 					<div class="clearfix"></div>
 				</div>
-			</form>
 
 			<div class="resumes">
 				<!-- Listings Loader -->
@@ -165,4 +130,5 @@
 			<!-- .entry-footer -->
 		</div>
 	</article>
+	</form>
 </div>

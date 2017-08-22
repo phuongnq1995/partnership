@@ -19,8 +19,6 @@ public interface EmployeeService {
 	String showProfile(long id, Model model, RedirectAttributes redirectAttributes);
 	
 	Employee findByUserId(long id);
-
-	String getIndex(Model model);
 	
 	Page<Employee> findPage(int page);
 	
@@ -29,5 +27,7 @@ public interface EmployeeService {
 	String delete(long id);
 	
 	String findByKeyWordsAndCategories(Model model, int page, String keywords,Integer[] skills);
+
+	String findByJobId(int categoryId, int page, Model model);
 
 }

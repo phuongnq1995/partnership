@@ -71,11 +71,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeRepository.findByUserId(userId);
 	}
 
-	public String getIndex(Model model) {
-		model.addAttribute("employees", employeeRepository.findAll());
-		return "indexemployee";
-	}
-
 	public Page<Employee> findPage(int page) {
 		Pageable pageable = createPageRequest(page);
 		return employeeRepository.findAll(pageable);
@@ -104,15 +99,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public String findByKeyWordsAndCategories(Model model, int page, String keywords, Integer[] skills) {
 		Pageable pageable = createPageRequest(page);
 		if (skills == null) {
-			System.out.println("1");
 			model.addAttribute("pages", employeeRepository.findByKeyWords(keywords, pageable));
 		} else {
-			System.out.println("2");
 			model.addAttribute("pages", employeeRepository.findByKeyWordsAndCategory(keywords, skills, pageable));
 		}
 		model.addAttribute("keywords", keywords);
 		model.addAttribute("skills", skills);
-		return "indexpost";
+		return "indexemployee";
 	}
-
+	
+	@Transactional
+	public String findByJobId(int categoryId, int page, Model model){
+		Pageable pageable = createPageRequest(page);
+		model.addAttribute("pages", employeeRepository.findByJobId(categoryId, pageable));
+		return "indexemployee";
+	}
 }

@@ -2,11 +2,16 @@ package org.partnership.controller.home;
 
 
 
+import java.util.Date;
+
 import javax.validation.Valid;
+
+import org.partnership.category.model.Category;
 import org.partnership.category.service.CategoryService;
 import org.partnership.container.PartnershipFlash;
+import org.partnership.converter.CategoryConverter;
+import org.partnership.converter.CustomDateConverter;
 import org.partnership.location.service.LocationService;
-import org.partnership.post.model.Post;
 import org.partnership.post.model.PostApply;
 import org.partnership.post.service.PostService;
 import org.partnership.user.model.Contact;
@@ -19,6 +24,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,6 +51,12 @@ public class HomeController {
 	@Autowired
 	private LocationService locationService;
 	
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		binder.registerCustomEditor(Date.class, new CustomDateConverter());
+		binder.registerCustomEditor(Category.class, new CategoryConverter());
+	}
+	
 	@RequestMapping(value = "/")
 	private String home(Model model) {
 		model.addAttribute("categories", categoryService.findAllParent());
@@ -51,12 +64,7 @@ public class HomeController {
 		model.addAttribute("mostPost", postService.findTop4PostRecent());
 		model.addAttribute("postApply", new PostApply());
 		model.addAttribute("locations", locationService.findAll());
-		for(Post post : postService.findTop4ByOrderByDaypostDesc()){
-			System.out.println("mostPost:"+post.getDaypost());
-		}
-		for(Post post : postService.findTop4PostRecent()){
-			System.out.println("recentPost:"+post.getDaypost());
-		}
+		model.addAttribute("postQuantity", postService.countPostForEmployee());
 		
 		return "home";
 	}

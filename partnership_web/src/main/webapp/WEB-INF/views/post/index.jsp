@@ -46,28 +46,6 @@
 				</div>
 			</div>
 			<div class="widget">
-				<h4>Job type</h4>
-				<ul class="job_types checkboxes">
-					<li><input type="checkbox" name="filter_job_type[]"
-						value="1" checked='checked' id="job_type_full-time" /> <label
-						for="job_type_full-time" class="full-time"> Full Time</label></li>
-					<li><input type="checkbox" name="filter_job_type[]"
-						value="2" checked='checked' id="job_type_part-time" /> <label
-						for="job_type_part-time" class="part-time"> Part Time</label></li>	
-					<li><input type="checkbox" name="filter_job_type[]"
-						value="3" checked='checked' id="job_type_freelance" /> <label
-						for="job_type_freelance" class="freelance"> Freelance</label></li>
-					<li><input type="checkbox" name="filter_job_type[]"
-						value="4" checked='checked' id="job_type_temporary" /> <label
-						for="job_type_temporary" class="temporary"> Temporary</label></li>
-					<li><input type="checkbox" name="filter_job_type[]"
-						value="5" checked='checked' id="job_type_internship" />
-						<label for="job_type_internship" class="internship">
-							Internship</label></li>
-				</ul>
-				<input type="hidden" name="filter_job_type[]" value="" />
-			</div>
-			<div class="widget">
 				<h4>Category</h4>
 				<div class="search_categories">
 				
@@ -90,45 +68,6 @@
 						</select>
 				</div>
 			</div>
-			<div class="widget widget_range_filter" style="margin-bottom: 10px">
-				<h4 class="checkboxes" style="margin-bottom: 0;">
-					<input type="checkbox" name="filter_by_salary_check"
-						id="salary_check" class="filter_by_check"> <label
-						for="salary_check">Filter by Salary</label>
-				</h4>
-				<div class="widget_range_filter-inside">
-					<div class="salary_amount range-indicator">
-						<span class="from"></span> &mdash; <span class="to"></span>
-					</div>
-					<input type="hidden" name="filter_by_salary" id="salary_amount"
-						type="checkbox">
-					<div id="salary-range"></div>
-					<div class="margin-bottom-50"></div>
-				</div>
-			</div>
-			<div class="widget widget_range_filter">
-				<h4 class="checkboxes" style="margin-bottom: 0;">
-					<input type="checkbox" name="filter_by_rate_check"
-						id="filter_by_rate" class="filter_by_check"> <label
-						for="filter_by_rate">Filter by Rate</label>
-				</h4>
-				<div class="widget_range_filter-inside">
-					<div class="rate_amount range-indicator">
-						<span class="from"></span> &mdash; <span class="to"></span>
-					</div>
-					<input type="hidden" name="filter_by_rate" id="rate_amount"
-						type="checkbox">
-					<div id="rate-range"></div>
-				</div>
-			</div>
-
-			<div class="widget widget_range_filter">
-				<div class="filter_wide filter_by_tag">
-					<h4>Filter by tag:</h4>
-					<span class="filter_by_tag_cloud"></span>
-				</div>
-			</div>
-
 	</div>
 	<!-- #secondary -->
 

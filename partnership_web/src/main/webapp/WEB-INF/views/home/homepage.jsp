@@ -13,8 +13,8 @@
 
 	<div class="container">
 		<c:if test="${MESSAGE != null}">
-					${MESSAGE}
-				</c:if>
+			${MESSAGE}
+		</c:if>
 		<div class="search-container sc-jobs">
 			
 			<!-- Form -->
@@ -24,7 +24,7 @@
 					placeholder="job title, keywords or company name" value="" /> 
 					
 				<select id="location" name="locationId" class="ico-02">
-					<option value="0" >Select</option>
+					<option value="0" >Select location</option>
 					<c:forEach items="${locations}" var="location">
 						<option value="${location.getId()}">${location.getName()}</option>
 					</c:forEach>
@@ -33,17 +33,10 @@
 					<i class="fa fa-search"></i>
 				</button>
 			</form>
-			<!-- Browse Jobs -->
-
-			<div class="browse-jobs">
-				Or browse job offers by <a
-					href="browse-categories/browse-categories.html">category</a>
-
-			</div>
 
 			<!-- Announce -->
 			<div class="announce">
-				We have <strong>23</strong> job offers for you!
+				We have <strong>${postQuantity}</strong> job offers for you!
 			</div>
 		</div>
 	</div>
@@ -64,7 +57,7 @@
 						<ul id="popular-categories">
 							<c:forEach items="${categories}" var="category">
 								<li><a
-									href="javascript:void(0)">
+									href="${pageContext.request.contextPath}/employee/searchByCategory/${category.getId()}">
 										<i class="${category.getIcon()}"></i>${category.getName()}</a></li>
 							</c:forEach>
 						</ul>

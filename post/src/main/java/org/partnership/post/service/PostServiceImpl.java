@@ -123,20 +123,17 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Transactional
-	public String findByKeyWordsAndLocation(Model model, int page, String keywords, int location_id, Integer[] categoriesId) {
+	public String findByKeyWordsAndLocation(Model model, int page, String keywords,
+			int location_id, Integer[] categoriesId) {
 		Pageable pageable = createPageRequest(page);
 		if(location_id == 0 && categoriesId == null){
-			System.out.println("1");
 			model.addAttribute("pages", postRepository.findByKeyWords(keywords, pageable));
 		} else if(location_id == 0){
-			System.out.println("2");
 			model.addAttribute("pages", postRepository.findByKeyWordsAndCategory(
 					keywords, categoriesId, pageable));
 		} else if(categoriesId == null){
-			System.out.println("3");
 			model.addAttribute("pages", postRepository.findByKeyWordsAndLocation(keywords, location_id, pageable));
 		} else {
-			System.out.println("4");
 			model.addAttribute("pages", postRepository.findByKeyWordsAndLocationAndCategory(
 					keywords, location_id, categoriesId, pageable));
 		}
@@ -191,6 +188,8 @@ public class PostServiceImpl implements PostService {
 		return postRepository.findTop4ByOrderByApplyAsc();
 	}
 	
-	
+	public long countPostForEmployee(){
+		return postRepository.countByStatusAndDayendAfter(1, new Date());
+	}
 
 }

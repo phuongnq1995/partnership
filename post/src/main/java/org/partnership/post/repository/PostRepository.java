@@ -51,4 +51,5 @@ public interface PostRepository extends JpaRepository<Post, Long>{
 		+" order by b.quantity desc ", nativeQuery=true)
 	List<Post> findTop4ByOrderByApplyAsc();
 	
+	Long countByStatusAndDayendAfter(int status, Date current);
 }
