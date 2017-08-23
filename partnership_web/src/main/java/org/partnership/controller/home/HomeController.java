@@ -65,7 +65,7 @@ public class HomeController {
 		model.addAttribute("postApply", new PostApply());
 		model.addAttribute("locations", locationService.findAll());
 		model.addAttribute("postQuantity", postService.countPostForEmployee());
-		
+		System.out.println("size:"+postService.findTop4ByOrderByDaypostDesc().size());
 		return "home";
 	}
 

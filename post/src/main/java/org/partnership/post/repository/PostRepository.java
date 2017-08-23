@@ -43,12 +43,12 @@ public interface PostRepository extends JpaRepository<Post, Long>{
 	
 	Page<Post> findByDayendAfterAndStatus(Date current, int status, Pageable pageable);
 
-	List<Post> findTop4ByStatusOrderByDaypostDesc(int status);
+	List<Post> findFirst4ByStatusOrderByDaypostDesc(int status, Pageable pageable);
 	
 	@Query(value="select * from post p left join ("
 		+" select count(id) as quantity, a.post_id as idpostapplycount from post_apply a  "
 		+" group by a.post_id ) b on b.idpostapplycount = p.id where p.status = 1 and CURRENT_DATE() <= p.dayend "
-		+" order by b.quantity desc ", nativeQuery=true)
+		+" order by b.quantity desc limit 4 ", nativeQuery=true)
 	List<Post> findTop4ByOrderByApplyAsc();
 	
 	Long countByStatusAndDayendAfter(int status, Date current);

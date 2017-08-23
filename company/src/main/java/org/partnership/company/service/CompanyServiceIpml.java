@@ -5,9 +5,13 @@ import java.util.List;
 import org.partnership.company.model.Company;
 import org.partnership.company.repository.CompanyRepository;
 import org.partnership.container.PartnershipFlash;
+import org.partnership.container.PartnershipStatic;
 import org.partnership.user.model.Contact;
 import org.partnership.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -37,8 +41,13 @@ public class CompanyServiceIpml implements CompanyService {
 		return "Create Success !";
 	}
 
-	public List<Company> findAll() {
-		return companyRepository.findAll();
+	public Page<Company> findAll(int page) {
+		Pageable pageable = createPageRequest(page);
+		return companyRepository.findAll(pageable);
+	}
+	
+	private Pageable createPageRequest(int page) {
+		return new PageRequest(page - 1, PartnershipStatic.PER_PAGE);
 	}
 
 	public Company findOne(long id) {

@@ -154,7 +154,7 @@ public class PostServiceImpl implements PostService {
 		} catch (IOException e) {
 			postApply.setCv(null);
 		}
-		if (postApply.getCv().length > 0) {
+		if (postApply.getCv() != null) {
 			postApply.setDaycreate(new Date());
 			postApplyRepository.save(postApply);
 			redirectAttributes.addFlashAttribute("MESSAGE",
@@ -181,7 +181,8 @@ public class PostServiceImpl implements PostService {
 	}
 
 	public List<Post> findTop4ByOrderByDaypostDesc() {
-		return postRepository.findTop4ByStatusOrderByDaypostDesc(1);
+		Pageable pageable = createPageRequest(1);
+		return postRepository.findFirst4ByStatusOrderByDaypostDesc(1, pageable);
 	}
 	
 	public List<Post> findTop4PostRecent() {

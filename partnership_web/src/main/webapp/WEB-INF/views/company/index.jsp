@@ -39,7 +39,7 @@
 						<th>Details</th>
 				</thead>
 				<tbody>
-					<c:forEach var="company" items="${companies}">
+					<c:forEach var="company" items="${pages.getContent()}">
 						
 						<tr class="photo-rounded1">
 							
@@ -67,7 +67,31 @@
 					</c:forEach>
 				<tbody>
 			</table>
-
+					<nav class="job-manager-pagination pagination">
+					<ul>
+						<c:forEach var="page" begin="1" end="${pages.getTotalPages()}">
+							<li>
+								<c:choose>
+									<c:when test="${pages.getNumber()+1 == page}">
+										<span class="current" data-page="${page}">${page}</span>
+									</c:when>
+									<c:otherwise>
+										<a href="${pageContext.request.contextPath}/company/index?page=${page}" data-page="${page}">${page}</a>
+									</c:otherwise>
+								</c:choose>
+							</li>
+						</c:forEach>
+						<!-- <li><span class="current" data-page="1"></span></li> -->
+						<c:if test="${pages.hasNextPage()}">
+							<li style="float: right; position: absolute; right: 0;"><a
+							href="${pageContext.request.contextPath}/company/index?page=${pages.getNumber()+2}" data-page="{page}">Next</a></li>
+						</c:if>
+						<c:if test="${pages.hasPreviousPage()}">
+							<li style="float: left; position: absolute; left:0;"><a
+							href="${pageContext.request.contextPath}/company/index?page=${pages.getNumber()}" data-page="{page}">Previous</a></li>
+						</c:if>
+					</ul>
+				</nav>
 		<footer class="entry-footer"> </footer>
 		<!-- .entry-footer -->
 

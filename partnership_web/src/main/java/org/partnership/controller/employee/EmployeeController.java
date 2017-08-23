@@ -137,7 +137,7 @@ public class EmployeeController {
 			model.addAttribute("listLocation", locationService.findAll());
 			return "editemployee";
 		} else {
-			redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashSuccess(employeeService.newEmployee(employee, fileUpload)));
+			redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashSuccess(employeeService.updateEmployee(employee, fileUpload)));
 		}
 		return "redirect:/employee/"+employee.getId();
 	}

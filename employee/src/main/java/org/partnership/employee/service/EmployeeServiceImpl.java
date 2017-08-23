@@ -30,10 +30,33 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Transactional
 	public String newEmployee(Employee employee, MultipartFile[] fileUpload) {
 		try {
-			if (!fileUpload[0].isEmpty())
+			if (! (fileUpload[0].isEmpty())){
 				employee.setAvatar(fileUpload[0].getBytes());
-			if (!fileUpload[1].isEmpty())
+			}
+			if (! (fileUpload[1].isEmpty())){
 				employee.setCv(fileUpload[1].getBytes());
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		employeeRepository.save(employee);
+		return "Update profile success !";
+	}
+	
+	@Transactional
+	public String updateEmployee(Employee employee, MultipartFile[] fileUpload) {
+		try {
+			Employee employeOld = employeeRepository.getOne(employee.getId());
+			if (! (fileUpload[0].isEmpty())){
+				employee.setAvatar(fileUpload[0].getBytes());
+			} else {
+				employee.setAvatar(employeOld.getAvatar());
+			}
+			if (! (fileUpload[1].isEmpty())){
+				employee.setCv(fileUpload[1].getBytes());
+			} else {
+				employee.setCv(employeOld.getCv());
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

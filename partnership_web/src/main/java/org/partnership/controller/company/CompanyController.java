@@ -126,8 +126,8 @@ public class CompanyController {
 	}
 	
 	@RequestMapping(value = "/index")
-	private String index(Model model){
-		model.addAttribute("companies", companyService.findAll());
+	private String index(Model model, @RequestParam(defaultValue="1") int page){
+		model.addAttribute("pages", companyService.findAll(page));
 		return "indexcompany";
 	}
 

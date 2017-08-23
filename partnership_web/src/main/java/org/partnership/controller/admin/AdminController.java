@@ -25,8 +25,8 @@ public class AdminController {
 	private EmployeeService employeeService; 
 	
 	@RequestMapping(value="/companies")
-	private String companies(Model model){
-		model.addAttribute("companies", companyService.findAll());
+	private String companies(Model model, @RequestParam(defaultValue="1")int page){
+		model.addAttribute("pages", companyService.findAll(page));
 		return "admincompanies";
 	}
 	
@@ -51,8 +51,8 @@ public class AdminController {
 	}
 	
 	@RequestMapping(value="/employees")
-	private String employees(Model model){
-		model.addAttribute("employees", employeeService.findAll());
+	private String employees(Model model, @RequestParam(defaultValue="1") int page){
+		model.addAttribute("pages", employeeService.findPage(page));
 		return "adminemployees";
 	}
 	

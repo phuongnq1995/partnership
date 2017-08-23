@@ -193,9 +193,9 @@
 			<h1>Admin Dashboard</h1>
 			<nav id="breadcrumbs" xmlns:v="http://rdf.data-vocabulary.org/#">
 				<ul>
-					<li class="home"><span><a title="Go to WorkScout."
-							href="../workscout.html" class="home"><span>Admin</span></a> </span></li>
-					<li class="current_item"><span><span>Report
+					<li class="home"><span><a title="Go to Home."
+							href="${pageContext.request.contextPath}" class="home"><span>Admin</span></a> </span></li>
+					<li class="current_item"><span><span>Statistic 
 								Dashboard</span> </span></li>
 				</ul>
 			</nav>
@@ -212,20 +212,12 @@
 
 		<nav class="woocommerce-MyAccount-navigation">
 			<ul>
-				<li><a
-					href="${pageContext.request.contextPath}/admin/companies">
-						Reports</a></li>
-				<li><a
-					href="${pageContext.request.contextPath}/admin/companies">
-						Companies</a></li>
-				<li class=""><a
-					href="${pageContext.request.contextPath}/admin/candidates">Candidates</a>
+				<li><a href="${pageContext.request.contextPath}/admin/statistic"> Statistic</a></li>
+				<li><a href="${pageContext.request.contextPath}/admin/companies"> Companies</a></li>
+				<li class=""><a href="${pageContext.request.contextPath}/admin/employees">Candidates</a>
 				</li>
-				<li class=""><a
-					href="${pageContext.request.contextPath}/admin/posts">Post</a></li>
-				<li class=""><a
-					href="${pageContext.request.contextPath}/admin/users">User</a></li>
-				<li class="">
+				<li class=""><a href="${pageContext.request.contextPath}/admin/posts">Post</a>
+				</li>
 			</ul>
 		</nav>
 

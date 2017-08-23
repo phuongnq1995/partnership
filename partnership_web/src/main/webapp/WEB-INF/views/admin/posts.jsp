@@ -11,9 +11,9 @@
 			<h1>Admin Dashboard</h1>
 			<nav id="breadcrumbs" xmlns:v="http://rdf.data-vocabulary.org/#">
 				<ul>
-					<li class="home"><span><a title="Go to WorkScout."
-							href="../workscout.html" class="home"><span>Admin</span></a> </span></li>
-					<li class="current_item"><span><span>Company
+					<li class="home"><span><a title="Go to Home"
+							href="${pageContext.request.contextPath}" class="home"><span>Admin</span></a> </span></li>
+					<li class="current_item"><span><span>Jobs
 								Dashboard</span> </span></li>
 				</ul>
 			</nav>
@@ -30,14 +30,12 @@
 
 		<nav class="woocommerce-MyAccount-navigation">
 			<ul>
+				<li><a href="${pageContext.request.contextPath}/admin/statistic"> Statistic</a></li>
 				<li><a href="${pageContext.request.contextPath}/admin/companies"> Companies</a></li>
 				<li class=""><a href="${pageContext.request.contextPath}/admin/employees">Candidates</a>
 				</li>
 				<li class=""><a href="${pageContext.request.contextPath}/admin/posts">Post</a>
 				</li>
-				<li class=""><a
-					href="${pageContext.request.contextPath}/admin/users">User</a></li>
-				<li class="">
 			</ul>
 		</nav>
 

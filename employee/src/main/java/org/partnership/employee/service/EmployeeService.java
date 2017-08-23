@@ -30,4 +30,6 @@ public interface EmployeeService {
 
 	String findByJobId(int categoryId, int page, Model model);
 
+	String updateEmployee(Employee employee, MultipartFile[] fileUpload);
+
 }

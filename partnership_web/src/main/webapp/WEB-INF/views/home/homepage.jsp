@@ -216,8 +216,8 @@
 																		action="${pageContext.request.contextPath}/post/applyPost"
 																		id="form-apply">
 
-																		<form:hidden path="postId" value="${post.getId()}" />
-
+																		<form:hidden path="postId" value="${perMost.getId()}" />
+	
 																		<fieldset class="fieldset-candidate_name">
 																			<label for="candidate_name">Your name<small>*</small></label>
 																			<div class="field">
@@ -320,15 +320,15 @@ $(document).ready(function() {
 			url : '${pageContext.request.contextPath}/employee/applyPost',
 			type : "GET",
 			success : function(data) {
-			if (data != null) {
-				$('#candidate_name').val(data.fullname);
-				if (data.cv != null) {
-					$('#cv').attr("href","${pageContext.request.contextPath}/cvEmployee/"+ data.id);
-				} else {
-					$("#cv").attr("style","display: none;");
+				if (data != null) {
+					$('#candidate_name').val(data.fullname);
+					if (data.cv != null) {
+						$('#cv').attr("href","${pageContext.request.contextPath}/cvEmployee/"+ data.id);
+					} else {
+						$("#cv").attr("style","display: none;");
+					}
+					$("#form-apply").attr("modelAttribute","postApply");
 				}
-				$("#form-apply").attr("modelAttribute","postApply");
-			}
 			}
 		});
 	});
