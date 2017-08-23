@@ -34,7 +34,7 @@
 				<li><a href="${pageContext.request.contextPath}/admin/companies"> Companies</a></li>
 				<li class=""><a href="${pageContext.request.contextPath}/admin/employees">Candidates</a>
 				</li>
-				<li class=""><a href="${pageContext.request.contextPath}/admin/posts">Post</a>
+				<li><a href="${pageContext.request.contextPath}/admin/posts">Post</a>
 				</li>
 			</ul>
 		</nav>

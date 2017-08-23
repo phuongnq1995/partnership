@@ -142,6 +142,6 @@ public class CompanyController {
 			redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashError("ERROR"));
 		}
 		redirectAttributes.addFlashAttribute("MESSAGE", PartnershipFlash.getFlashSuccess(contactService.saveContact(contact)));
-		return "redirect:/employee/"+companyService.findByUserId(contact.getUserReceive().getId()).getId();
+		return "redirect:/company/"+companyService.findByUserId(contact.getUserReceive().getId()).getId();
 	}
 }

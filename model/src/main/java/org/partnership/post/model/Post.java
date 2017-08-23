@@ -83,7 +83,7 @@ public class Post implements Serializable{
 	
 	private long maxsalary;
 	
-	@Size(max = 1450, message = "Description have to max size 1450 character.")
+	@Size(max = 5000, message = "Description have to max size 5000 character.")
 	private String description;
 	
 	@Size(max = 1450, message = "Requirement have to max size 1450 character.")
