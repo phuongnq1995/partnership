@@ -213,8 +213,8 @@
 		<nav class="woocommerce-MyAccount-navigation">
 			<ul>
 				<li><a
-					href="${pageContext.request.contextPath}/admin/companies">
-						Reports</a></li>
+					href="${pageContext.request.contextPath}/admin/statistic">
+						Statistic</a></li>
 				<li><a
 					href="${pageContext.request.contextPath}/admin/companies">
 						Companies</a></li>
@@ -223,9 +223,6 @@
 				</li>
 				<li class=""><a
 					href="${pageContext.request.contextPath}/admin/posts">Post</a></li>
-				<li class=""><a
-					href="${pageContext.request.contextPath}/admin/users">User</a></li>
-				<li class="">
 			</ul>
 		</nav>
 
