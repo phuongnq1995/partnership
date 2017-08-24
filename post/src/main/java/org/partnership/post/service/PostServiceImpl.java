@@ -193,4 +193,13 @@ public class PostServiceImpl implements PostService {
 		return postRepository.countByStatusAndDayendAfter(1, new Date());
 	}
 
+	@Transactional
+	public String deletePostByCompanyId(long companyId) {
+		List<Post> posts = postRepository.findByCompanyId(companyId);
+		for(Post post : posts){
+			postRepository.delete(post);
+		}
+		return "Deleted success !";
+	}
+
 }

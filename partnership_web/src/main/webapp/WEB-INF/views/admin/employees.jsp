@@ -67,8 +67,30 @@
 							</c:choose>
 							<td>${employee.getPhone()}</td>
 							<td>${employee.getJobName()}</td>
-							<td><a href="companies/delete/${employee.getId()}"
-								class="button">Delete </a></td>
+							<td><a 
+								class="small-dialog popup-with-zoom-anim button" href="#resume-dialog${employee.getId()}" id="link-resume-dialog" 
+								>Delete </a>
+							<div id="resume-dialog${employee.getId()}"
+									class="small-dialog zoom-anim-dialog mfp-hide apply-popup">
+									<div class="small-dialog-headline">
+										<h2>Are You Sure?</h2>
+									</div>
+									<div class="small-dialog-content">
+										<div >
+											<label for="full-name">You will delete this
+												employee&hellip;</label>
+											<div class="field required-field">
+												<span class="wpcf7-form-control-wrap full-name"></span>
+											</div>
+											<p class="send-app-btn">
+												<a class="button"
+												 href="${pageContext.request.contextPath}/admin/employees/delete/${employee.getId()}" >Delete</a>
+												
+											</p>
+										</div>
+									</div>
+								</div>
+							</td>
 
 						</tr>
 					</c:forEach>

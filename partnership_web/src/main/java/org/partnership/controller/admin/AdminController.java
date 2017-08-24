@@ -24,6 +24,9 @@ public class AdminController {
 	@Autowired
 	private EmployeeService employeeService; 
 	
+	@Autowired
+	private PostService postService;
+	
 	@RequestMapping(value="/companies")
 	private String companies(Model model, @RequestParam(defaultValue="1")int page){
 		model.addAttribute("pages", companyService.findAll(page));
@@ -32,7 +35,9 @@ public class AdminController {
 	
 	@RequestMapping(value="/companies/delete/{id}")
 	private String deleteCompany(@PathVariable long id, RedirectAttributes redirectAttributes){
-		redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", companyService.delete(id));
+		if(!postService.deletePostByCompanyId(id).isEmpty()){
+			redirectAttributes.addFlashAttribute("SUCCESS_MESSAGE", companyService.delete(id));
+		}
 		return "redirect:/admin/companies";
 	}
 	

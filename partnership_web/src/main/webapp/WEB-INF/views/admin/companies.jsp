@@ -69,8 +69,31 @@
 										width="100px" height="100px" /></td>
 								</c:otherwise>
 							</c:choose>
-							<td><a href="companies/delete/${company.getId()}"
-								class="button">Delete </a></td>
+							<td><a 
+								class="small-dialog popup-with-zoom-anim button" href="#resume-dialog${company.getId()}" id="link-resume-dialog" 
+								>Delete </a>
+								<div id="resume-dialog${company.getId()}"
+									class="small-dialog zoom-anim-dialog mfp-hide apply-popup">
+									<div class="small-dialog-headline">
+										<h2>Are You Sure?</h2>
+									</div>
+									<div class="small-dialog-content">
+										<div >
+											<label for="full-name">You will delete all post of this
+												company&hellip;</label>
+											<div class="field required-field">
+												<span class="wpcf7-form-control-wrap full-name"></span>
+											</div>
+											<p class="send-app-btn">
+												<a class="button"
+												 href="${pageContext.request.contextPath}/admin/companies/delete/${company.getId()}" >Delete</a>
+												
+											</p>
+										</div>
+									</div>
+								</div>
+
+							</td>
 
 						</tr>
 					</c:forEach>

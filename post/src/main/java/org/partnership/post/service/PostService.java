@@ -41,4 +41,6 @@ public interface PostService {
 	String deletedPost(Model model, int page, RedirectAttributes redirectAttributes, long[] lists);
 	
 	public long countPostForEmployee();
+	
+	String deletePostByCompanyId(long companyId);
 }

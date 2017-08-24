@@ -23,7 +23,7 @@ public class CompanyServiceIpml implements CompanyService {
 
 	@Autowired
 	private CompanyRepository companyRepository;
-
+	
 	@Transactional
 	public String newCompany(Company company, MultipartFile fileUpload, String location) {
 		try {

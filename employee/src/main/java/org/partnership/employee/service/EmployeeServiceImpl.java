@@ -111,8 +111,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public String delete(long id) {
 		Employee employee = employeeRepository.findOne(id);
 		if (employee != null) {
-			userRepository.delete(employee.getUserId());
+			long userId = employee.getUserId();
 			employeeRepository.delete(id);
+			userRepository.delete(userId);
 			return "Delete success !";
 		}
 		return "Delete fail !";

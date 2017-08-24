@@ -52,4 +52,6 @@ public interface PostRepository extends JpaRepository<Post, Long>{
 	List<Post> findTop4ByOrderByApplyAsc();
 	
 	Long countByStatusAndDayendAfter(int status, Date current);
+
+	List<Post> findByCompanyId(long companyId);
 }
