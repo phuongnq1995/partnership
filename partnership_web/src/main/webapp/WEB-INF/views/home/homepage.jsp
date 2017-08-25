@@ -254,7 +254,7 @@
 																					<div class="job-manager-uploaded-files"></div> <input
 																					type='file' name="fileUpload"
 																					class="input-text wp-job-manager-file-upload"
-																					accept="|pdf|" id="fileUploadCv" />
+																					accept="|pdf|" id="resume_file" />
 																					<div class="upload-btn">
 																						<i class="fa fa-upload"></i>Browse
 																					</div>
@@ -333,5 +333,18 @@ $(document).ready(function() {
 		});
 	});
 });
+var input = document.getElementById("resume_file");
+input.onclick = function() {
+	this.value = null;
+};
+input.onchange = function() {
+	var path = input.value;
+	var filename = "";
+	if (path.lastIndexOf("\\") != -1)
+		filename = path.substring(path.lastIndexOf("\\") + 1, path.length);
+	else
+		filename = path.substring(path.lastIndexOf("/") + 1, path.length);
+	document.getElementById("log").innerHTML = filename;
+};
 </script>
 

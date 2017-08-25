@@ -148,7 +148,7 @@ public class PostServiceImpl implements PostService {
 	public String newApplyPost(PostApply postApply, MultipartFile fileUpload,
 			RedirectAttributes redirectAttributes) {
 		try {
-			if (postApply == null) {
+			if (postApply.getCv() == null) {
 				postApply.setCv(fileUpload.getBytes());
 			}
 		} catch (IOException e) {
